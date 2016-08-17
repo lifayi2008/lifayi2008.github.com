@@ -1,0 +1,714 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="bash," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="内置命令是shell自己实现的命令。当内置命令作为简单命令的第一个word时，shell直接执行这个命令，不需要调用其他的程序。内置命令一般用来实现那些不可能或者不便于使用独立的程序实现的功能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bash文档4--shell内置命令(译)">
+<meta property="og:url" content="http://blog.yoopig.com/2016/06/15/Bash文档4--shell内置命令-译.html">
+<meta property="og:site_name" content="lifayi2008">
+<meta property="og:description" content="内置命令是shell自己实现的命令。当内置命令作为简单命令的第一个word时，shell直接执行这个命令，不需要调用其他的程序。内置命令一般用来实现那些不可能或者不便于使用独立的程序实现的功能">
+<meta property="og:updated_time" content="2016-08-17T09:21:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bash文档4--shell内置命令(译)">
+<meta name="twitter:description" content="内置命令是shell自己实现的命令。当内置命令作为简单命令的第一个word时，shell直接执行这个命令，不需要调用其他的程序。内置命令一般用来实现那些不可能或者不便于使用独立的程序实现的功能">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://blog.yoopig.com/2016/06/15/Bash文档4--shell内置命令-译.html"/>
+
+  <title> Bash文档4--shell内置命令(译) | lifayi2008 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">lifayi2008</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">压力不是有人比你努力，而是比你牛逼的人依然比你努力</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Bash文档4--shell内置命令(译)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-15T11:57:10+08:00" content="2016-06-15">
+              2016-06-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Bash/" itemprop="url" rel="index">
+                    <span itemprop="name">Bash</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>内置命令是shell自己实现的命令。当内置命令作为简单命令的第一个word时，shell直接执行这个命令，不需要调用其他的程序。内置命令一般用来实现那些不可能或者不便于使用独立的程序实现的功能<br><a id="more"></a><br>本节简单描述那些从bourne shell继承的bash内置命令，和bash添加以及扩展的内置命令</p>
+<p>几个内置命令会在其他的章节描述：用来提供作业控制接口的内置命令、目录栈、命令历史和the programmable completion facilities</p>
+<p>很多的内置命令已经被POSIX和Bash扩展</p>
+<p>除非特别指出，这些内置命令都接受以<code>-</code>开始的选项并且以<code>--</code>表示选项的结束。<code>:</code> <code>true</code> <code>false</code> <code>test</code>内置命令不接受任何参数同时也不会对<code>--</code>特殊对待。<code>exit</code>、<code>logout</code>、<code>break</code>、<code>continue</code>、<code>let</code>和<code>shift</code>命令接收<code>-</code>开始的参数，但是不需要<code>--</code>来表示选项的结束。其他的内置命令接收但是不限于开始提到的参数形式</p>
+<h4 id="Bourne-Shell内置命令"><a href="#Bourne-Shell内置命令" class="headerlink" title="Bourne Shell内置命令"></a>Bourne Shell内置命令</h4><p>下面的这些内置命令是从sh继承的。这些命令按照POSIX的标准实现：</p>
+<p><strong><code>: [arguments]</code></strong><br>除了扩展参数以及进行重定向操作之外不做任何事情，返回值为0</p>
+<p><strong><code>. filename [arguments]</code></strong><br>在当前的shell上下文中读取并执行filename脚本的内容。如果filename不包含一个斜线，则使用PATH来查找文件名。如果bash未运行在POSIX模式，如果再PATH中未找到filename则会在当前目录中查找。如果提供了arguments则成为filename执行时的位置参数。否则的话当前shell的位置参数也是filename的位置参数。filename执行的返回值是最后一个执行命令的返回值，如果没有执行命令则返回0。如果filename未找到或者不可读则返回非0值。这个内置命令等同于soruce</p>
+<p><strong><code>break [n]</code></strong><br>从for while until 或者 select循环中退出。如果提供n参数，则第n层的循环被跳出。n必须大于或者等于1。只有在n小于1的情况下break才会返回非0值</p>
+<p><strong><code>continue [n]</code></strong><br>在for while until或者select循环中开始下一次循环。如果提供了n参数则表示开始下n次循环。n必须大于或者等于1。只有在n小于1的情况下continue才会返回非0值</p>
+<p><strong><code>exit [n]</code></strong><br>退出shell，返回n给当前shell的父进程。如果n为空则表示上一个执行的命令的返回值。任何关于EXIT的trap在shell终止前被执行</p>
+<p><strong><code>return [n]</code></strong><br>停止shell函数的执行并且返回n到调用脚本。如果未提供n，则返回值是函数中上一个命令的退出状态。return也可以用来终止使用.（source）内置命令执行的脚本，可以返回n或者脚本中的上一个命令的退出状态。如果提供n则返回值是n的低8位值。任何和RETURN关联的trap都会在返回到调用脚本之前执行。如果n不为一个数字或者将return使用在其他的地方则return返回非0值</p>
+<p><strong><code>cd [-L|[-P [-e]] [-@] [directory]</code></strong><br>改变当前工作目录到directory。如果directory未指定，则使用<code>$HOME</code>的值。directory后面的参数被忽略。如果shell变量CDPATH存在，则使用变量值作为搜索路径：CDPATH变量中的每一个路径名都作为搜索路径，with alternative directory names in CDPATH separated by a colon <code>:</code>。如果目录名以一个斜线开始，则不使用CDPATH</p>
+<p><code>-P</code>选项表示不跟随符合连接：symbolic links are resolved while cd is traversing directory and before processing an instance of <code>..</code> in directory.<br>默认情况或者指定了-L选项，symbolic links in directory are resolved after cd processes an instance of <code>..</code> in directory.<br>如果directory中使用了<code>..</code>， it is processed by removing the immediately preceding pathname component, back to a slash or the beginning of directory.<br>如果指定<code>-P</code>选项的同时指定了<code>-e</code>选项并且在目录成功改变之后不能确定当前工作目录，则<code>cd</code>会返回一个未成功的状态<br>在支持的系统上，<code>-@</code>选项表示和文件关联的扩展属性<br>如果directory指定为<code>-</code>则在目录改变之前会被更改为<code>$OLDPWD</code><br>如果使用了CDPATH中的一个非空的目录，或者<code>-</code>是第一个参数，并且也成功的改变了目录，则新的工作目录的绝对路径会被打印到标准输出<br>如果目录改变成功则返回0，否则返回非0</p>
+<p><strong><code>eval [arguments]</code></strong><br>所有的参数组合在一起成为一个新的命令，并且被执行，<em>命令的退出状态作为eval的退出状态</em>。如果没有参数或者有空参数则eval返回0</p>
+<p><strong><code>exec [-cl] [-a name] [command [arguments]]</code></strong><br>执行command命令而代替当前的shell。如果使用-l选项，shell会在传给command的第0个参数前加一个<code>-</code>。login程序就是这样做的。<code>-c</code>选项在执行command之前会清空环境。如果使用<code>-a</code>选项，则shell将name作为command的第0个参数。如果comand因为某些原因不能执行，则一个非交互式的shell退出，除非使用了execfail shell选项。这种情况下shell返回错误。An interactive shell returns failure if the file cannot be executed。如果未指定command，则可以指定重定向来影响当前shell。如果重定向没有发生错误，则退出状态为0；否则返回一个非0的退出状态</p>
+<p><strong><code>export [-fn] [-p] [name[=value]]</code></strong><br>将环境中的name标记为可导入到子进程中。如果指定<code>-f</code>选项，则name表示一个函数；否则的话name表示一个shell变量。-n参数表示name不再标记被导入。如果没有提供name或者使用<code>-p</code>选项，则显示所有已导出的变量。<code>-p</code>选项将输出组织为可以重新作为输入的形式。如果name后面跟着<code>=value</code>，则将name的值设置为value</p>
+<p>命令的返回值为0除非提供了非法的参数，或者name是一个非法的变量名，或者使用<code>-f</code>选项但是未提供一个函数名</p>
+<p><strong><code>getopts optstringname [args]</code></strong><br>getopts可以被shell用来分析位置参数。optstring中包含要被识别的选项字符；如果字符后面跟着一个 <code>:</code>，则表示这个选项期望一个参数值，参数值和选项之间使用空格隔开。冒号<code>:</code>和问号<code>?</code>不能用作选项字符。每次调用getopts时，都会将下一个选项字符赋值给name，如果name不存在则直接创建这个变量，并且下一个被处理的参数的索引作为OPTIND的值。每次shell或者shell script调用时OPTIND的值被初始化为1。如果选项字符期待有一个参数则getopts在处理是会将这个值赋给OPTANG变量。shell不会自动重置OPTIND；如果在同一个shell使用多组位置参数时，那么在多次调用getopts之间必须手动重置OPTIND变量</p>
+<p>如果选项处理完毕，则getopts会退出并且返回一个大于0的数。OPTIND被设置为第一个非选项的参数的索引，并且name设置为<code>?</code></p>
+<p>getopts通常用来分析位置参数，但是如果提供了args参数，则getopts会分析args参数而不是位置参数</p>
+<p>getopts使用两种方式报告错误。如果optstring参数的第一个字符是<code>:</code>，则使用安静的错误报告方式。正常情况下如果指定非法选项或者丢失选项的参数则打印诊断消息。如果变量OPTERR被设置为0，则不打印错误消息，即使optstrings的第一个字符是<code>:</code></p>
+<p>如果指定了一个非法的选项，getopts会将name置为<code>?</code>，如果没有使用安静的错误报告方式，则打印一个错误消息并且释放OPTARG变量。如果设置为静默方式，则将非法的选项字符被赋给OPTARG变量，也不打印错误消息</p>
+<p>如果期望有参数的选项没有获取到参数，并且getopts非静默模式，将name置为<code>?</code>，OPTARG被释放，然后打印错误消息。如果使用静默模式则将name置为<code>:</code>，并且将OPTARG设置为这个选项字符</p>
+<p><strong><code>hash [-r] [-p filename] [-dt] [name]</code></strong><br>每次调用hash命令，bash会记住作为参数的name命令的路径，所以下次调用这个命令时不必在目录树中搜索。hash从<code>$PATH</code>中搜索查找name命令的完整路径。任何之前记住的路径都会被丢弃。<code>-p</code>选项表示使用filename作为name的路径，而不从<code>$PATH</code>中搜索。<code>-r</code>选项表示让hash忘记之前记住的所有路径。<code>-d</code>选项表示忘记之前记住的name的路径。如果使用<code>-t</code>选项则name对应的每一个路径都会被打印。如果使用多个name作为参数，并且使用<code>-t</code>选择则name先打印然后再打印记住的路径名。如果没有提供选项，或者使用-l选项则会打印所有经过hash的命令和路径名，区别是后者会已可在此作为输入的格式打印。命令返回0除非name命令未找到或者使用了非法的选项</p>
+<p><strong><code>pwd [-LP]</code></strong><br>打印当前工作的目录的绝对路径。如果使用<code>-P</code>选项则会对符号连接进行解引用。如果使用<code>-L</code>选项则当前打印的路径名可能会是符号连接。如果提供了非法选项或者不能决定当前目录时返回非0值</p>
+<p><strong><code>readonly [-aAf] [-p] [name[=value]] …</code></strong><br>将每一个name标记为只读。后面的操作中，这些name的值不能改变。如果使用<code>-f</code>选项则表示name是一个函数。<code>-a</code>选择表示name是一个索引数组；<code>-A</code>选项表示name是一个关联数组；如果两个都提供了则<code>-A</code>优先。如果未提供参数或者使用<code>-p</code>选项，所有标记为只读的name被打印，如果未提name而使用<code>-aAf</code>选项则表示打印相应的子集；使用<code>-p</code>可以使用一个可重用(作为输入)的格式打印。如果name后面跟<code>=value</code>则表示将name设置为value。如果提供了非法的选项或者name不是一个变量或者函数则返回非0值</p>
+<p><strong><code>shift [n]</code></strong><br>将位置参数往左移n个。位置参数从<code>n+1....$#</code>被重命名为<code>$1....$#-n</code>。原来的参数从<code>$#</code>到<code>$#-n+1</code>被释放。n必须是一个非负数字并且小于或者等于<code>$#</code>。如果n是0或者大于<code>$#</code>，则位置参数未改变。如果未提供n则默认是1。如果n不合法的返回非0</p>
+<p><strong><code>test expr</code></strong><br><strong><code>[ expr ]</code></strong><br>计算条件表达式expr并且返回0(真)或者1(假)。每个操作符和操作数必须是分开的参数。表达式是后面章节描述符的条件表达式<br>。test不接受任何选项，也不接受<code>--</code>作为参数的结尾，如果有提供则会被忽略</p>
+<p>如果使用<code>[</code>的形式则最后一个参数必须是<code>]</code></p>
+<blockquote>
+<p>注意这是一个命令而不是一种语句结构</p>
+</blockquote>
+<p>表达式可以使用下面的这些操作符结合使用，下面列表按优先级从高到底排列。表达式的计算按照参数的个数，当有五个或者更多的参数时才会使用操作符的优先级</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">! expr              如果expr为假则返回真</span><br><span class="line">( expr )            用来覆盖正常的优先级</span><br><span class="line">expr1 <span class="_">-a</span> expr2      如果两个表达式都返回真则结果为真</span><br><span class="line">expr1 -o expr2      如果两个表达式有一个为真则返回真</span><br></pre></td></tr></table></figure>
+<p>内置命令<code>test</code>或者<code>[</code>会根据参数个数的不同使用不同的运算规则:</p>
+<ul>
+<li>0 arguments<br>表达式为假</li>
+<li>1 argument<br>当且仅当参数不为空时命令返回真</li>
+<li>2 arguments<br>如果第一个参数是<code>!</code>，则当且仅当第二个参数为空时返回真；如果第一个参数是后面描述的一元操作符之一，则一元操作符测试为真时返回真。如果第一个参数不是一个合法的一元操作符则返回假</li>
+<li>3 arguments<br>按照后面描述的依次进行测试。如果第二个参数是二元操作符之一，表达式的结果是第一个和第三个操作数二元测试的结果。如果只有三个参数<code>-a</code> 和<code>-o</code>也被认为是二元操作符。如果第一个参数是<code>!</code>，则后面两个参数按照两个参数的情况进行计算，然后对后面两个参数的计算结果取反。如果第一个参数是<code>(</code>，第三个参数是<code>)</code>则按照一个参数时的情况进行计算。其他情况表达式为假</li>
+<li>4 arguments<br>如果第一个参数是”!”，则后面三个参数按照三个参数的情况计算，在将结果取反。否则的话使用上面描述的优先级规则对表达式进行分析计算</li>
+<li>5 or more arguments<br>使用上面描述的优先级规则对表达式进行分析计算</li>
+</ul>
+<p>如果在<code>[</code>和<code>test</code>中使用 <code>&lt;</code>或者<code>&gt;</code>，则按照ascii的顺序进行计算</p>
+<p><strong><code>times</code></strong><br>打印出shell及其子进程使用的系统和用户时间，返回值为0</p>
+<p><strong><code>trap [-lp] [arg] [sigspec …]</code></strong><br>当shell收到sigspec信号是arg会被执行。如果未指定arg(只有参数sigspec)或者使用<code>-</code>，则指定的信号处置改为shell被调用时的值。如果arg为空，则当shell或者shell调用的命令执行时sigspec指定的信号被忽略。如果arg未指定并且使用了<code>-p</code>选项则shell打印每个sigspec关联的trap。如果没有提供任何参数或者使用了<code>-p</code>选项则打印所有设置了trap的信号，并且以可重新作为输入的形式。<code>-l</code>选项打印信号名和对应的号码。sigspec可以使用信号名也可以使用对应的号码。信号名大小写无关并且SIG可以省略</p>
+<p>如果sigspec是0或者EXIT，则arg在shell退出时执行。如果sigspec是DEBUG，则命令arg在每一个简单命令、for命令、case命令、select命令、每一个算术for命令和shell函数中的第一个命令执行之前之前执行。详细的DEBUG trap和shell关系的信息可以参考内置命令shopt命令的extdebug选项的描述。如果sigspec是RETURN，则arg在每个函数或者使用<code>.</code>(source)内置命令执行的脚步完成时执行</p>
+<p>如果sigspec是ERR，则如果一个管道(包括简单命令)，列表或者组合命令返回非0的退出状态时执行arg，但是要受下面条件的制约。如果返回错误的命令是命令列表的一部分并且紧跟着<code>until</code>或者<code>while</code>关键字，或者是<code>if</code>或者<code>elif</code>保留字后面的测试命令的一部分，或者是<code>||</code> <code>&amp;&amp;</code>命令列表的非最后一个命令，或者任何管道线命令的非最后一个命令，或者在命令前面加了<code>!</code>来执行，上面几种情况在命令返回错误时都不会执行arg。These are the same conditions obeyed by the errexit (-e) option.</p>
+<p>Signals ignored upon entry to the shell cannot be trapped or reset. Trapped signals that are not being ignored are reset to their original values in a subshell or subshell environment when one is created. </p>
+<p>如果sigspec未指定一个合法的信号则返回非0值</p>
+<p><strong><code>umask [-p] [-S] [mode]</code></strong><br>将shell进程的文件创建掩码改为mode。如果mode以数字开始则被解释为8进制数字；如果非数字开始则被解释为和chmod参数类似的符号权限标示。如果mode为空则打印当前的掩码。如果只指定了<code>-S</code>选项则打印符号权限标示。如果使用<code>-p</code>选项mode为空，则使用可以重新作为输入的格式打印当前的掩码。如果掩码成功更改或者使用正确的选项返回0，其他情况返回非0</p>
+<p>注意如果模式为8进制数字的话，则创建文件的权限会使用7减这个数字，所以掩码022表示实际创建文件的权限是755</p>
+<p><strong><code>unset [-fnv] [name]</code></strong><br>移除变量或者函数name。如果使用<code>-v</code>选项，name引用的变量和name都被移除。如果使用<code>-f</code>选项则name表示一个函数，并且函数定义被移除。如果使用<code>-n</code>选项则name是一个有nameref属性的变量，name被取消，而name引用的变量则不变。如果使用了<code>-f</code>选项则<code>-n</code>选项无效。如果没有使用选项则name指代一个shell变量；如果不存在这个变量则name指代一个函数名。只读的变量和函数不能被取消</p>
+<h4 id="Bash内置命令"><a href="#Bash内置命令" class="headerlink" title="Bash内置命令"></a>Bash内置命令</h4><p>本节描述bash扩展并且仅有的命令。其中的一部分是属于POSIX标准</p>
+<p><strong><code>alias [-p] [name[=value] …]</code></strong><br>没有给出参数或者使用-p选项，则alias打印已创建的别名列表，打印的信息可以重新作为命令的输入。如果给出参数则定义一个将一个name定义为给出的value的别名。如果没有给出value值则打印name对应的别名值。alias详细的描述在后面的章节</p>
+<p><strong><code>bind</code></strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bind</span> [-m keymap] [-lpsvPSVX]</span><br><span class="line"><span class="built_in">bind</span> [-m keymap] [-q <span class="keyword">function</span>] [-u <span class="keyword">function</span>] [-r keyseq]</span><br><span class="line"><span class="built_in">bind</span> [-m keymap] <span class="_">-f</span> filename</span><br><span class="line"><span class="built_in">bind</span> [-m keymap] -x keyseq:shell-command</span><br><span class="line"><span class="built_in">bind</span> [-m keymap] keyseq:<span class="keyword">function</span>-name</span><br><span class="line"><span class="built_in">bind</span> readline-command</span><br></pre></td></tr></table></figure></p>
+<p><strong><code>builtin [shell-builtin [args]]</code></strong><br>使用给出的参数arg运行一个shell内置命令，并且返回。这在定义一个和内置命令同名的函数时有用，因为函数的调用优先于内置命令，所以使用builtin可以调用这个builtin命令而不是同名的函数。如果shell-builting不是一个内置命令则返回非0值</p>
+<p><strong><code>caller [expr]</code></strong><br>返回任何活动子例程的内容，子例程可以是函数或者使用.（soruce）运行的脚本<br>Without expr, caller displays the line number and source filename of the current subroutine call. If a non-negative integer is supplied as expr, caller displays the line number, subroutine name, and source file corresponding to that position in the current execution call stack. This extra information may be used, for example, to print a stack trace. The current frame is frame 0.<br>The return value is 0 unless the shell is not executing a subroutine call or expr does not correspond to a valid position in the call stack.</p>
+<p><strong><code>command [-pVv] command [arguments …]</code></strong><br>使用arguments运行command命令而不管有函数和command同名。<em>只有内置命令和PATH路径中的命令会被执行</em>。如果有一个shell函数ls，而在这个函数中运行command ls时会执行外部命令ls而不是递归的调用函数ls。The <code>-p</code> option means to use a default value for PATH that is guaranteed to find all of the standard utilities. 如果command不存在或者发生错误返回127，否则的话返回command执行的返回值</p>
+<p>如果使用<code>-V</code>或者<code>-v</code>选项则会打印command的描述性信息，类似于type命令。如果使用<code>-v</code>选项则会打印出调用这个命令时实际执行的内容(别名或者可执行文件)；如果使用<code>-V</code>选项则会打印稍详细点的信息，类似于不带选项的type命令</p>
+<p><strong><code>declare [-aAfFgilnrtux] [-p] [name[=value] …]</code></strong><br>定义变量并且给他们分配属性。如果未提供name参数，则会打印出给定选项类型的变量和值</p>
+<p><code>-p</code>选项会显示name对应的属性和值。如果使用<code>-p</code>选项时提供了name则除了<code>-f</code>和<code>-F</code>选项其他的选项都被忽略</p>
+<p>如果使用-p选项又没有提供name参数，则会显示其他选项对应的所有变量和值以及属性。如果只指定了<code>-p</code>选项，则会显示所有shell变量的属性和值。<code>-f</code>选项可以限制只显示函数</p>
+<p><code>-F</code>选择只显示函数名而不显示函数内容和属性。如果启用extdebug选项，则函数定义的文件名和行号也被显示。<code>-F</code>隐含<code>-f</code></p>
+<p><code>-g</code>选项可以在全局作用域创建和更改变量，即使在函数中使用declare。其他情况下则会忽略这个选项</p>
+<p>下面这些选项可以限制只有特定属性相关的变量被显示或者给变量分配特定的属性:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="_">-a</span>    表示name是一个索引数组</span><br><span class="line">-A    表示name是一个关联数组</span><br><span class="line"><span class="_">-f</span>    表示name是一个函数</span><br><span class="line">-i    表示name变量是一个整形的；给变量赋值时会对右值进行算术运算</span><br><span class="line"><span class="_">-l</span>    当给变量赋值时所有的大写字符会被转换为小写。大写属性被禁用</span><br><span class="line">-n    给name分配nameref属性，使name引用另外一个变量。表示这个变量的值是另外一个变量名。所有对变量的引用和赋值，除非是改变变量的nameref属性，都是对以这变量值为名的变量的操作。`-n`属性不能应用到数组变量</span><br><span class="line">-r    表示name是一个只读的变量，后续不能再重新赋值和取消</span><br><span class="line">-t    给name分配trace属性。被trace的函数从调用的shell中继承DEBUG和RETURN traps。trace对变量无效</span><br><span class="line">-u    和`<span class="_">-l</span>`相反</span><br><span class="line">-x    通过环境变量将name导入到子进程中</span><br></pre></td></tr></table></figure>
+<p>使用<code>+</code>代替<code>-</code>可以关闭这些属性，例外情况是<code>+a</code>不会销毁一个数组，而<code>+r</code>也不会取消一个变量的只读属性。如果在一个函数中使用declare则和local一样将name标记为局部的，除非使用<code>-g</code>选项。如果name后面跟<code>=value</code>则变量被赋值</p>
+<p>When using <code>-a</code> or <code>-A</code> and the compound assignment syntax to create array variables, additional attributes do not take effect until subsequent assignments.</p>
+<p>使用了不合理的参数或者变量名或者变量值、或者没有使用组合赋值语法给数组分配值则会返回非0值</p>
+<p><strong><code>echo [-neE] [arg …]</code></strong><br>输出arg，如果有多个arg则输出结果使用空格分隔，并且会在最后添加一个换行。最后返回值为0除非写时发生错误。如果使用-n参数则不会在结尾添加一个换行。如果使用-e参数，则会解释下面这些反斜线转义的字符。-E选项则关闭这些转义字符，即使在那些默认会解释的系统上面。xpg_echo可以用来动态的控制echo命令默认是否解释这些转义字符。echo不会将–作为选项的结尾</p>
+<p>echo会解释下面这些转义字符:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">\a      alert (bell)</span><br><span class="line">\b      backspace</span><br><span class="line">\c      suppress further output</span><br><span class="line">\e</span><br><span class="line">\E      escape</span><br><span class="line">\f      form feed</span><br><span class="line">\n      new line</span><br><span class="line">\r      carriage <span class="built_in">return</span></span><br><span class="line">\t      horizontal tab</span><br><span class="line">\v      vertical tab</span><br><span class="line">\\      backslash</span><br><span class="line">\0nnn   the eight-bit character whose value is the octal value nnn (zero to three octal digits)</span><br><span class="line">\xHH    the eight-bit character whose value is the hexadecimal value HH (one or two hex digits)</span><br><span class="line">\uHHHH  the Unicode (ISO/IEC 10646) character whose value is the hexadecimal value HHHH (one to four hex digits)</span><br><span class="line">\UHHHHHHHH  the Unicode (ISO/IEC 10646) character whose value is the hexadecimal value HHHHHHHH (one to eight hex digits)</span><br></pre></td></tr></table></figure></p>
+<p><strong><code>enable [-a] [-dnps] [-f filename] [name …]</code></strong><br>启用或者禁用内置命令。禁用一个内置命令可以让和内置命令同名的命令在执行时不必使用完全路径，即使shell会优先扫描内置命令。如果使用<code>-n</code>参数则name命令被禁用。否则的话name启用。比如如果想要在$PATH中的一个test命令代替内置的test命令可以使用<code>enable -n test</code></p>
+<p>如果使用<code>-p</code>选项，或者没有提供任何选项，则会打印所有启用的内置命令。而<code>-a</code>选项则打印所有启用和禁用的内置命令并且在命令前面加一个enable或者disable</p>
+<p><code>-f</code>选项表示如果系统支持动态导入，则从共享对象filename中导入新的内置命令。<code>-d</code>命令则删除由<code>-f</code>导入的命令</p>
+<p><em>如果未提供参数则打印内置命令的列表</em>。<code>-s</code>选项可以控制只显示POSIX的内置命令。如果提供<code>-f</code>选项的同时使用<code>-s</code>选项则这些命令成为特殊内置命令</p>
+<p>如果提供的name不是一个内置命令或者导入命令时出错则返回非0值</p>
+<p><strong><code>help [-dms] [pattern]</code></strong><br>显示内置命令的帮助信息。如果使用pattern则shell显示匹配pattern的所有命令的帮助信息。如果没有提供参数的话，显示所有内置命令和一个简单的帮助信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="_">-d</span>    表示显示一个简短的帮助信息</span><br><span class="line">-m    表示显示匹配patthern命令的类似于manpage的帮助信息</span><br><span class="line"><span class="_">-s</span>    表示显示一个简短的usage帮助信息</span><br></pre></td></tr></table></figure>
+<p>返回值为0除非没有匹配的命令</p>
+<p><strong><code>let expression [expression …]</code></strong><br>let内置命令可以让shell变量进行数学计算。每个expression都按照arithmetic expansion的规则进行算术运算。如果最后一个expression计算结果为0则返回1；否则的话返回0</p>
+<p><strong><code>local [option] name[=value] …</code></strong><br>用来创建本地变量，如果有=value部分则同时进行赋值，name可以有多个使用空格分隔。option可以为declare的所有选项。local只能在一个函数内部使用；可以用来限制变量只在本函数（以及本函数调用的函数）中使用。如果在函数外部使用，或者使用非法的name，或者name是一个只读变量则返回非0值</p>
+<p><strong><code>logout [n]</code></strong><br>退出登录shell，并且将n返回给父shell</p>
+<p><strong><code>mapfile [-n count] [-O origin] [-s count] [-t] [-u fd]
+    [-C callback] [-c quantum] [array]</code></strong><br>从标准输入读取行，并且赋给索引数组（ <em>每行作为一个元素</em>），如果使用<code>-u</code>选项则表示从文件描述符fd获取输入。变量MAPFILE是默认的数组名。可以使用下面的这些选项:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-n    表示最多接收n行，如果n为0则表示全部接收</span><br><span class="line">-O    从索引origin开始分配值，默认索引为0</span><br><span class="line"><span class="_">-s</span>    丢弃接收到的第一行内容</span><br><span class="line">-t    移除接收到的行的结尾的换行符</span><br><span class="line">-u    从文件描述符fd接收行而不是标准输入</span><br><span class="line">-C    每次接收到quantum行都调用callback，quantum使用-c参数指定</span><br><span class="line">-c    指定每一次调用callback间隔的读取到的行数</span><br></pre></td></tr></table></figure>
+<p>如果只使用<code>-C</code>选项指定callback，而没有使用<code>-c</code>则默认是5000。When callback is evaluated, it is supplied the index of the next array element to be assigned and the line to be assigned to that element as additional arguments. callback is evaluated after the line is read but before the array element is assigned.</p>
+<p>如果未提供明确的origin，mapfile在赋值前会清除数组（可以将origin设置为上次调用mapfile的行数，将数组名设置为和上次调用相同来将两次调用赋给同一个数组）</p>
+<p>除非是用了错误的选项，数组非法或者只读，或者不是一个索引数组返回非0，否则返回0</p>
+<p><strong><code>printf [-v var] format [arguments]</code></strong><br>使用format控制的格式将argument打印至标准输出。<em>使用-v参数可以让结果被赋值给var变量</em>，而不是打印到标准输出</p>
+<p>format是包含三种类型对象的一系列字符串：普通文本字符被简单打印输出；转义字符序列会被转换然后打印到标准输出；格式指定字符，每个会被后面对应的arguments替换。除了和C语言<code>printf</code>相同的控制字符之外，shell中的<code>printf</code>还会解释下面这些扩展字符:</p>
+<ul>
+<li><code>%b</code>    转义字符占位符，表示后面对应的参数是一个转义字符，例外是<code>\c</code>不会用来结束一行，而是<code>\&#39;</code> <code>\&quot;</code> <code>\?</code>的反斜线也不会被移除， and octal escapes beginning with <code>\0</code> may contain up to four digits     注意：后面的参数应该加引用，否则会首先被shell转义</li>
+<li><code>%q</code>  Causes printf to output the corresponding argument in a format that can be reused as shell input.</li>
+<li><code>%(datefmt)T</code>       可以让<code>printf</code>打印日期时间字符串，datefmt是strftime库函数可识别的字符格式。对应的argument被当做是从epoch以来的秒数。argument可以使用两个特殊的值：-1表示当前时间，-2表示shell调用时的时间。没有给出相应的参数则默认是-1。这是一个和一般printf不同的行为</li>
+</ul>
+<p>Arguments to non-string format specifiers are treated as C language constants, except that a leading plus or minus sign is allowed, and if the leading character is a single or double quote, the value is the ASCII value of the following character. </p>
+<p>如果给出的参数比占位符多，那么占位符和参数不再是一一对应，format会循环消耗参数。如果占位符比参数多，则后面的占位符期望的参数根据情况默认是0或者空。打印成功则返回0，失败则返回非0值</p>
+<p><strong><code>read [-ers] [-a aname] [-d delim] [-i text] [-n nchars]
+    [-N nchars] [-p prompt] [-t timeout] [-u fd] [name …]</code></strong><br>从标准输入读取一行，如果使用-u参数则表示从文件描述符fd读取，第一个word被赋给第一个name，第二个word赋值给第二个name以此类推，word数多于name则会把后面的word都赋给最后一个name。如果从输入读取到的word少于name则其他的name会被赋空值。IFS变量的值用来将行分隔为word，分隔规则和shell expansion相同。反斜线可以用来转义接下来读到的一个字符或者换行符。如果没有提供name参数，则读到的行被赋值给REPLY变量。除非读到了EOF，或者超时(这时返回值大于128)，或者变量赋值错误，或者是一个非法的文件描述符，否则返回值是0</p>
+<p>其他选项的解释如下:  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="_">-a</span> aname    分隔后的word被赋值给索引数组aname，从索引从0开始。aname中的所有元素在赋值前被移除。如果有name参数被忽略</span><br><span class="line"><span class="_">-d</span> delim    使用delim的第一个字符来终止输入的一行内容，而不是换行符</span><br><span class="line"><span class="_">-e</span>          Readline (see Command Line Editing) is used to obtain the line. Readline uses the current (or default, <span class="keyword">if</span> line editing was not previously active) editing settings.</span><br><span class="line">-i text     如果Readline被用来读取行，会在开始编辑之前将<span class="built_in">test</span>放入编辑缓存</span><br><span class="line">-n nchars   <span class="built_in">read</span>读取nchars个字符就停止，如果再读取nchars个字符之前遇到delimter则也作为读取到的一行</span><br><span class="line">-p promp    开始读取输入之前先打印protmpt的内容，尾部不会自动添加换行。只有输入来自于终端时才会打印prompt</span><br><span class="line">-r          如果使用本选项，则反斜线不会被作为转义字符。反斜线作为一个普通字符。当反斜线后面跟换行时被当做续行符</span><br><span class="line"><span class="_">-s</span>          静默模式，如果从终端读取输入，字符不会被回显</span><br><span class="line">-t timeout  如果再timeout秒内没有获取到一个完整的行(或者特定数目的字符)则<span class="built_in">read</span>会超时并返回错误。timeout可以指定为小数。只有<span class="built_in">read</span>从终端、pipe或者其他特殊文件读时这个选项才有效；从普通文件读时无效。如果<span class="built_in">read</span>超时则<span class="built_in">read</span>会将输入的内容赋值给特殊变量name。如果timeout指定为0，则<span class="built_in">read</span>会立即返回，不会试图去读数据。如果指定的文件描述符可读则返回0，否则返回非0。如果超时则返回一个大于128的数字</span><br><span class="line">-u fd       从文件描述符fd获取输入</span><br></pre></td></tr></table></figure>
+<p><strong><code>readarray [-n count] [-O origin] [-s count] [-t] [-u fd] [-C callback] [-c quantum] [array]</code></strong><br>和mapfile同义</p>
+<p><strong><code>source filename</code></strong><br>和<code>.</code>同义</p>
+<p><strong><code>type [-afptP] [name …]</code></strong><br>对每一个name打印出：如果name是一个命令则它会如何被解释。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-t    如果使用-t选项，<span class="built_in">type</span>只打印一个单词标示name是什么类型的命令“<span class="built_in">alias</span>”“<span class="keyword">function</span>”“<span class="built_in">builtin</span>”“file”“keyword”。如果name未找到则什么也不打印，<span class="built_in">type</span>返回非0值</span><br><span class="line">-p   如果给出的name使用<span class="built_in">type</span> -t选项打印出‘file’时，-p选项会打印出这个‘file’的绝对路径；如果-t选项的输出是其他几种类型，则-p选项没有任何输出</span><br><span class="line">-P   大写的-P选项会强制对每个name进行路径搜索，即使-t的输出不是‘file’，这当name是别名时有用</span><br><span class="line">如果一个命令已经在bash的<span class="built_in">hash</span>表里面，则直接返回对应的值；这个命令不必一定在<span class="variable">$PATH</span>中</span><br><span class="line"><span class="_">-a</span>    如果使用<span class="_">-a</span>选项同时又没有使用-p选项，则<span class="built_in">type</span>命令会返回name的所有情况，包括别名和函数</span><br><span class="line"><span class="_">-f</span>    如果使用<span class="_">-f</span>选项则<span class="built_in">type</span>不会查找shell函数</span><br></pre></td></tr></table></figure>
+<p><strong><code>typeset [-afFgrxilnrtux] [-p] [name[=value] …]</code></strong><br>typeset命令是为了和kshell兼容的命令，和declare同义</p>
+<p><strong><code>ulimit [-abcdefilmnpqrstuvxHST] [limit]</code></strong><br>ulimit用来控制shell启动的进程的可用资源数量，系统需要提供这类支持。选项解释如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">-S    更改或者打印和资源关联的软限制值</span><br><span class="line">-H    更改或者打印和资源管理的硬限制值</span><br><span class="line"><span class="_">-a</span>    打印所有的限制值</span><br><span class="line">-b    最大的socket缓存</span><br><span class="line">-c    创建的coredump的最大大小</span><br><span class="line"><span class="_">-d</span>    进程的最大数据段data segment</span><br><span class="line"><span class="_">-e</span>    进程可调度的最大优先级</span><br><span class="line"><span class="_">-f</span>    shell和子进程可创建的最大文件大小</span><br><span class="line">-i    处于pending状态的信号的最大数量</span><br><span class="line"><span class="_">-l</span>    可以锁进内存的最大大小</span><br><span class="line">-m    最大驻留集大小(很多系统未实现本限制)</span><br><span class="line">-n    最大打开文件数量(很多系统不允许设置这个值)</span><br><span class="line">-p    命名管道缓冲区大小</span><br><span class="line">-q    POSIX消息队列最大字节数</span><br><span class="line">-r    最大的实时调度优先级</span><br><span class="line"><span class="_">-s</span>    最大的栈大小</span><br><span class="line">-t    最大的CPU时间，单位是秒</span><br><span class="line">-u    单个用户最大进程数</span><br><span class="line">-v    shell最大的挂载虚拟内存数量</span><br><span class="line">-x    文件锁的最大数量</span><br><span class="line">-T    最大线程数量</span><br></pre></td></tr></table></figure>
+<p>如果指定了limit参数，并且未使用-a参数，指定的资源被设置为新的limit值。limit的特殊值hard，soft和unlimited代表当前的硬限制，当前软限制和无限制。非root用户使用的资源不能超过当前设置的硬限制值；软限制值最大可以设置为硬限制值。如果没有给出limit则表示打印指定的资源限制值，除非使用<code>-H</code>选项。当设置值时如果未指定<code>-H</code>或者<code>-S</code>则两者都被设置。如果没有给出任何选项则默认是<code>-f</code>。除了<code>-t</code>的增量是秒，其他的都是1024byte；<code>-p</code>的单位是512-byte blocks；<code>-T</code> <code>-b</code> <code>-n</code>和<code>-u</code>都是非度量值</p>
+<p>除非指定非法的选项或者值，或者在设置值时出现错误，返回非0</p>
+<p><strong><code>unalias [-a] [name … ]</code></strong><br>移除alias列表的别名。如果使用-a参数则表示所有的别名都被移除。详细的alias信息可以参考后面的章节</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/bash/" rel="tag">#bash</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/15/Bash文档3--shell扩展-译.html" rel="next" title="Bash文档3--shell扩展(译)">
+                <i class="fa fa-chevron-left"></i> Bash文档3--shell扩展(译)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/15/Bash文档5--shell内置变量-译.html" rel="prev" title="Bash文档5--shell内置变量(译)">
+                Bash文档5--shell内置变量(译) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="lifayi2008" />
+          <p class="site-author-name" itemprop="name">lifayi2008</p>
+          <p class="site-description motion-element" itemprop="description">压力不是有人比你努力，而是比你牛逼的人依然比你努力</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Bourne-Shell内置命令"><span class="nav-number">1.</span> <span class="nav-text">Bourne Shell内置命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bash内置命令"><span class="nav-number">2.</span> <span class="nav-text">Bash内置命令</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lifayi2008</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

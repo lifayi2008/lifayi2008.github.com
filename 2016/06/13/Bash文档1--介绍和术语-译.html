@@ -1,0 +1,630 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="bash," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="介绍什么是BashBash是GNU操作系统的shell，或者说是命令语言解释器。Bash是”Broune-Again Shell”的一个简称，也是对当前Unix shell ‘sh’最初作者的一个调侃，sh最早出现在第七版的贝尔实验室的Unix系统上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bash文档1--介绍和术语(译)">
+<meta property="og:url" content="http://blog.yoopig.com/2016/06/13/Bash文档1--介绍和术语-译.html">
+<meta property="og:site_name" content="lifayi2008">
+<meta property="og:description" content="介绍什么是BashBash是GNU操作系统的shell，或者说是命令语言解释器。Bash是”Broune-Again Shell”的一个简称，也是对当前Unix shell ‘sh’最初作者的一个调侃，sh最早出现在第七版的贝尔实验室的Unix系统上">
+<meta property="og:updated_time" content="2016-08-17T09:21:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bash文档1--介绍和术语(译)">
+<meta name="twitter:description" content="介绍什么是BashBash是GNU操作系统的shell，或者说是命令语言解释器。Bash是”Broune-Again Shell”的一个简称，也是对当前Unix shell ‘sh’最初作者的一个调侃，sh最早出现在第七版的贝尔实验室的Unix系统上">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://blog.yoopig.com/2016/06/13/Bash文档1--介绍和术语-译.html"/>
+
+  <title> Bash文档1--介绍和术语(译) | lifayi2008 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">lifayi2008</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">压力不是有人比你努力，而是比你牛逼的人依然比你努力</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Bash文档1--介绍和术语(译)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-13T15:51:33+08:00" content="2016-06-13">
+              2016-06-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Bash/" itemprop="url" rel="index">
+                    <span itemprop="name">Bash</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><h5 id="什么是Bash"><a href="#什么是Bash" class="headerlink" title="什么是Bash"></a>什么是Bash</h5><p>Bash是GNU操作系统的shell，或者说是命令语言解释器。Bash是”Broune-Again Shell”的一个简称，也是对当前Unix shell ‘sh’最初作者的一个调侃，sh最早出现在第七版的贝尔实验室的Unix系统上<br><a id="more"></a><br>Bash在最大限度上兼容sh，并且从Korn shell和C shell中借鉴了很多有用的特性。Bash目标是成为IEEE POSIX规范（IEEE标准1003.1）中的一个符合IEEE POSIX标准的SHELL和工具。它在交互和编程方面都对sh进行了功能性的改进</p>
+<p>GUN操作系统同时也提供了其他的shell，包括C shell，Bash是默认的shell。和其他的GUN软件一样，Bash有很强的可移植性。现在几乎可以运行在所有版本的Unix上面甚至一些其他的操作系统</p>
+<h5 id="什么是shell"><a href="#什么是shell" class="headerlink" title="什么是shell"></a>什么是shell</h5><p>从根本上说，shell是一个简单的可执行命令的宏处理器。宏处理器意味着这样一个功能：文本和符号都会被展开为更大的一个表达式</p>
+<p>Unix shell是一个命令解释器和编程语言。作为一个命令解释器，shell提供了一个用户接口来执行各种各样的GNU工具命令。作为一种编程语言，我们可以将那些命令组合起来一起执行。可以创建一个包含命令的文件，而这个文件自己也成了一个命令。这些命令就和系统命令比如/bin下面的命令一样，让用户和组可以使用这些命令建立自定义的环境和执行自动化任务</p>
+<p>Shell可以以交互式和非交互式执行。在交互模式中，它从键盘接收输入。当以非交互式执行时，shell从一个文件中读取命令执行</p>
+<p>Shell可以同步或者异步的方式执行GUN命令。如果是同步的方式，shell会等待命令返回才能接收新的输入；异步执行的命令可以和shell并行执行，shell可以同时接收新的命令。redirection结构可以更细粒度的控制命令的输入和输出。另外，shell也可以让我们控制命令的执行环境</p>
+<p>Shell也提供了一系列内置命令(builtins)来实现那些不可能或者不便于使用外部可执行文件实现的功能。比如cd、break、continue和exec，这些命令不能使用外部命令来实现，因为这些命令是直接对shell自己进行操作。history、getopts、kill或者pwd命令可以使用外部命令实现，但是使用内置命令更方便。所有的内置命令在后面的章节中描述</p>
+<p>执行命令是必不可少的功能，但是shell更强大之处是内置的编程语言。就像高等级的编程语言，shell提供了变量、控制结构、引用和函数</p>
+<p>shell也提供了一些为交互式特别准备的特性。这些交互式特性包括作业控制、命令行编辑、命令历史和别名，这些特性都将在本手册中描述</p>
+<h4 id="术语（未按字母顺序）"><a href="#术语（未按字母顺序）" class="headerlink" title="术语（未按字母顺序）"></a>术语（未按字母顺序）</h4><p>下面的这些术语将在整个手册中使用</p>
+<p><strong>POSIX</strong>：一系列基于Unix的开放系统标准。Bash主要关心POSIX1003.1标准的Shell和工具部分</p>
+<p><strong>blank</strong>：空格或者tab字符</p>
+<p><strong>operator</strong>：包括控制操作符(control operator)和重定向操作符(redirection operator)。operator至少要包括一个未被引用的元字符(metacharacter)</p>
+<p><strong>word</strong>：被shell作为单个单元的一串字符。words不包括未被引用的元字符（operator）</p>
+<p><strong>token</strong>：被shell作为单个单元的一串字符。是一个word或者operator</p>
+<p><strong>control operator</strong>：起控制作用的token，包括换行和 <code>||</code> <code>&amp;&amp;</code> <code>&amp;</code> <code>;</code> <code>;;</code> <code>|</code> <code>|&amp;</code> <code>(</code> <code>)</code>单引号中的字符</p>
+<p><strong>matecharacter</strong>：未被引用的元字符用来分割words。元字符包括blank和<code>|</code> <code>&amp;</code> <code>;</code> <code>(</code> <code>)</code> <code>&lt;</code> <code>&gt;</code>单引号中的字符</p>
+<p><strong>builtin</strong>：shell内部实现的一个命令</p>
+<p><strong>exit status</strong>：命令返回给调用者的值。值被限制为8位，所以最大为255</p>
+<p><strong>return status</strong>：等同于exit status</p>
+<p><strong>field</strong>：经过shell一些扩展之后形成的文本单元。如果是执行一个命令，扩展之后的field作为命令名和参数</p>
+<p><strong>filename</strong>：用来标示文件的一串字符</p>
+<p><strong>job</strong>：组成管道线的一系列命令，和这些命令的衍生进程，所有的这些进程都在一个进程组中</p>
+<p><strong>job control</strong>：用户可以选择性的停止或者继续某些进程的机制</p>
+<p><strong>name</strong>：一个只包含字母数字下划线并且以字母或者下划线开始的word。name用来标示变量或者函数名，或者说是一个标识符</p>
+<p><strong>process group</strong>：有相同进程组ID的一系列进程</p>
+<p><strong>reserved word</strong>：对shell有特殊意义的word。大部分保留字开始一个控制流程，比如for或者while</p>
+<p><strong>signal</strong>：系统中的某种事件发生时，内核通知进程的一种机制</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/bash/" rel="tag">#bash</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/13/使用Hexo-github搭建博客.html" rel="next" title="使用Hexo+github搭建博客">
+                <i class="fa fa-chevron-left"></i> 使用Hexo+github搭建博客
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/14/Bash文档2--基本shell特性-译.html" rel="prev" title="Bash文档2--基本shell特性(译)">
+                Bash文档2--基本shell特性(译) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="lifayi2008" />
+          <p class="site-author-name" itemprop="name">lifayi2008</p>
+          <p class="site-description motion-element" itemprop="description">压力不是有人比你努力，而是比你牛逼的人依然比你努力</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#什么是Bash"><span class="nav-number">1.1.</span> <span class="nav-text">什么是Bash</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#什么是shell"><span class="nav-number">1.2.</span> <span class="nav-text">什么是shell</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#术语（未按字母顺序）"><span class="nav-number">2.</span> <span class="nav-text">术语（未按字母顺序）</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lifayi2008</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,638 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="bash," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="本章描述bash使用的shell内置变量。bash会自动给部分的这些变量分配一个默认值">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bash文档5--shell内置变量(译)">
+<meta property="og:url" content="http://blog.yoopig.com/2016/06/15/Bash文档5--shell内置变量-译.html">
+<meta property="og:site_name" content="lifayi2008">
+<meta property="og:description" content="本章描述bash使用的shell内置变量。bash会自动给部分的这些变量分配一个默认值">
+<meta property="og:updated_time" content="2016-08-17T09:21:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bash文档5--shell内置变量(译)">
+<meta name="twitter:description" content="本章描述bash使用的shell内置变量。bash会自动给部分的这些变量分配一个默认值">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://blog.yoopig.com/2016/06/15/Bash文档5--shell内置变量-译.html"/>
+
+  <title> Bash文档5--shell内置变量(译) | lifayi2008 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">lifayi2008</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">压力不是有人比你努力，而是比你牛逼的人依然比你努力</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Bash文档5--shell内置变量(译)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-15T16:46:18+08:00" content="2016-06-15">
+              2016-06-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Bash/" itemprop="url" rel="index">
+                    <span itemprop="name">Bash</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本章描述bash使用的shell内置变量。bash会自动给部分的这些变量分配一个默认值<br><a id="more"></a></p>
+<h4 id="Bourne-Shell变量"><a href="#Bourne-Shell变量" class="headerlink" title="Bourne Shell变量"></a>Bourne Shell变量</h4><p>bash兼容一下sh变量。部分情况下，bash会给这些变量分配默认值</p>
+<p><strong><code>CDPATH</code></strong><br>冒号分隔的目录列表，作为cd内置命令搜索的路径</p>
+<p><strong><code>HOME</code></strong><br>当前用户的家目录；<code>cd</code>命令切换的默认目录。也是Tilde扩展时<code>~</code>代表的目录</p>
+<p><strong><code>IFS</code></strong><br>分隔字段的一系列字符；shell进行扩展（expansion）时用来分割word</p>
+<p><strong><code>MAIL</code></strong><br>如果变量被设置为一个文件名或者目录名，并且<code>MAILPATH</code>变量未设置，特定文件中或者Maildir格式目录中有邮件到达时shell会通知用户</p>
+<p><strong><code>MAILPATH</code></strong><br>冒号分隔的文件列表，shell会周期性的检查列表中的文件以确定新邮件的到来。每个文件名后面跟<code>?</code>然后再跟一段字符串表示的消息可以在新邮件到来时打印这段消息。可以在消息中使用<code>$_</code>变量代表当前的文件名</p>
+<p><strong><code>OPTARG</code></strong><br>getopts内置命令处理的上一个参数的值</p>
+<p><strong><code>OPTIND</code></strong><br>getopts内置命令处理的上一个参数的索引</p>
+<p><strong><code>PATH</code></strong><br>冒号分隔的目录列表，shell在这个列表的目录中搜索命令。一个空的目录名表示当前目录。两个相邻的冒号表示中间有有一个空目录，前置或者后置的冒号也表示一个空目录</p>
+<p><strong><code>PS1</code></strong><br>首要命令行提示符字符串。默认值是<code>\s-\v\$</code>。后面的空值提示符章节描述完整的转移字符序列</p>
+<p><strong><code>PS2</code></strong><br>次要的命令行提示符字符串。默认值是<code>&gt;</code></p>
+<h4 id="Bash变量"><a href="#Bash变量" class="headerlink" title="Bash变量"></a>Bash变量</h4><p>Bash同时也会设置并使用下面这些变量，但是其他的shell可能不会进行特殊对待</p>
+<p>Bash使用的另外一些变量会在其他的章节描述：比如作业控制相关的变量</p>
+<p><strong><code>BASH</code></strong><br>当前bash可执行文件的路径</p>
+<p><strong><code>BASHOPTS</code></strong><br>冒号分隔的当前启用的shell选项。列表中的所有word都可以作为<code>shopt</code>命令<code>-s</code>选项的参数值。这个列表其实也就是<code>shopt</code>内置命令打印的内容中为<code>on</code>的那些选项。当bash启动时会在读取<code>startup file</code>之前应用这些选项。本变量是只读的</p>
+<p><strong><code>BASHPID</code></strong><br>当前bash进程的pid。在某些情形下不同于<code>$$</code>，比如一些不需要bash去初始化的子shell</p>
+<p><strong><code>BASH_ALIASES</code></strong><br>一个关联数组，数组成员对应于alias内置命令维护的内部的别名列表。增加到这个数组中的元素会成为bash的一个别名，将一个元素移除数组也会导致从bash别名列表中删除这个别名</p>
+<p><strong><code>BASH_ARGC</code></strong><br>An array variable whose values are the number of parameters in each frame of the current bash execution call stack. The number of parameters to the current subroutine (shell function or script executed with . or source) is at the top of the stack. When a subroutine is executed, the number of parameters passed is pushed onto BASH_ARGC. The shell sets BASH_ARGC only when in extended debugging mode (see The Shopt Builtin for a description of the extdebug option to the shopt builtin)</p>
+<p><strong><code>BASH_ARGV</code></strong><br>An array variable containing all of the parameters in the current bash execution call stack. The final parameter of the last subroutine call is at the top of the stack; the first parameter of the initial call is at the bottom. When a subroutine is executed, the parameters supplied are pushed onto BASH_ARGV. The shell sets BASH_ARGV only when in extended debugging mode (see The Shopt Builtin for a description of the extdebug option to the shopt builtin)</p>
+<p><strong><code>BASH_CMDS</code></strong><br>一个关联数组变量成员对应于hash内置变量维护的命令哈希表。增加到这个数组中的成员会成为命令hash表的一个条目，从数组中移除成员也会从hash表中删除对应的条目</p>
+<p><strong><code>BASH_COMMAND</code></strong><br>The command currently being executed or about to be executed, unless the shell is executing a command as the result of a trap, in which case it is the command executing at the time of the trap.</p>
+<p><strong><code>BASH_COMPAT</code></strong><br>用来设置shell的兼容性级别。shopt内置命令章节描述各种shell兼容级别以及相关的影响。值可以是一个整数或者小数表示想要的设置的兼容级别。如果<code>BASH_COMAPT</code>为空或者未设置，则表示设置为默认值，一般为当前bash的版本。如果设置的值不是一个合法的级别值，则bash会将值置为默认值，并且打印一个错误消息。可用的级别值在前面的shopt章节中描述（比如，4.2和42都是一个合法的级别值）</p>
+<p><strong><code>BASH_ENV</code></strong><br>如果在执行shell脚本时设置本变量，则变量的值会作为一个startup file被执行脚本的bash读取和执行</p>
+<p><strong><code>BASH_EXECUTION_STRING</code></strong><br><code>-c</code>选项的参数</p>
+<p><strong><code>FUNCNAME</code></strong><br>一个数组变量包含shell当前函数调用栈中的所有函数名。索引0表示任何当前执行的shell函数名。最底端的元素（索引值最大）是<code>main</code>。只有在执行shell函数时这个变量才存在。给变量分配值不会有任何结果并且会返回一个错误。如果FUNCNAME被取消设置，则它不在有任何特殊意义，即使后面进行重新设置</p>
+<p>这个变量可以配合<code>BASH_LINENO</code>和<code>BASH_SOURCE</code>变量使用。<code>FUNCNAME</code>中的每一个值在<code>BASH_LINENO</code>和<code>BASH_SOURCE</code>都有对应的值来描述调用栈。比如，<code>${FUNCNAME[$i]}</code>被在文件<code>${BASH_SOURCE[$i+1]}</code>中第<code>${BASH_LINENO[$i]}</code>行调用。<code>caller</code>内置命令使用这些信息来显示当前调用栈的情况</p>
+<p><strong><code>BASH_LINENO</code></strong><br>一个数组变量，成员是每一个被调用的<code>FUNCNAME</code>在源文件中的行号。<code>${BASH_LINENO[$i]}</code>表示<code>${FUNCNAME[$i]}</code>在源文件（<code>${BASH_SOURCE[$i+1]}</code>）中被调用的行号（or <code>${BASH_LINENO[$i-1]}</code> if referenced within another shell function）。使用LINENO得到当前的行号</p>
+<p><strong><code>BASH_SOUCE</code></strong><br>一个数组变量，成员是FUNCNAME数组变量中成员对应的函数名所在的源文件名。shell函数<code>${FUNCNAME[$i]}</code>在文件<code>${BASH_SOURCE[$i]}</code>中定义并且在<code>${BASH_SOURCE[$i+1]}</code>中调用</p>
+<p><strong><code>BASH_REMATCH</code></strong><br>一个数组变量，成员是<code>[[</code>条件命令的<code>=~</code>二元操作符右边的正则表达式匹配到的各部分字符串。索引0对应的值是匹配整个正则表达式的字符串。索引n对应的元素是正则表达式中第n个括号表达式匹配到的部分。本变量是只读的</p>
+<p><strong><code>BASH_SUBSHELL</code></strong><br>Incremented by one within each subshell or subshell environment when the shell begins executing in that environment. The initial value is 0</p>
+<p><strong><code>BASH_VERSINFO</code></strong><br>一个只读的索引数组变量，成员保存了当前bash实例的版本的信息</p>
+<p><strong><code>BASH_VERSION</code></strong><br>当前bash实例的版本信息</p>
+<p><strong><code>BASH_XTRACEFD</code></strong><br>如果设置为一个合法的文件描述符的整数值，Bash会将启用<code>set -x</code>而产生的追踪信息输出到这个文件描述符。这样可以区分开分析输出和错误输出。如果将<code>BASH_XTRACEFD</code>取消或者分配一个新值则这个文件描述符被关闭。取消<code>BASH_XTRACEFD</code>或者设为空值则Bash会将追踪分析输出打印到标准错误输出。注意：将<code>BASH_XTRACEFD</code>设置为2，然后再取消设置会关闭标准错误输出</p>
+<p><strong><code>CHILD_MAX</code></strong><br>Set the number of exited child status values for the shell to remember. Bash will not allow this value to be decreased below a POSIX-mandated minimum, and there is a maximum value (currently 8192) that this may not exceed. The minimum value is system-dependent.</p>
+<p><strong><code>COLUMNS</code></strong><br>用来设置select命令打印选项列表时的终端宽度。如果checkwinsize选项启用则会自动设置，或者依赖于在交互式shell中收到一个SIGWINCH信号</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/bash/" rel="tag">#bash</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/15/Bash文档4--shell内置命令-译.html" rel="next" title="Bash文档4--shell内置命令(译)">
+                <i class="fa fa-chevron-left"></i> Bash文档4--shell内置命令(译)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/16/Bash文档6--Bash特性-译.html" rel="prev" title="Bash文档6--Bash特性(译)">
+                Bash文档6--Bash特性(译) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="lifayi2008" />
+          <p class="site-author-name" itemprop="name">lifayi2008</p>
+          <p class="site-description motion-element" itemprop="description">压力不是有人比你努力，而是比你牛逼的人依然比你努力</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Bourne-Shell变量"><span class="nav-number">1.</span> <span class="nav-text">Bourne Shell变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bash变量"><span class="nav-number">2.</span> <span class="nav-text">Bash变量</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lifayi2008</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

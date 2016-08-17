@@ -1,0 +1,630 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MySQL," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="查看日志相关系统变量">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL日志及日志处理">
+<meta property="og:url" content="http://blog.yoopig.com/2016/08/17/MySQL日志及日志处理.html">
+<meta property="og:site_name" content="lifayi2008">
+<meta property="og:description" content="查看日志相关系统变量">
+<meta property="og:updated_time" content="2016-08-17T09:22:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL日志及日志处理">
+<meta name="twitter:description" content="查看日志相关系统变量">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://blog.yoopig.com/2016/08/17/MySQL日志及日志处理.html"/>
+
+  <title> MySQL日志及日志处理 | lifayi2008 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">lifayi2008</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">压力不是有人比你努力，而是比你牛逼的人依然比你努力</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                MySQL日志及日志处理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-17T17:13:00+08:00" content="2016-08-17">
+              2016-08-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>查看日志相关系统变量<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show variables like &apos;%log%&apos;;</span><br><span class="line">+-----------------------------------------+-------------------------------------+</span><br><span class="line">| Variable_name                           | Value                               |</span><br><span class="line">+-----------------------------------------+-------------------------------------+</span><br><span class="line">| back_log                                | 80                                  |</span><br><span class="line">| binlog_cache_size                       | 32768                               |</span><br><span class="line">| binlog_checksum                         | CRC32                               |</span><br><span class="line">| binlog_direct_non_transactional_updates | OFF                                 |</span><br><span class="line">| binlog_error_action                     | IGNORE_ERROR                        |</span><br><span class="line">| binlog_format                           | STATEMENT                           |</span><br><span class="line">| binlog_gtid_simple_recovery             | OFF                                 |</span><br><span class="line">| binlog_max_flush_queue_time             | 0                                   |</span><br><span class="line">| binlog_order_commits                    | ON                                  |</span><br><span class="line">| binlog_row_image                        | FULL                                |</span><br><span class="line">| binlog_rows_query_log_events            | OFF                                 |</span><br><span class="line">| binlog_stmt_cache_size                  | 32768                               |</span><br><span class="line">| binlogging_impossible_mode              | IGNORE_ERROR                        |</span><br><span class="line">| expire_logs_days                        | 0                                   |</span><br><span class="line">| general_log                             | ON                                  |</span><br><span class="line">| general_log_file                        | /usr/local/mysql/data/test.log      |</span><br><span class="line">| innodb_api_enable_binlog                | OFF                                 |</span><br><span class="line">| innodb_flush_log_at_timeout             | 1                                   |</span><br><span class="line">| innodb_flush_log_at_trx_commit          | 1                                   |</span><br><span class="line">| innodb_locks_unsafe_for_binlog          | OFF                                 |</span><br><span class="line">| innodb_log_buffer_size                  | 8388608                             |</span><br><span class="line">| innodb_log_compressed_pages             | ON                                  |</span><br><span class="line">| innodb_log_file_size                    | 50331648                            |</span><br><span class="line">| innodb_log_files_in_group               | 2                                   |</span><br><span class="line">| innodb_log_group_home_dir               | ./                                  |</span><br><span class="line">| innodb_mirrored_log_groups              | 1                                   |</span><br><span class="line">| innodb_online_alter_log_max_size        | 134217728                           |</span><br><span class="line">| innodb_undo_logs                        | 128                                 |</span><br><span class="line">| log_bin                                 | OFF                                 |</span><br><span class="line">| log_bin_basename                        |                                     |</span><br><span class="line">| log_bin_index                           |                                     |</span><br><span class="line">| log_bin_trust_function_creators         | OFF                                 |</span><br><span class="line">| log_bin_use_v1_row_events               | OFF                                 |</span><br><span class="line">| log_error                               | /usr/local/mysql/data/test.err      |</span><br><span class="line">| log_output                              | FILE                                |</span><br><span class="line">| log_queries_not_using_indexes           | OFF                                 |</span><br><span class="line">| log_slave_updates                       | OFF                                 |</span><br><span class="line">| log_slow_admin_statements               | OFF                                 |</span><br><span class="line">| log_slow_slave_statements               | OFF                                 |</span><br><span class="line">| log_throttle_queries_not_using_indexes  | 0                                   |</span><br><span class="line">| log_warnings                            | 1                                   |</span><br><span class="line">| max_binlog_cache_size                   | 18446744073709547520                |</span><br><span class="line">| max_binlog_size                         | 1073741824                          |</span><br><span class="line">| max_binlog_stmt_cache_size              | 18446744073709547520                |</span><br><span class="line">| max_relay_log_size                      | 0                                   |</span><br><span class="line">| relay_log                               |                                     |</span><br><span class="line">| relay_log_basename                      |                                     |</span><br><span class="line">| relay_log_index                         |                                     |</span><br><span class="line">| relay_log_info_file                     | relay-log.info                      |</span><br><span class="line">| relay_log_info_repository               | FILE                                |</span><br><span class="line">| relay_log_purge                         | ON                                  |</span><br><span class="line">| relay_log_recovery                      | OFF                                 |</span><br><span class="line">| relay_log_space_limit                   | 0                                   |</span><br><span class="line">| simplified_binlog_gtid_recovery         | OFF                                 |</span><br><span class="line">| slow_query_log                          | OFF                                 |</span><br><span class="line">| slow_query_log_file                     | /usr/local/mysql/data/test-slow.log |</span><br><span class="line">| sql_log_bin                             | ON                                  |</span><br><span class="line">| sql_log_off                             | OFF                                 |</span><br><span class="line">| sync_binlog                             | 0                                   |</span><br><span class="line">| sync_relay_log                          | 10000                               |</span><br><span class="line">| sync_relay_log_info                     | 10000                               |</span><br><span class="line">+-----------------------------------------+-------------------------------------+</span><br><span class="line">61 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">log_output 指定了常规日志和慢查询日志输出的目的地，可以设置为FILE和TABLE</span><br><span class="line"></span><br><span class="line">general_log 和 general_log_file 分别指定了是否开启常规查询日志和日志输出文件位置</span><br><span class="line"></span><br><span class="line">slow_query_log 和 slow_query_log_file 分别指定了是否开启慢查询日志和日志输出文件位置</span><br><span class="line"></span><br><span class="line">log_error 指定了错误日志输出文件位置</span><br></pre></td></tr></table></figure></p>
+<h4 id="基本概述"><a href="#基本概述" class="headerlink" title="基本概述"></a>基本概述</h4><p>根据设置MySQL会维护如下几种日志：</p>
+<p><strong><code>错误日志(error log)</code></strong> ： 这个日志记录服务器的启动和关闭情况，以及MySQL服务内部错误和异常情况；如果MySQL服务无法启动或者崩溃应该查看这个日志中的内容</p>
+<pre><code>如果使用mysqld_safe启动Mysql的话会默认使用 --log-error=/mysql_home/data/hostname.err 参数来指定日志位置
+
+还可以在配置文件中增加 log-error=file 来指定其他的位置
+</code></pre><p><strong><code>常规查询日志(general log)</code></strong> ： 这个日志主要记录客户端连接、查询和各种其他操作的记录</p>
+<pre><code>常规查询日志默认关闭，可以在配置文件中增加 general-log=ON 和 general_log_file=file 来开启并指定文件位置
+</code></pre><p><strong><code>慢查询日志(slow query log)</code></strong> ： MySQL服务器内部会维护一个名为<code>long_query_time</code>的变量（默认10秒），如果一个查询花费的时间超过这个变量指定的值，服务器会认为这是一个慢查询</p>
+<pre><code>慢查询日志默认关闭，可以在配置文件中增加 slow-query-log=ON 和 slow_query_log_file=file 来开启并指定文件位置
+
+可以使用 long_query_time=n 来指定慢查询的时间
+可以使用 min_examined_row_limit=n 来指定要记录的慢查询操作至少要扫描的行数
+</code></pre><p><strong><code>二进制日志(binary log)和二进制日志索引文件</code></strong> ： 一个或者多个二进制格式的日志文件，记录了对服务器进行更改操作的查询语句（UPDATE、DELTE、INSERT、CREATE TABLE、DROP TABLE、GRANT等）；二进制日志文件需要有一个对应的索引文件，保存了服务器现有的二进制日志文件和当前读写的日志文件</p>
+<pre><code>二进制日志有两个基本用途：
+
+    1. 可以配合备份文件在系统崩溃时对数据进行恢复
+    2. 数据库复制时将二进制日志发送到从服务器执行
+
+可以使用 log-bin = [basename] 来开启二进制日志并且指定二进制日志文件的前缀，如果不指定basename则使用hostname-bin作为前缀
+可以使用 log-bin-index = basename[.suffix] 指定索引文件名，如果不使用这个选项则默认使用hostname.index作为索引文件名
+可以使用 binlog-format = [STATEMENT|ROW|MIXED] 选项指定二进制日志记录方式，默认STATEMENT表示直接记录操作语句，ROW表示记录影响的行的内容，MIXED表示以记录数据行为主，在必要的时候记录操作语句
+
+还有一些更详细的二进制日志相关的参数可以参考&lt;&lt;MySQL配置文件参数详解&gt;&gt;一篇
+</code></pre><p><strong><code>中继日志(relay log)和中继日志索引文件</code></strong> ： 这个日志存在于主从复制的从服务器上，主要记录了从主服务器接收到的还未执行的操作记录，格式和二进制日志文件一样，并且也有一个索引文件记录了服务器上现有的中继日志文件</p>
+<pre><code>中继日志的启用方法和命名同二进制日志
+</code></pre><h4 id="日志轮替"><a href="#日志轮替" class="headerlink" title="日志轮替"></a>日志轮替</h4><p>MySQL服务器内部实现了对二进制日志进行轮替的方法；在服务器重新启动或者<code>flush-logs</code>命令或者日志文件大小达到<code>max_binlog_size</code>指定的值时服务器会进行日志轮替；<code>expire_logs_days</code>选项参数指定了二进制日志保存的天数</p>
+<p>使用<code>mysqladmin flush-logs -u log -plogpassword</code>外部命令或者使用<code>FLUSH LOGS</code>查询命令可以刷新日志，这个对除error log之外的其他三种日志都起作用，所以我们可以创建一个自定义脚本来对日志文件进行轮替</p>
+<pre><code>创建一个刷新日志的用户：
+GRANT RELOAD ON *.* TO &apos;log&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;log&apos;;  
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh  </span></span><br><span class="line"><span class="comment"># log refresh   </span></span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span> [ ! <span class="_">-f</span> <span class="variable">$1</span> ]; <span class="keyword">then</span>  </span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"log file do not exist;"</span>  </span><br><span class="line">    <span class="built_in">exit</span> 1  </span><br><span class="line"><span class="keyword">fi</span>  </span><br><span class="line">  </span><br><span class="line">LOG=<span class="variable">$1</span>  </span><br><span class="line">DB_USER=<span class="string">"log"</span>  </span><br><span class="line">DB_PASS=<span class="string">"log"</span>                                                               </span><br><span class="line">BIN_DIR=<span class="string">"/usr/local/mysql/bin"</span></span><br><span class="line">  </span><br><span class="line"><span class="comment"># Others vars  </span></span><br><span class="line">DATE=`date +%w`                                          </span><br><span class="line">  </span><br><span class="line">mv <span class="variable">$&#123;LOG&#125;</span> <span class="variable">$&#123;LOG&#125;</span>_<span class="variable">$&#123;DATE&#125;</span>  </span><br><span class="line">  </span><br><span class="line"><span class="variable">$&#123;BIN_DIR&#125;</span>/mysqladmin  -ulog -plog flush-logs</span><br></pre></td></tr></table></figure>
+<p>可以将上面的脚本文件加入crontab计划任务对常规查询日志和慢日志进行轮替</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag">#MySQL</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/15/MySQL事务及实现.html" rel="next" title="Mysql事务及实现">
+                <i class="fa fa-chevron-left"></i> Mysql事务及实现
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="lifayi2008" />
+          <p class="site-author-name" itemprop="name">lifayi2008</p>
+          <p class="site-description motion-element" itemprop="description">压力不是有人比你努力，而是比你牛逼的人依然比你努力</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本概述"><span class="nav-number">1.</span> <span class="nav-text">基本概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#日志轮替"><span class="nav-number">2.</span> <span class="nav-text">日志轮替</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lifayi2008</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

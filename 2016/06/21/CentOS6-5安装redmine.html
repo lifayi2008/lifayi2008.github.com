@@ -1,0 +1,625 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="redmine," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="安装依赖包1$ yum install -y gcc-c++ patch readline readline-devel zlib zlib-devel libyaml-devel libffi-devel  openssl-devel make bzip2 autoconf automake libtool bison iconv-devel ImageMagick ImageMagick-de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS6.5安装redmine">
+<meta property="og:url" content="http://blog.yoopig.com/2016/06/21/CentOS6-5安装redmine.html">
+<meta property="og:site_name" content="lifayi2008">
+<meta property="og:description" content="安装依赖包1$ yum install -y gcc-c++ patch readline readline-devel zlib zlib-devel libyaml-devel libffi-devel  openssl-devel make bzip2 autoconf automake libtool bison iconv-devel ImageMagick ImageMagick-de">
+<meta property="og:updated_time" content="2016-08-17T09:21:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CentOS6.5安装redmine">
+<meta name="twitter:description" content="安装依赖包1$ yum install -y gcc-c++ patch readline readline-devel zlib zlib-devel libyaml-devel libffi-devel  openssl-devel make bzip2 autoconf automake libtool bison iconv-devel ImageMagick ImageMagick-de">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://blog.yoopig.com/2016/06/21/CentOS6-5安装redmine.html"/>
+
+  <title> CentOS6.5安装redmine | lifayi2008 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">lifayi2008</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">压力不是有人比你努力，而是比你牛逼的人依然比你努力</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                CentOS6.5安装redmine
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-21T17:38:38+08:00" content="2016-06-21">
+              2016-06-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/基础服务/" itemprop="url" rel="index">
+                    <span itemprop="name">基础服务</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h5 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum install -y gcc-c++ patch readline readline-devel zlib zlib-devel libyaml-devel libffi-devel  openssl-devel make bzip2 autoconf automake libtool bison iconv-devel ImageMagick ImageMagick-devel</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h5 id="安装ruby、rubygems"><a href="#安装ruby、rubygems" class="headerlink" title="安装ruby、rubygems"></a>安装ruby、rubygems</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://cache.ruby-lang.org/pub/ruby/2.3/ruby-2.3.1.tar.gz</span><br><span class="line"></span><br><span class="line">$ tar -xf ruby-2.3.1.tar.gz &amp;&amp; <span class="built_in">cd</span> ruby*</span><br><span class="line"></span><br><span class="line">$ ./configure --prefix=/usr/<span class="built_in">local</span>/ruby/ &amp;&amp; make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ wget https://rubygems.global.ssl.fastly.net/rubygems/rubygems-2.6.4.tgz</span><br><span class="line"></span><br><span class="line">$ tar -xf rubygems-2.6.4.tgz &amp;&amp; <span class="built_in">cd</span> rubygems*</span><br><span class="line"></span><br><span class="line">$ /usr/<span class="built_in">local</span>/ruby/bin/ruby setup.rb</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如上ruby安装在/usr/local/ruby、rubygems安装在/usr/local/ruby/bin/gem</p>
+</blockquote>
+<h5 id="安装rails"><a href="#安装rails" class="headerlink" title="安装rails"></a>安装rails</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ /usr/<span class="built_in">local</span>/ruby/bin/gem install rails</span><br><span class="line"></span><br><span class="line">Done installing documentation <span class="keyword">for</span> i18n, thread_safe, tzinfo, activesupport, rack, rack-test, mini_portile2, pkg-config, nokogiri, loofah, rails-html-sanitizer, rails-deprecated_sanitizer, rails-dom-testing, builder, erubis, actionview, actionpack, activemodel, arel, activerecord, globalid, activejob, mime-types-data, mime-types, mail, actionmailer, thor, railties, bundler, concurrent-ruby, sprockets, sprockets-rails, rails after 386 seconds</span><br><span class="line">33 gems installed</span><br><span class="line"></span><br><span class="line">系统提示安装了33个gems包</span><br><span class="line"></span><br><span class="line">//安装mysql配适器</span><br><span class="line">//$ /usr/<span class="built_in">local</span>/ruby/bin/gem install mysql</span><br><span class="line"></span><br><span class="line">将ruby bundle 加入环境变量</span><br><span class="line">$ <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/ruby/bin/</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"export PATH=<span class="variable">$PATH</span>:/usr/local/ruby/bin/"</span> &gt; /etc/profile.d/ruby.sh</span><br></pre></td></tr></table></figure>
+<h5 id="在数据库中创建相关库和账号"><a href="#在数据库中创建相关库和账号" class="headerlink" title="在数据库中创建相关库和账号"></a>在数据库中创建相关库和账号</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create database redmine ;</span><br><span class="line">mysql&gt; CREATE USER <span class="string">'redmine'</span>@<span class="string">'localhost'</span> IDENTIFIED BY <span class="string">'my_password'</span>;</span><br><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON redmine.* TO <span class="string">'redmine'</span>@<span class="string">'localhost'</span>;</span><br></pre></td></tr></table></figure>
+<h5 id="安装redmine"><a href="#安装redmine" class="headerlink" title="安装redmine"></a>安装redmine</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://www.redmine.org/releases/redmine-3.3.0.tar.gz</span><br><span class="line"></span><br><span class="line">$ tar -xf redmine-3.3.0.tar.gz -C /data/ &amp;&amp; <span class="built_in">cd</span> /data/redmine*</span><br><span class="line">redmine放置在/data目录下</span><br><span class="line"></span><br><span class="line">$ cp config/database.yml.example config/database.yml</span><br><span class="line"></span><br><span class="line">$ vi config/database.yml</span><br><span class="line"></span><br><span class="line">编辑config/database.yml文件将production中mysql的账号密码改为实际的账号密码</span><br><span class="line"></span><br><span class="line">安装redmine的依赖</span><br><span class="line">$ /usr/<span class="built_in">local</span>/ruby/bin/bundle install --without development <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line">上面命令会根据本目录下的Gemfile文件来安装依赖包，redmine同时也会根据你的config/database.yml文件的内容安装响应的database adapters，所以如果更改了使用的数据库需要重新运行上面命令</span><br><span class="line"></span><br><span class="line">注意运行上面命令的提示：</span><br><span class="line">Don<span class="string">'t run Bundler as root. Bundler can ask for sudo if it is needed, and installing your bundle as root will break this application for all non-root users on this machine.</span><br><span class="line"></span><br><span class="line">生成一个加密用的key</span><br><span class="line">$ /usr/local/ruby/bin/bundle exec /usr/local/ruby/bin/rake generate_secret_token</span></span><br></pre></td></tr></table></figure>
+<h5 id="建立数据库表并导入数据"><a href="#建立数据库表并导入数据" class="headerlink" title="建立数据库表并导入数据"></a>建立数据库表并导入数据</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ RAILS_ENV=production bundle <span class="built_in">exec</span> rake db:migrate</span><br><span class="line">$ RAILS_ENV=production bundle <span class="built_in">exec</span> rake redmine:load_default_data</span><br><span class="line">会让你选择一种语言，请选择zh</span><br></pre></td></tr></table></figure>
+<h5 id="更改Linux环境相关目录的权限"><a href="#更改Linux环境相关目录的权限" class="headerlink" title="更改Linux环境相关目录的权限"></a>更改Linux环境相关目录的权限</h5><p>如果你使用其他用户启动redmine，那么请保证那个用户对redmine目录下的<code>files</code> <code>log</code> <code>tmp</code> <code>tmp/pdf</code> <code>public/plugin_assets</code>目录有写权限，比如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p tmp tmp/pdf public/plugin_assets</span><br><span class="line">$ sudo chown -R redmine:redmine files <span class="built_in">log</span> tmp public/plugin_assets</span><br><span class="line">$ sudo chmod -R 755 files <span class="built_in">log</span> tmp public/plugin_assets</span><br></pre></td></tr></table></figure></p>
+<h5 id="测试安装"><a href="#测试安装" class="headerlink" title="测试安装"></a>测试安装</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ bundle <span class="built_in">exec</span> rails server webrick <span class="_">-e</span> production -b 192.168.1.202</span><br><span class="line"></span><br><span class="line">192.168.1.202为你的服务器IP地址</span><br><span class="line"></span><br><span class="line">可以使用默认用户名密码 admin/admin登陆查看</span><br></pre></td></tr></table></figure>
+<h5 id="使用其他服务器运行redmine"><a href="#使用其他服务器运行redmine" class="headerlink" title="使用其他服务器运行redmine"></a>使用其他服务器运行redmine</h5><p>安装thin<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">编辑redmine根目录下的Gemfile文件，在全局的配置中添加两行：</span><br><span class="line">gem <span class="string">"faye"</span></span><br><span class="line">gem <span class="string">"thin"</span></span><br><span class="line"></span><br><span class="line">重新进行bundle</span><br><span class="line">$ /usr/<span class="built_in">local</span>/ruby/bin/bundle install --without development <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line">创建thin的配置文件</span><br><span class="line">mkdir /etc/thin/</span><br></pre></td></tr></table></figure></p>
+<p>编辑thin配置文件<code>/etc/thin/redmine.yml</code>，内容如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">pid: tmp/pids/thin.pid</span><br><span class="line">group: root</span><br><span class="line"><span class="built_in">wait</span>: 30</span><br><span class="line">timeout: 30</span><br><span class="line"><span class="built_in">log</span>: <span class="built_in">log</span>/thin.log</span><br><span class="line">max_conns: 1024</span><br><span class="line">require: []</span><br><span class="line"></span><br><span class="line">environment: production</span><br><span class="line">max_persistent_conns: 512</span><br><span class="line">servers: 4</span><br><span class="line">daemonize: <span class="literal">true</span></span><br><span class="line">user: root</span><br><span class="line">socket: /tmp/thin.sock</span><br><span class="line"><span class="built_in">chdir</span>: /data/redmine-3.3.0</span><br></pre></td></tr></table></figure></p>
+<p>启动thin<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ thin -C /etc/thin/redmine.yml start</span><br></pre></td></tr></table></figure></p>
+<p>配置nginx</p>
+<p>nginx包含的配置文件<code>proxy.include</code>内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">proxy_<span class="built_in">set</span>_header   Host <span class="variable">$http_host</span>;</span><br><span class="line">proxy_<span class="built_in">set</span>_header   X-Real-IP <span class="variable">$remote_addr</span>; </span><br><span class="line">proxy_<span class="built_in">set</span>_header   X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">proxy_<span class="built_in">set</span>_header   X-Forwarded-Proto <span class="variable">$scheme</span>;</span><br><span class="line">client_max_body_size       10m;</span><br><span class="line">client_body_buffer_size    128k;</span><br><span class="line">proxy_connect_timeout      90;</span><br><span class="line">proxy_send_timeout         90;</span><br><span class="line">proxy_<span class="built_in">read</span>_timeout         90;</span><br><span class="line">proxy_buffer_size          4k;</span><br><span class="line">proxy_buffers              4 32k;</span><br><span class="line">proxy_busy_buffers_size    64k;</span><br><span class="line">proxy_temp_file_write_size 64k;</span><br></pre></td></tr></table></figure>
+<p>nginx配置文件如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">upstream thin_cluster &#123;</span><br><span class="line">    server unix:/tmp/thin.0.sock;</span><br><span class="line">    server unix:/tmp/thin.1.sock;</span><br><span class="line">    server unix:/tmp/thin.2.sock;</span><br><span class="line">    server unix:/tmp/thin.3.sock;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen       your.ip.address.here:80;</span><br><span class="line">    server_name  your.domain.name;</span><br><span class="line"></span><br><span class="line">    access_<span class="built_in">log</span>  /var/<span class="built_in">log</span>/nginx/redmine-proxy-access;</span><br><span class="line">    error_<span class="built_in">log</span>   /var/<span class="built_in">log</span>/nginx/redmine-proxy-error;</span><br><span class="line"></span><br><span class="line">    include sites/proxy.include;</span><br><span class="line">    root /var/lib/redmine/redmine/public;</span><br><span class="line">    proxy_redirect off;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Send sensitive stuff via https</span></span><br><span class="line">    rewrite ^/login(.*) https://your.domain.here<span class="variable">$request_uri</span> permanent;</span><br><span class="line">    rewrite ^/my/account(.*) https://your.domain.here<span class="variable">$request_uri</span> permanent;</span><br><span class="line">    rewrite ^/my/password(.*) https://your.domain.here<span class="variable">$request_uri</span> permanent;</span><br><span class="line">    rewrite ^/admin(.*) https://your.domain.here<span class="variable">$request_uri</span> permanent;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        try_files <span class="variable">$uri</span>/index.html <span class="variable">$uri</span>.html <span class="variable">$uri</span> @cluster;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location @cluster &#123;</span><br><span class="line">        proxy_pass http://thin_cluster;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen       your.ip.address.here:443;</span><br><span class="line">    server_name  your.domain.here;</span><br><span class="line"></span><br><span class="line">    access_<span class="built_in">log</span>  /var/<span class="built_in">log</span>/nginx/redmine-ssl-proxy-access;</span><br><span class="line">    error_<span class="built_in">log</span>   /var/<span class="built_in">log</span>/nginx/redmine-ssl-proxy-error;</span><br><span class="line"></span><br><span class="line">    ssl on;</span><br><span class="line"></span><br><span class="line">    ssl_certificate /etc/ssl/startssl/your.domain.here.pem.full;</span><br><span class="line">    ssl_certificate_key /etc/ssl/startssl/your.domain.here.key;</span><br><span class="line"></span><br><span class="line">    include sites/proxy.include;</span><br><span class="line">    proxy_redirect off;</span><br><span class="line">    root /var/lib/redmine/redmine/public;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># When we're back to non-sensitive things, send back to http</span></span><br><span class="line">    rewrite ^/$ http://your.domain.here<span class="variable">$request_uri</span> permanent;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Examples of URLs we don't want to rewrite (otherwise 404 errors occur):</span></span><br><span class="line">    <span class="comment"># /projects/PROJECTNAME/archive?status=</span></span><br><span class="line">    <span class="comment"># /projects/copy/PROJECTNAME</span></span><br><span class="line">    <span class="comment"># /projects/PROJECTNAME/destroy</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># This should exclude those (tested here: http://www.regextester.com/ )</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$uri</span> !~* <span class="string">"^/projects/.*(copy|destroy|archive)"</span>) &#123;</span><br><span class="line">        rewrite ^/projects(.*) http://your.domain.here<span class="variable">$request_uri</span> permanent;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    rewrite ^/guide(.*) http://your.domain.here<span class="variable">$request_uri</span> permanent;</span><br><span class="line">    rewrite ^/users(.*) http://your.domain.here<span class="variable">$request_uri</span> permanent;</span><br><span class="line">    rewrite ^/my/page(.*) http://your.domain.here<span class="variable">$request_uri</span> permanent;</span><br><span class="line">    rewrite ^/<span class="built_in">logout</span>(.*) http://your.domain.here<span class="variable">$request_uri</span> permanent;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        try_files <span class="variable">$uri</span>/index.html <span class="variable">$uri</span>.html <span class="variable">$uri</span> @cluster;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location @cluster &#123;</span><br><span class="line">        proxy_pass http://thin_cluster;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="redmine的迁移和升级提示"><a href="#redmine的迁移和升级提示" class="headerlink" title="redmine的迁移和升级提示"></a>redmine的迁移和升级提示</h5><p>redmine的备份只需要备份数据库和redmine根目录下的<code>files</code>文件夹即可；所以迁移的话只需要将备份的数据库和files文件进行覆盖</p>
+<p>如果是升级/全新安装新的版本，则需要执行下面的步骤：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1. 安装上面的步骤进行全新安装</span><br><span class="line">2. 删除redmine数据库和files文件夹（或者备份）</span><br><span class="line">3. 将你的原备份的数据库和文件进行覆盖</span><br><span class="line">4. 执行下面的数据库集成和清理操作</span><br><span class="line"></span><br><span class="line">$ bundle <span class="built_in">exec</span> rake db:migrate RAILS_ENV=production</span><br><span class="line">$ bundle <span class="built_in">exec</span> rake tmp:cache:clear tmp:sessions:clear RAILS_ENV=production</span><br><span class="line"></span><br><span class="line">$ bundle <span class="built_in">exec</span> rake generate_secret_token</span><br></pre></td></tr></table></figure></p>
+<p>参考：<br><a href="https://www.redmine.org/projects/redmine/wiki/RedmineInstall" target="_blank" rel="external"><strong><code>redmine wiki</code></strong></a><br><a href="http://www.redmine.org/projects/redmine/wiki/HowTo_configure_Nginx_to_run_Redmine" target="_blank" rel="external"><strong><code>redmine thin</code></strong></a><br><a href="https://www.redmine.org/projects/redmine/wiki/RedmineUpgrade" target="_blank" rel="external"><strong><code>redmine upgrade</code></strong></a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/redmine/" rel="tag">#redmine</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/16/Bash文档6--Bash特性-译.html" rel="next" title="Bash文档6--Bash特性(译)">
+                <i class="fa fa-chevron-left"></i> Bash文档6--Bash特性(译)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/28/使用mybatis连接数据库.html" rel="prev" title="使用mybatis连接数据库">
+                使用mybatis连接数据库 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="lifayi2008" />
+          <p class="site-author-name" itemprop="name">lifayi2008</p>
+          <p class="site-description motion-element" itemprop="description">压力不是有人比你努力，而是比你牛逼的人依然比你努力</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#安装依赖包"><span class="nav-number">1.</span> <span class="nav-text">安装依赖包</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装ruby、rubygems"><span class="nav-number">2.</span> <span class="nav-text">安装ruby、rubygems</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装rails"><span class="nav-number">3.</span> <span class="nav-text">安装rails</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在数据库中创建相关库和账号"><span class="nav-number">4.</span> <span class="nav-text">在数据库中创建相关库和账号</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装redmine"><span class="nav-number">5.</span> <span class="nav-text">安装redmine</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#建立数据库表并导入数据"><span class="nav-number">6.</span> <span class="nav-text">建立数据库表并导入数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#更改Linux环境相关目录的权限"><span class="nav-number">7.</span> <span class="nav-text">更改Linux环境相关目录的权限</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#测试安装"><span class="nav-number">8.</span> <span class="nav-text">测试安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用其他服务器运行redmine"><span class="nav-number">9.</span> <span class="nav-text">使用其他服务器运行redmine</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#redmine的迁移和升级提示"><span class="nav-number">10.</span> <span class="nav-text">redmine的迁移和升级提示</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lifayi2008</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
