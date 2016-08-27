@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://blog.yoopig.com/2016/08/25/MySQL数据类型.html">
 <meta property="og:site_name" content="lifayi2008">
 <meta property="og:description" content="字面值类型（Literal value）MySQL能够识别和使用的字面值类型包括：数值、字符串、日期/时间值、十六进制值、位字段值、布尔值、空值（NULL）">
-<meta property="og:updated_time" content="2016-08-26T09:34:39.000Z">
+<meta property="og:updated_time" content="2016-08-27T07:13:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL数据类型">
 <meta name="twitter:description" content="字面值类型（Literal value）MySQL能够识别和使用的字面值类型包括：数值、字符串、日期/时间值、十六进制值、位字段值、布尔值、空值（NULL）">
@@ -347,11 +347,11 @@ SELECT _utf8&apos;some text&apos;;
 <ul>
 <li>只要表达式里面有一个近似值就把其他的也当作近似值进行计算</li>
 <li>如果表达式里面全是整数形式的精确值，MySQL将使用BIGINT 64位精度对它进行求值</li>
-<li>如果表达式里面全是精确值，但其中有一个或者多个有小数部分，则使用65位精度进行DECIMAL运算</li>
+<li>如果表达式里面全是精确值，但其中有一个或者多个有小数部分，则使用65位精度进行DECIMAL运算（DECIMAL最大为65位）</li>
 <li>如果在求值过程中需要将某一个字符串转换为一个数值，则它会被转换为双精度浮点值。于是根据前面的规则求值的结果是浮点值</li>
 </ul>
 <h5 id="日期和时间字面值"><a href="#日期和时间字面值" class="headerlink" title="日期和时间字面值"></a>日期和时间字面值</h5><p>日期和时间值可以用几种格式来表示，比如字符串或者数值。在MySQL期望接收一个日期类型值的上下文里<code>&#39;2015-07-21&#39;</code> <code>&#39;20150721&#39;</code> <code>20150721</code>都被当作一个日期字面值</p>
-<p><strong><code>标准的SQL和ODBC日期时间字面值</code></strong>  标准SQL允许使用类型关键字和一个字符串构成一个临时的日期时间字面值：</p>
+<p><strong><code>标准的SQL和ODBC日期时间字面值</code></strong>  标准SQL允许使用类型关键字和一个字符串构成一个日期时间字面值：</p>
 <pre><code>DATE &apos;str&apos;
 TIME &apos;str&apos;
 TIMESTAMP &apos;str&apos;
@@ -413,8 +413,9 @@ mysql&gt; INSERT INTO t SET b = b&apos;0101&apos;;
 </code></pre><p>为字段值赋给用户变量时被当作二进制字符串。要将位字段值作为数值可以使用<code>CAST(... AS UNSIGN)</code>函数或者给它加上0</p>
 <h5 id="空值"><a href="#空值" class="headerlink" title="空值"></a>空值</h5><p>空值意味着没有数据。<code>NULL</code>可以任意大小写。<code>NULL</code>等同于<code>\N</code></p>
 <p>在使用<code>LOAD DATA INFILE</code> <code>SELECT ... INTO OUTFILE</code>语句导入或者导出的文件中<code>NULL</code>使用<code>\N</code>表示</p>
-<h4 id="存储类型"><a href="#存储类型" class="headerlink" title="存储类型"></a>存储类型</h4><h5 id="数值类型"><a href="#数值类型" class="headerlink" title="数值类型"></a>数值类型</h5><p><strong><code>BIT[(M)]</code></strong><br>位字段类型，<code>M</code>表示bit的个数，可设置为1~64默认是1</p>
-<p>在下面整型的描述中，修饰符 <code>M</code> 表示整型的最大显示宽度，与相关类型可以存储的值的大小无关，最大可设置为255</p>
+<h4 id="存储类型"><a href="#存储类型" class="headerlink" title="存储类型"></a>存储类型</h4><p>MySQL可存储5种大的数据类型: <code>数值类型</code> <code>日期和时间类型</code> <code>字符串类型</code> <code>空间(spatial)类型</code> <code>JSON数据类型</code>；每种大的数据类型又分为很多种小的数据类型，下面进行详细描述</p>
+<h5 id="数值类型"><a href="#数值类型" class="headerlink" title="数值类型"></a>数值类型</h5><p><strong><code>BIT[(M)]</code></strong><br>位字段类型，<code>M</code>表示bit的个数，可设置为1~64默认是1；<code>M</code>同时也指定了所占用的存储空间，如果实际存储的值小于M则系统会在左侧补0</p>
+<p>在下面整型的描述中，修饰符 <code>M</code> 表示整型的最小显示宽度（如果宽度不够则进行右侧对齐），与相关类型可以存储的值的大小无关，最大可设置为255</p>
 <p><strong><code>TINYINT[(M)] [UNSIGNED] [ZEROFILL]</code></strong><br>非常小的整数，占1个字节，可以设置的值的范围是<code>-128~127</code>或者<code>0~255</code></p>
 <p><strong><code>BOOL, BOOLEAN</code></strong><br>等同于<code>TINYINT(1)</code>，可以设置为<code>0</code> <code>false</code> <code>true</code>和非零的TINYINT值；false等同于0，true等同于1，但是反过来0等同于false，非0值等同于true</p>
 <p><strong><code>SMALLINT[(M)] [UNSIGNED] [ZEROFILL]</code></strong><br>小整数，占2个字节，可以设置的值的范围是<code>-32768~32767</code>或者<code>0~65535</code></p>
@@ -423,24 +424,40 @@ mysql&gt; INSERT INTO t SET b = b&apos;0101&apos;;
 <p><strong><code>BIGINT[(M)] [UNSIGNED] [ZEROFILL]</code></strong><br>大整数，占8个字节，可以设置的值的范围是<code>-9223372036854775808~9223372036854775808</code>或者<code>0~18446744073709551615</code></p>
 <ul>
 <li>可以将数值序列字符串插入到BIGINT数据列中</li>
-<li></li>
+<li>所有的算术运算都是用<code>BIGINT</code>或者<code>DOUBLE</code>进行，如果参与计算的操作数过大则会产生错误的计算结果</li>
 </ul>
 <p><strong><code>DECIMAL[(M[,D])] [UNSIGNED] [ZEROFILL]</code></strong><br>精确小数，<code>M</code>表示可存储的数字的位数，<code>D</code>表示小数点后面的位数；<code>M</code>的最大值是65，<code>D</code>的最大值是30，小数点不计入；如果未指定<code>D</code>则为0表示没有小数部分，如果未指定<code>M</code>则默认值是10，也可以使用DEC、FIXED、NUMERIC</p>
-<p><strong><code>FLOAT[(M[,D])] [UNSIGNED] [ZEROFILL]</code></strong><br>单精度浮点数，占4个字节，可以设置值的范围是<code>-3.402823466E+38~-1.175494351E-38</code> <code>0</code>或者<code>1.175494351E-38~3.402823466E+38</code>，实际的范围依赖你的硬件和操作系统；<code>M</code>和<code>D</code>分别表示可存储的数字的位数和小数点后面的位数</p>
-<p><strong><code>DOUBLE[(M[,D])] [UNSIGNED] [ZEROFILL]</code></strong><br>双精度浮点数，占8个字节，可以设置值的范围是<code>-1.7976931348623157E+308~-2.2250738585072014E-308</code> <code>0</code>或者<code>2.2250738585072014E-308~1.7976931348623157E+308</code>，，实际的范围依赖你的硬件和操作系统；<code>M</code>和<code>D</code>分别表示可存储的数字的位数和小数点后面的位数</p>
 <blockquote>
-<p>指定<code>ZEROFILE</code>修饰符，则隐含<code>UNSIGNED</code>修饰符</p>
+<p>最大65位精度的小数可以是正或者负的值，<code>UNSIGNED</code>只是简单的不允许负的值插入，而不会像整型那样将可容纳的值的范围向正数方向平移</p>
+<p>精确小数在内部使用二进制表示，存储时每九个数字占四个字节，并且整数部分和小数部分分开存储</p>
+</blockquote>
+<p><strong><code>FLOAT[(M[,D])] [UNSIGNED] [ZEROFILL]</code></strong><br>单精度浮点数，占4个字节，可以设置值的范围是<code>-3.402823466E+38~-1.175494351E-38</code> <code>0</code>或者<code>1.175494351E-38~3.402823466E+38</code>，实际的范围依赖你的硬件和操作系统；<code>M</code>和<code>D</code>分别表示可存储的数字的位数和小数点后面的位数</p>
+<p><strong><code>DOUBLE[(M[,D])] [UNSIGNED] [ZEROFILL]</code></strong><br>双精度浮点数，占8个字节，可以设置值的范围是<code>-1.7976931348623157E+308~-2.2250738585072014E-308</code> <code>0</code>或者<code>2.2250738585072014E-308~1.7976931348623157E+308</code>，实际的范围依赖你的硬件和操作系统；<code>M</code>和<code>D</code>分别表示可存储的数字的位数和小数点后面的位数</p>
+<p><code>UNSIGNED</code>用在浮点数列时，浮点数的可存储范围同样不会向正数方向平移</p>
+<blockquote>
+<p><code>ZEROFILE</code>修饰符表示如果列存储的实际值小于指定的显示宽度则在左侧补0，同时隐含<code>UNSIGNED</code>修饰符</p>
 <p><code>SERIAL</code>修饰符是<code>BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE</code>修饰符的别名</p>
 <p><code>SERIAL DEFAULT VALUE</code>修饰符是<code>NOT NULL AUTO_INCREMENT UNIQUE</code>修饰符的别名</p>
 </blockquote>
 <h5 id="日期和时间类型"><a href="#日期和时间类型" class="headerlink" title="日期和时间类型"></a>日期和时间类型</h5><p><code>TIME</code> <code>DATETIME</code> <code>TIMESTAMP</code>类型可以指定一个表示微秒精度的修饰符<code>(fsp)</code>，<code>fsp</code>的取值范围是0-6，0和空都表示没有微秒部分</p>
 <p><code>TIMESTAMP</code> <code>DATETIME</code>可以设置自动初始化和更新属性</p>
+<p>如果给一个列设置的值超过本列可表示的范围，则MySQL会将其设置为<code>zero</code>，但是<code>TIME</code>类型例外，超出<code>TIME</code>类型的列会被设置为<code>TIME</code>可以表示的最大或者最小值</p>
+<p>几种类型的<code>zero</code>值检索结果如下：</p>
+<pre><code>DATE    &apos;0000-00-00&apos;
+TIME    &apos;00:00:00&apos;
+DATETIME    &apos;0000-00-00 00:00:00&apos;
+TIMESTAMP   &apos;0000-00-00 00:00:00&apos;
+YEAR    0000
+</code></pre><p>在数值上下文中，MySQL会将日期和时间类型转换为数值进行处理</p>
 <p><code>SUM()</code> <code>AVG()</code>聚合函数不能直接使用日期时间类型的列，但是我们可以使用一种变通的方法：先将日期时间值转换为数值单位，进行聚合操作，然后再转换回来，比如</p>
 <pre><code>SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(time_col))) FROM tbl_name;
 SELECT FROM_DAYS(SUM(TO_DAYS(date_col))) FROM tbl_name;
 </code></pre><p><strong><code>DATE</code></strong><br>日期，支持的值的范围是<code>1000-01-01</code>到<code>9999-12-31</code>。MySQL显示日期类型值为<code>YYYY-MM-DD</code>的格式，但是可以使用很多种日期字面值来给他赋值</p>
 <p><strong><code>DATETIME[(fsp)]</code></strong><br>日期和时间组合值，支持的值的范围是<code>1000-01-01 00:00:00.000000</code>到<code>9999-12-31 23:59:59:999999</code>。MySQL显示日期时间类型值为<code>YYYY-MM-DD HH:MM:SS[.franction]</code>的格式，但是可以使用很多种日期时间字面值来给他赋值</p>
 <p>设置<code>DEFAULT</code>和<code>ON TIME</code>列修饰符可以让DATETIME类型列值自动初始化和更新为当前的时间</p>
+<blockquote>
+<p>如果未启用<code>NO_ZERO_DATE</code>模式，上面两种类型中的月和日可以设置为<code>00</code></p>
+</blockquote>
 <p><strong><code>TIMESTAMP[(fsp)]</code></strong><br>时间戳，支持的值范围是UTC时间<code>1970-01-01 00:00:01.000000</code>到<code>2038-01-19 03:14:07.999999</code>，TIMESTAMP被存储为自epoch(1970-01-01 00:00:00 UTC)以来的秒数；MySQL中的时间戳不能表示<code>1970-01-01 00:00:01</code>是因为它会被存储为0，而0要用来表示<code>0000-00-00 00:00:00</code>这个TIMESTAMP值</p>
 <p>如果未设置<code>explicit_defaults_for_timestamp</code>系统变量（默认OFF），表中的第一个TIMESTAMP列自动有设置为初始化时间或者最近一次更新时间的属性，也可以使用<code>DEFAULT CURRENT_TIMESTAMP</code>和<code>ON TIME CURRENT_TIMESTAMP</code>列修饰符显式设置</p>
 <p>如果一个TIMESTAMP列有设置为初始化时间或者最近一次更新时间的属性，并且在插入值时未指定值或者指定NULL值（这一列有NULL修饰符例外），则这列被更新为当前时间</p>
@@ -449,6 +466,7 @@ SELECT FROM_DAYS(SUM(TO_DAYS(date_col))) FROM tbl_name;
 <h5 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h5><p><code>CHAR</code> <code>VARCHAR</code> <code>TEXT</code>类型后面的<code>M</code>的单位是character</p>
 <p><code>CHAR</code> <code>VARCHAR</code> <code>TEXT</code> <code>ENUM</code> <code>SET</code>类型后面可以指定字符集和排序规则，如果未指定字符集则使用系统默认字符集</p>
 <p>如果指定字符集为<code>binary</code>则导致字符类型转变为相应的二进制数据类型：<code>CHAR</code>转变为<code>BINARY</code> <code>VARCHAR</code>转变为<code>VARBINARY</code> <code>TEXT</code>转变为<code>BLOB</code>；而<code>ENUM</code> <code>SET</code>不转换</p>
+<p><code>CHAR</code> <code>VARCHAR</code> <code>TEXT</code>类型可以使用<code>BINARY</code>修饰符，这表示本行的排序规则是默认字符集的二进制排序规则</p>
 <p>不带<code>M</code>长度修饰符的列类型，表示MySQL一定会分配可以容纳本列允许最大字符/字节数的存储空间，如果受制于行最大字节数的限制，则会报错</p>
 <p><strong><code>CHAR[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]</code></strong><br>定长字符串，<code>M</code>可取值的范围是0-255默认是1，如果插入的值小于给定的长度则在右侧补空格，如果未启用<code>PAD_CHAR_TO_FULL_LENGTH</code>模式，则取出数据时会去掉末尾的空格</p>
 <p>允许定义<code>CHAR(0)</code>这样的列，如果再使用NULL修饰符则这一列只能有两个值<code>NULL</code> <code>&#39;&#39;</code></p>
@@ -464,6 +482,10 @@ SELECT FROM_DAYS(SUM(TO_DAYS(date_col))) FROM tbl_name;
 <p><strong><code>BLOG(M)</code></strong><br>类似于<code>BLOG(M)</code>，但这里存储的是二进制数据</p>
 <p><strong><code>MEDIUMBLOG</code></strong><br>类似于<code>MEDIUMTEXT</code>，但这里存储的是二进制数据</p>
 <p><strong><code>LONGBLOG(M)</code></strong><br>类似于<code>LONGTEXT</code>，但这里存储的是二进制数据</p>
+<blockquote>
+<p><code>BLOB</code>和<code>TEXT</code>类型可以看作是<code>VARBINARY</code>和<code>VARCHAR</code>类型，但是有两点不同：前者只能创建前缀索引，而后者前缀索引是可选的；前者不能有<code>DEFAULT</code>值</p>
+<p><code>BLOB</code>和<code>TEXT</code>类型在存储时单独分配存储对象</p>
+</blockquote>
 <p><strong><code>ENUM(&#39;value1&#39;,&#39;value2&#39;,...) [CHARACTER SET charset_name] [COLLATE collation_name]</code></strong><br>枚举类型，一个字符串对象，并且只能是后面<code>value</code>指定的值其中的一个或者是<code>NULL</code>；ENUM类型在内部使用整型表示</p>
 <p><strong><code>SET(&#39;value1&#39;,&#39;value2&#39;,...) [CHARACTER SET charset_name] [COLLATE collation_name]</code></strong><br>集合类型，可以是一个或者多个后面<code>value</code>列表中指定的值；SET类型在内部使用整型表示</p>
 
