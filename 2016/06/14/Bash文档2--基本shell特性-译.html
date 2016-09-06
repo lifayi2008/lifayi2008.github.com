@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://blog.yoopig.com/2016/06/14/Bash文档2--基本shell特性-译.html">
 <meta property="og:site_name" content="lifayi2008">
 <meta property="og:description" content="Bash是Bourne-again shell的首字母缩写。Bourne shell是传统的Unix shell，由Stephen Bourne开发。所有的sh内置命令都在bash中实现，evaluation和quoting的规则则来自POSIX规范中Unix shell的标准">
-<meta property="og:updated_time" content="2016-08-17T09:21:23.000Z">
+<meta property="og:updated_time" content="2016-09-06T07:49:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Bash文档2--基本shell特性(译)">
 <meta name="twitter:description" content="Bash是Bourne-again shell的首字母缩写。Bourne shell是传统的Unix shell，由Stephen Bourne开发。所有的sh内置命令都在bash中实现，evaluation和quoting的规则则来自POSIX规范中Unix shell的标准">
@@ -461,7 +461,7 @@ function name [()] compound-command [ redirections ]
 <p><strong>$@</strong>：参数展开为所有的位置参数。当参数展开没有在双引号中时，和<code>$*</code>完全一样。当位置参数在双引号中展开时，每个位置参数展开为单个的word，<code>$@</code>等同于<code>&quot;$1&quot;</code> <code>&quot;$2&quot;</code> <code>....</code>。如果双引号引起来的<code>$@</code>或者<code>$*</code>包含在一个word中，则扩展的结果是：第一个参数连接着word的开始部分，然后是空格，然后第二个参数，最后一个参数连接着word的结束的部分。如果没有位置参数，<code>$@</code>和<code>$@</code>都展开为空（被移除）</p>
 <p><strong>$#</strong>：展开为位置参数的个数</p>
 <p><strong>$?</strong>：展开为上一个退出的前台进程（组）的退出状态</p>
-<p><strong>$-</strong>：在交互式shell中展开为一串包括”i”的字符串，在shell script中展开为不包括”i”的字符串</p>
+<p><strong>$-</strong>：展开为启动shell时设置的选项标记字符所组成的字符串，标记可能是<code>set</code>命令设置的，或者系统设置的（比如<code>-i</code>选项）</p>
 <p><strong>$$</strong>：展开为当前shell的PID。如果在一个()创建的子shell中，<code>$$</code>依然表示调用的shell的PID而不是子shell的PID</p>
 <p><strong>$!</strong>：展开为最后一个放入后台进程的PID</p>
 <p><strong>$0</strong>：展开为shell或者shell script的名字，在shell初始化的时候设置。如果bash脚本文件的方式执行的，则$0设置为这个文件的名字。如果bash使用-c选项调用则$0设置为可执行文件后面的第一个参数（如果有的话）。否则被设置为当前shell的名称（-bash）</p>
