@@ -84,19 +84,16 @@
 
 
 
-<meta name="description" content="重定向在命令执行之前，shell可以使用特定的语法来将其输入输出进行重定向。重定向可以让命令的文件句柄被复制，打开，关闭或者指向别的文件，可以改变命令要写入或者读取的文件。重定向也可以用来修改当前shell环境的文件句柄。下面的这些重定向操作符可以放在简单命令的任何地方：前置中间或者后面。重定向按照操作符出现的顺序从左向右进行
-任何在重定向操作符之前加数字表示文件描述符的情况都可以使用{varna">
+<meta name="description" content="重定向在命令执行之前，shell可以使用特定的语法来将其输入输出进行重定向。重定向可以让命令的文件句柄被复制，打开，关闭或者指向别的文件，可以改变命令要写入或者读取的文件。重定向也可以用来修改当前shell环境的文件句柄。下面的这些重定向操作符可以放在简单命令的任何地方：前置中间或者后面。重定向按照操作符出现的顺序从左向右进行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Bash文档7--重定向&命令执行&脚本">
 <meta property="og:url" content="http://blog.yoopig.com/2016/09/13/Bash文档7-重定向-命令执行-脚本.html">
 <meta property="og:site_name" content="lifayi2008">
-<meta property="og:description" content="重定向在命令执行之前，shell可以使用特定的语法来将其输入输出进行重定向。重定向可以让命令的文件句柄被复制，打开，关闭或者指向别的文件，可以改变命令要写入或者读取的文件。重定向也可以用来修改当前shell环境的文件句柄。下面的这些重定向操作符可以放在简单命令的任何地方：前置中间或者后面。重定向按照操作符出现的顺序从左向右进行
-任何在重定向操作符之前加数字表示文件描述符的情况都可以使用{varna">
-<meta property="og:updated_time" content="2016-09-13T06:31:45.000Z">
+<meta property="og:description" content="重定向在命令执行之前，shell可以使用特定的语法来将其输入输出进行重定向。重定向可以让命令的文件句柄被复制，打开，关闭或者指向别的文件，可以改变命令要写入或者读取的文件。重定向也可以用来修改当前shell环境的文件句柄。下面的这些重定向操作符可以放在简单命令的任何地方：前置中间或者后面。重定向按照操作符出现的顺序从左向右进行">
+<meta property="og:updated_time" content="2016-09-13T06:35:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Bash文档7--重定向&命令执行&脚本">
-<meta name="twitter:description" content="重定向在命令执行之前，shell可以使用特定的语法来将其输入输出进行重定向。重定向可以让命令的文件句柄被复制，打开，关闭或者指向别的文件，可以改变命令要写入或者读取的文件。重定向也可以用来修改当前shell环境的文件句柄。下面的这些重定向操作符可以放在简单命令的任何地方：前置中间或者后面。重定向按照操作符出现的顺序从左向右进行
-任何在重定向操作符之前加数字表示文件描述符的情况都可以使用{varna">
+<meta name="twitter:description" content="重定向在命令执行之前，shell可以使用特定的语法来将其输入输出进行重定向。重定向可以让命令的文件句柄被复制，打开，关闭或者指向别的文件，可以改变命令要写入或者读取的文件。重定向也可以用来修改当前shell环境的文件句柄。下面的这些重定向操作符可以放在简单命令的任何地方：前置中间或者后面。重定向按照操作符出现的顺序从左向右进行">
 
 
 
@@ -318,8 +315,7 @@
       
 
       
-        <h4 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h4><p>在命令执行之前，shell可以使用特定的语法来将其输入输出进行重定向。重定向可以让命令的文件句柄被复制，打开，关闭或者指向别的文件，可以改变命令要写入或者读取的文件。重定向也可以用来修改当前shell环境的文件句柄。下面的这些重定向操作符可以放在简单命令的任何地方：前置中间或者后面。重定向按照操作符出现的顺序从左向右进行</p>
-<p>任何在重定向操作符之前加数字表示文件描述符的情况都可以使用<code>{varname}</code>来代替数字，这样shell会分配一个大于10的文件描述符给重定向操作，并且将这个数字赋给<code>varname</code>变量。有一种例外是<code>&gt;&amp;-</code>和<code>&lt;&amp;-</code>，如果上面两种形式前置一个数字或者变量表示文件描述符时，shell会关闭这个文件描述符或者关闭变量值对应的文件描述符</p>
+        <h4 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h4><p>在命令执行之前，shell可以使用特定的语法来将其输入输出进行重定向。重定向可以让命令的文件句柄被复制，打开，关闭或者指向别的文件，可以改变命令要写入或者读取的文件。重定向也可以用来修改当前shell环境的文件句柄。下面的这些重定向操作符可以放在简单命令的任何地方：前置中间或者后面。重定向按照操作符出现的顺序从左向右进行<br><a id="more"></a><br>任何在重定向操作符之前加数字表示文件描述符的情况都可以使用<code>{varname}</code>来代替数字，这样shell会分配一个大于10的文件描述符给重定向操作，并且将这个数字赋给<code>varname</code>变量。有一种例外是<code>&gt;&amp;-</code>和<code>&lt;&amp;-</code>，如果上面两种形式前置一个数字或者变量表示文件描述符时，shell会关闭这个文件描述符或者关闭变量值对应的文件描述符</p>
 <p>下面的描述中，如果文件描述符为空，则<code>&lt;</code>和<code>&gt;</code>分别表示前置一个文件描述符0或者1表示标准输入或者标准输出。</p>
 <p>下面描述的操作元素<code>word</code>，除非特别指出，都要经历<code>brace expansion</code> <code>tilde expansion</code> <code>parameter expansion</code> <code>command subtitution</code> <code>arithmetic expansion</code> <code>quote removal</code> <code>filename expansion</code> <code>word splitting</code>。如果展开替换结果超过1个word，则shell会报错；这个结果要指代一个文件名</p>
 <p>注意重定向的顺序非常重要。比如</p>
