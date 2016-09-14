@@ -1,0 +1,814 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="bash,awk," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="awk基本语法和命令awk命令语法awk -Fs  &amp;apos;/pattern/ {action}&amp;apos; input-file
+awk -Fs &amp;apos;{action}&amp;apos; input-file">
+<meta property="og:type" content="article">
+<meta property="og:title" content="awk笔记">
+<meta property="og:url" content="http://blog.yoopig.com/2016/09/14/awk笔记.html">
+<meta property="og:site_name" content="lifayi2008">
+<meta property="og:description" content="awk基本语法和命令awk命令语法awk -Fs  &amp;apos;/pattern/ {action}&amp;apos; input-file
+awk -Fs &amp;apos;{action}&amp;apos; input-file">
+<meta property="og:updated_time" content="2016-09-14T10:45:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="awk笔记">
+<meta name="twitter:description" content="awk基本语法和命令awk命令语法awk -Fs  &amp;apos;/pattern/ {action}&amp;apos; input-file
+awk -Fs &amp;apos;{action}&amp;apos; input-file">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://blog.yoopig.com/2016/09/14/awk笔记.html"/>
+
+  <title> awk笔记 | lifayi2008 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">lifayi2008</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">压力不是有人比你努力，而是比你牛逼的人依然比你努力</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                awk笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-14T11:43:23+08:00" content="2016-09-14">
+              2016-09-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Bash/" itemprop="url" rel="index">
+                    <span itemprop="name">Bash</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="awk基本语法和命令"><a href="#awk基本语法和命令" class="headerlink" title="awk基本语法和命令"></a>awk基本语法和命令</h4><h5 id="awk命令语法"><a href="#awk命令语法" class="headerlink" title="awk命令语法"></a>awk命令语法</h5><pre><code>awk -Fs  &apos;/pattern/ {action}&apos; input-file
+awk -Fs &apos;{action}&apos; input-file
+</code></pre><a id="more"></a>
+<p><strong><code>-F</code></strong>  指定域分隔符，如果不指定，将使用一个空格域作为分隔符</p>
+<p><code>/pattern/</code>和<code>{action}</code>都使用引号引起来（最好使用单引号，如果awk的参数中不包含bash中的特殊字符则可以使用双引号）</p>
+<p><code>/pattern/</code>是可选的。如果不指定，则表示匹配任何一行内容；如果指定一个模式，则对应的<code>action</code>只应用于匹配的行；如果指定两个模式则应用于两个模式之间的内容</p>
+<blockquote>
+<p>注意：在awk中不能使用<code>$</code>表示文件末尾，可以使用<code>0</code>来表示 如awk ‘/2013-11-17 13:22:18/,0’ test.txt</p>
+</blockquote>
+<p><code>{action}</code>中的<code>action</code>是awk的程序命令，可以是一个或者多个用逗号分隔的多个。整个<code>action</code>都使用<code>{}</code>括起来；程序命令中可以有多个<code>/pattern/{action}</code>，表示针对符合特定的<code>pattern</code>的行做对应的<code>action</code>操作；但是在<code>action</code>中不能在嵌套<code>/pattern/{action}</code>了（可以使用程序来达成同样的效果）</p>
+<p><code>input-file</code>操作输入的文件，可以是一个或者多个用空格分开</p>
+<p>也可以将awk程序命令放置在一个文件中，然后使用<code>awk -F -f myscript.awk input-file</code>来使用awk程序操作后面的文件</p>
+<h5 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h5><pre><code>$ awk -F : &apos;/mail/ {print $1}&apos; /etc/passwd
+</code></pre><p><code>-F:</code>表示域的分隔符是<code>:</code>，分隔符可以使用引号括起来</p>
+<p><code>/mail/</code>是一个匹配模式，表示后面的程序命令将作用于包含<code>mail</code>的行</p>
+<p><code>{print $1}</code>awk的程序命令，表示打印前面匹配到的行的第一个字段</p>
+<p><code>/etc/password</code>输入的文件名</p>
+<h5 id="awk程序结构"><a href="#awk程序结构" class="headerlink" title="awk程序结构"></a>awk程序结构</h5><p>一个典型的awk程序可以有三部分：</p>
+<ol>
+<li>BEGIN Block<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">语法：</span><br><span class="line">BEGIN&#123;awk-command&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>BEGIN Block是可选的，仅在程序开始的时候（未读入文件的时候）执行一次；是打印表头和初始化变量的好位置；在BEGIN Block中可以运行多个awk命令，需要使用<code>;</code>分隔；关键字<code>BEGIN</code>必须是大写的</p>
+<blockquote>
+<p>当只使用<code>BEGIN block</code>时可以不指定输入内容， 如果有其他的Block时必须指定输入文件，否则awk会报错</p>
+</blockquote>
+<ol>
+<li>Body Block<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">语法:</span><br><span class="line">/pattern/&#123;action&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>body block对输入的每一行执行<code>pattern</code>和<code>action</code>；body block不需要使用关键字指示</p>
+<ol>
+<li>END Block<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">语法:</span><br><span class="line">END &#123; awk-commands &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>END Block是可选的，只在所有body block执行完之后执行一次；END Block是打印页脚和清除其他活动的好地方；在END Block中可以运行多个awk命令，需要使用<code>;</code>分隔；关键字<code>END</code>必须是大写的</p>
+<blockquote>
+<p>即使你指定有多个操作文件，BEGIN和END Block也只会各执行一次，而body block则会依次应用于每一个文件的每一行</p>
+</blockquote>
+<h5 id="打印命令"><a href="#打印命令" class="headerlink" title="打印命令"></a>打印命令</h5><p><strong><code>print打印</code></strong>  </p>
+<p>默认awk打印命令（不使用参数）打印所有字段（行的内容）：</p>
+<pre><code>$ awk &apos;{ print }&apos; employee.txt
+</code></pre><p><code>$0</code>也用来表示所有字段：</p>
+<pre><code>$ awk &apos;{print $0}&apos; employee.txt
+</code></pre><p>可以指定打印某一个字段：</p>
+<pre><code>$ awk &apos;{print $2}&apos; employee.txt
+</code></pre><p>使用<code>-F</code>指定分隔符 可以使用<code>单引号</code> <code>双引号</code>或者没有任何引号都行，也可以紧挨着F也可以有空格</p>
+<pre><code>$ awk -F &apos;,&apos; &apos;{print $2}&apos; employee.txt
+$ awk -F &quot;,&quot; &apos;{print $2}&apos; employee.txt
+$ awk -F, &apos;{print $2}&apos; employee.txt
+
+$ awk -F &apos;,&apos; &apos;BEGIN{ print &quot;--------\nName\tTitle\n--------&quot;}{ print $2,&quot;\t&quot;,$3;}END{ print &quot;---------&quot;; }&apos; employee.txt
+</code></pre><blockquote>
+<p>可以将每一条命令写在一行上，结尾使用<code>\</code>转接到下一行；但是仍要按在同一行的格式来写，不能省略符号</p>
+<p>也可以使用<code>-f</code>参数指定一个包含awk block的文件，文件中可以使用<code>#</code>指定注释，而且可以省略引号</p>
+</blockquote>
+<p><strong><code>printf打印</code></strong>  </p>
+<p>类似于c语言中的<code>printf</code>:</p>
+<pre><code>printf &quot;print format&quot;,variable1,variable2,...
+</code></pre><p>可以在<code>print format</code>中使用字符常量中的转义字符：<code>\n</code> <code>\t</code> <code>\v</code> <code>\b</code> <code>\r</code> <code>\f</code></p>
+<p>可以在<code>print format</code>中使用的占位符：<code>%s</code> <code>%c</code> <code>%d</code> <code>%e</code> <code>%f</code> <code>%g</code> <code>%o</code> <code>%x</code> <code>%%</code>分别表示<code>字符串</code> <code>单个字符</code> <code>整数</code> <code>浮点数</code> <code>固定浮点数</code> <code>e或者f</code> <code>八进制</code> <code>十六进制</code> <code>%字面值</code></p>
+<p>可以在占位符中使用数字指定最小宽度，如果实际宽度小于指定的宽度则使用0或者空格补齐，默认是在左侧补齐，可以在数字之前加一个<code>-</code>表示右侧补齐，：</p>
+<pre><code>$ awk &apos;BEGIN { printf &quot;%6s\n&quot;, &quot;Good&quot; }&apos;
+$ awk &apos;BEGIN { printf &quot;|%-6s|\n&quot;, &quot;Good&quot; }&apos; ##加&quot;|&quot;是为了能看到显示的空格
+</code></pre><p>在指定的宽度数字之前加一个<code>.</code>；用在字符串时表示可以打印绝对的宽度，如果后面指定的数据长度超过指定长度则会被从后面截断（绝对宽度在awk4.0版本之前可能无效，可靠的方法是使用<code>substr</code>函数进行截断）；用在数值时表示小数的精度</p>
+<pre><code>$ awk &apos;BEGIN { printf &quot;%.6s\n&quot;, &quot;Good Boy!&quot; }&apos;
+$ awk &apos;BEGIN { printf &quot;%6s\n&quot;, substr(&quot;Good Boy!&quot;,1,6) }&apos;
+</code></pre><p><code>printf</code>不使用<code>ORS</code> <code>OFS</code>指定的分隔符，它只使用自己的格式</p>
+<p><code>print</code>和<code>printf</code>都可以将打印内容使用<code>&gt;</code>操作符打印到一个文件中</p>
+<h5 id="行选取"><a href="#行选取" class="headerlink" title="行选取"></a>行选取</h5><p>行选取包括行号选取、模式匹配以及逻辑操作符选取：</p>
+<p>awk在执行命令时可以使用模式匹配，模式匹配使用两个<code>/</code>包围的正则表达式用来匹配行的内容，可以使用两个模式匹配用来表示两个匹配行之间的所有行，两个模式匹配使用逗号分隔</p>
+<p>同样可以使用一个数字表示要选取的行，也可以使用两个数字表示选取的行的范围，两个数字之间使用逗号分隔</p>
+<p>可以混合使用行号选取和匹配模式选取</p>
+<p>可以在记录选取中使用逻辑运算符和正则表达式配合字段进行行选取：</p>
+<pre><code>$ awk -F &quot;,&quot; &apos;$1 == 103 {print $2}&apos; items.txt
+$ awk -F &apos;:&apos; &apos;$NF ~ /\/bin\/sh/ { n++ }; END { print n }&apos; /etc/passwd
+</code></pre><h4 id="awk内置变量"><a href="#awk内置变量" class="headerlink" title="awk内置变量"></a>awk内置变量</h4><ol>
+<li><code>FS</code>输入域分隔符</li>
+</ol>
+<p>awk默认使用空格作为字段分隔符，也可以指定其他的字符作为分隔符，甚至可以使用正则表达式匹配到的字符作为分隔符</p>
+<pre><code>$ awk -F &apos;,&apos; &apos;{print $2, $3}&apos; employee.txt
+</code></pre><p>同样可以使用<code>FS</code>变量来设置分隔符，<code>FS</code>一般指定在BEGIN Block中，并且需要使用双引号（这意味着同时外层不能使用双引号）</p>
+<p>可以使用部分的正则规则来同时指定多个字段分隔符：</p>
+<pre><code>$ awk &apos;BEGIN {FS=&quot;[,:%]&quot;} {print $2, $3}&apos; employee-multiple-fs.txt
+$ awk -F&apos;[,:%]&apos; &apos;{print $2, $3}&apos; employee-multiple-fs.txt
+</code></pre><ol>
+<li><code>OFS</code>输出域分隔符</li>
+</ol>
+<p>默认使用空格作为输出域分隔符，只有在使用<code>,</code>连接要输出的域的时候才会使用<code>OFS</code>:</p>
+<pre><code>$ awk -F &apos;,&apos; &apos;BEGIN { OFS=&quot;:&quot; } { print $2, $3 }&apos; employee.txt
+</code></pre><p>未使用<code>,</code>作为域分隔符，则awk不会使用<code>OFS</code>作为输出域分隔符：</p>
+<pre><code>awk &apos;BGEIN{FS=&quot;,&quot;}{print $2&quot;:&quot;$3}&apos; employee.txt、
+这个例子中手动指定一个字符串:连接两个输出字段
+</code></pre><blockquote>
+<p>awk中使用空字符来连接两个字符串</p>
+<p>awk字符串只能使用双引号引用（这意味着同时外层不能使用双引号）</p>
+<p>注意 : 在BEGIN中指定的<code>OFS</code>和<code>FS</code>值需要加双引号  如：<code>OFS=&quot;:&quot;</code>，因为给这些特殊变量赋值必须使用字符串常量</p>
+<p>注意 : 如果在BODY block中使用<code>print</code> 打印<code>$0</code>时，前面指定的<code>OFS</code>值不会生效，必须在打印操作前面加上<code>$1=$1</code></p>
+<p>如果要使用<code>print</code>打印<code>&#39;</code> <code>&quot;</code>时，可以使用这两个字符的<code>ASCII</code>码的八进制或者十六进制值表示，比如：<code>print &quot;\xxx&quot;</code></p>
+</blockquote>
+<ol>
+<li><code>RS</code>记录分隔符</li>
+</ol>
+<p>前面说的awk一次处理一行内容是不准确的，准确的说awk一次处理一条记录，而awk默认的一条记录就是一行，但是可以使用<code>RS</code>变量来改变</p>
+<blockquote>
+<p>注意：记录选取（行号和匹配模式）应用到行，而非应用到记录</p>
+</blockquote>
+<pre><code>$ awk -F, &apos;BEGIN { RS=&quot;:&quot; } { print $2 }&apos; employee-one-line.txt
+</code></pre><p>这样<code>:</code>被用来分隔记录，上面的一行内容被分隔为多条记录，而awk一次处理一条记录</p>
+<blockquote>
+<p>注意：如果指定<code>RS=&quot;&quot;</code>则表示使用单个或者多个空行作为记录分隔符</p>
+</blockquote>
+<ol>
+<li><code>ORS</code>输出记录分隔符</li>
+</ol>
+<p>awk默认使用换行作为输出记录分隔符，但是可以使用<code>ORS</code>变量来改变：</p>
+<pre><code>$ awk &apos;BEGIN { FS=&quot;,&quot;; ORS=&quot;\n---\n&quot; } {print $2, $3}&apos; employee.txt
+$ awk &apos;BEGIN { FS=&quot;,&quot;; OFS=&quot;\n&quot;;ORS=&quot;\n---\n&quot; } {print $1,$2,$3}&apos; employee.txt 
+</code></pre><ol>
+<li><code>NR</code> <code>FNR</code>当前处理的记录号</li>
+</ol>
+<p>经常用在循环中用于获取当前处理的记录数，用在END Block中可以获取文件中的记录数</p>
+<pre><code>$ awk &apos;BEGIN{FS=&quot;,&quot;}{print &quot;Emp Id of record number&quot;,NR,&quot;is&quot;,$1;}END{print &quot;Total number of records:&quot;,NR}&apos; employee.txt
+</code></pre><p>两者的区别是在处理第二个文件（如果指定第二个文件）时，<code>FNR</code>会重置为1，而<code>NR</code>则不回重置，而是在上一个文件的基础上继续增加</p>
+<ol>
+<li><code>NF</code>当前处理的记录的字段数</li>
+</ol>
+<p><code>NF</code>表示使用前面指定分隔符分隔每条记录后的字段总数</p>
+<p>我们可以使用<code>$NF</code>取得最后一个字段，<code>$(NF-1)</code>取得倒数第二个字段</p>
+<blockquote>
+<p>注意：  <code>FS</code> <code>OFS</code> <code>RS</code> <code>ORS</code> 在 <code>BEGIN block</code>中指定的在处理所有行时都有效，而在<code>BODY block</code>中指定的到处理下一行时才生效，下面一个小技巧可以让在当前行生效</p>
+</blockquote>
+<pre><code>awk &apos;NR==FNR{a[$5]=$0;next}{FS=&quot;,&quot;;$0=$0;print $0&quot;&quot;a[$3]}&apos; test2.txt test.txt
+</code></pre><ol>
+<li><code>FILENAME</code>当前处理的文件名</li>
+</ol>
+<p>当使用awk程序处理多个文件时，这变量可以获取当前处理的文件名</p>
+<pre><code>$ awk &apos;{ print FILENAME }&apos;  employee.txt employee-multiple-fs.txt
+
+重点在于$0=$0这一条语句，这表示根据设置的分隔符将当前行内容重新赋值给$0
+</code></pre><p>当从标准输入获取输入内容时，<code>FILENAME</code>是<code>-</code></p>
+<blockquote>
+<p>注意：BEGIN Block中没有<code>FILENAME</code>变量，因为这时还没有开始处理文件</p>
+</blockquote>
+<h4 id="awk变量和运算符"><a href="#awk变量和运算符" class="headerlink" title="awk变量和运算符"></a>awk变量和运算符</h4><h5 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h5><p>awk变量名可以使用<code>字母</code> <code>数字</code> <code>下划线</code>；关键字不能作为awk变量名；awk的变量名也不需要任何特殊符号<br>可以使用awk的<code>-v</code>选项定义一个变量，比如：<code>awk -vname=&#39;hello&#39; &#39;BEGIN{print name}&#39;</code>；不需要显式的定义一个变量，awk会根据上下文未首次使用到的变量赋0或者空。在awk里没有数据类型，不管awk变量是一个数字或者字符串取决于该变量使用的上下文。</p>
+<p>如果想将shell中的变量传到awk中可以使用如下的形式：</p>
+<pre><code>awk -vHOSTNMAE=$HOSTNAME &apos;BEGIN{print HOSTNAME}&apos;
+awk &apos;BEGIN{print &quot;&apos;$HOSTNAME&apos;&quot;}&apos;
+
+第二种形式中，$HOSTNAME首先会被shell解释并做变量名扩展，扩展后的内容和前后的两个awk参数合起来构成一个参数，awk在解释这个参数的时候$HOSTNAME的值已经在双引号中了
+</code></pre><p><code>OFMT</code>变量 指定awk默认输出的浮点数格式<code>%.6gd</code> <code>g</code>为<code>printf</code>输出格式的一种表示选择<code>e</code>或者<code>f</code>中较短的形式  <code>d</code>表示十进制整数</p>
+<p><code>ARGC</code>和<code>ARGC</code>分别用来表示参数的个数和所有参数组成的数组：</p>
+<pre><code>awk &apos;BEGIN{for (i in ARGV)print ARGC,ARGV[i]}&apos; a b c
+</code></pre><p><code>IGNORECASE</code>设为非0的值，表示模式使用正则匹配时不区分大小写</p>
+<h5 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h5><ol>
+<li>单目运算符</li>
+</ol>
+<p>awk支持<code>+</code> <code>-</code> <code>++</code> <code>--</code>单目运算符</p>
+<pre><code>$ awk -F &apos;:&apos; &apos;$NF ~/\/bin\/bash/ { n++ }; END { print n }&apos; /etc/passwd      ##统计shell用户数量
+</code></pre><ol>
+<li>二元运算符</li>
+</ol>
+<p>awk支持<code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>%</code>二元运算符</p>
+<pre><code>$ awk &apos;NR % 2 == 0&apos; items.txt ##显示偶数的行
+</code></pre><ol>
+<li>赋值运算符</li>
+</ol>
+<p>awk支持<code>=</code> <code>+=</code> <code>-=</code> <code>*=</code> <code>/=</code> <code>%=</code>赋值运算符</p>
+<ol>
+<li>逻辑运算符</li>
+</ol>
+<p>awk支持<code>&gt;</code> <code>&lt;</code> <code>&gt;=</code> <code>&lt;=</code> <code>==</code> <code>!=</code> <code>&amp;&amp;</code> <code>||</code>逻辑运算符</p>
+<p>这些逻辑运算符可以用在行选取中</p>
+<ol>
+<li>正则表达式操作符</li>
+</ol>
+<p><code>~</code>和<code>!~</code>分别表示匹配和不匹配，正则表达式使用<code>/</code>包围</p>
+<p>正则表达式也可以用在行选取中</p>
+<ol>
+<li><p>三元操作符<code>? :</code></p>
+</li>
+<li><p>字符串连接操作符</p>
+</li>
+</ol>
+<p>awk中可以使用<code>空</code> <code>空字符串（&quot;&quot;）</code> <code>空格</code>来连接字符串，效果是一样的</p>
+<h4 id="条件和循环语句"><a href="#条件和循环语句" class="headerlink" title="条件和循环语句"></a>条件和循环语句</h4><p>同c语言，awk也支持条件和循环语句</p>
+<pre><code>if (conditional-expression)
+               action 
+
+if (conditional-expression){
+    action1;
+    action2;
+}
+
+if (conditional-expression)
+    action1
+else
+    action2
+
+
+while(condition)
+  actions
+
+do
+    action
+while(condition)
+
+for(initialization;condition;increment/decrement)
+    actions
+</code></pre><p>awk同样也支持<code>break</code>和<code>continue</code>用来控制循环</p>
+<p>awk另外还支持<code>exit</code>语句，它会立即停止脚本，开始执行END Block中的内容</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/bash/" rel="tag">#bash</a>
+          
+            <a href="/tags/awk/" rel="tag">#awk</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/13/Bash文档7-重定向-命令执行-脚本.html" rel="next" title="Bash文档7--重定向&命令执行&脚本">
+                <i class="fa fa-chevron-left"></i> Bash文档7--重定向&命令执行&脚本
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="lifayi2008" />
+          <p class="site-author-name" itemprop="name">lifayi2008</p>
+          <p class="site-description motion-element" itemprop="description">压力不是有人比你努力，而是比你牛逼的人依然比你努力</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#awk基本语法和命令"><span class="nav-number">1.</span> <span class="nav-text">awk基本语法和命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#awk命令语法"><span class="nav-number">1.1.</span> <span class="nav-text">awk命令语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#应用实例"><span class="nav-number">1.2.</span> <span class="nav-text">应用实例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#awk程序结构"><span class="nav-number">1.3.</span> <span class="nav-text">awk程序结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#打印命令"><span class="nav-number">1.4.</span> <span class="nav-text">打印命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#行选取"><span class="nav-number">1.5.</span> <span class="nav-text">行选取</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#awk内置变量"><span class="nav-number">2.</span> <span class="nav-text">awk内置变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#awk变量和运算符"><span class="nav-number">3.</span> <span class="nav-text">awk变量和运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#变量"><span class="nav-number">3.1.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#运算符"><span class="nav-number">3.2.</span> <span class="nav-text">运算符</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#条件和循环语句"><span class="nav-number">4.</span> <span class="nav-text">条件和循环语句</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lifayi2008</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
