@@ -92,7 +92,7 @@ awk -Fs &amp;apos;{action}&amp;apos; input-file">
 <meta property="og:site_name" content="lifayi2008">
 <meta property="og:description" content="awk基本语法和命令awk命令语法awk -Fs  &amp;apos;/pattern/ {action}&amp;apos; input-file
 awk -Fs &amp;apos;{action}&amp;apos; input-file">
-<meta property="og:updated_time" content="2016-09-14T10:45:02.000Z">
+<meta property="og:updated_time" content="2016-09-18T06:29:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="awk笔记">
 <meta name="twitter:description" content="awk基本语法和命令awk命令语法awk -Fs  &amp;apos;/pattern/ {action}&amp;apos; input-file
@@ -529,6 +529,72 @@ for(initialization;condition;increment/decrement)
     actions
 </code></pre><p>awk同样也支持<code>break</code>和<code>continue</code>用来控制循环</p>
 <p>awk另外还支持<code>exit</code>语句，它会立即停止脚本，开始执行END Block中的内容</p>
+<h4 id="awk数组"><a href="#awk数组" class="headerlink" title="awk数组"></a>awk数组</h4><p>awk数组和其他程序语言的数组相比较，awk 数组非常强大。在awk中，数组是关联的。即一个数组包含多个多个 由index/value组成的对，index不需要设置成一个数字，事实上可以是一个字符串或一个数字，不要指定一个数组的大小。awk自动为初次使用的数组元素分配空或者0，另外在awk4以后的版本中支持多维数组，可以任意进行第n个维度的遍历</p>
+<p>awk总是将索引看作是一个字符串，即使你使用数字也是一样的，所以<code>a[1]</code>和<code>a[&quot;1&quot;]</code>是同一个元素</p>
+<p>可以使用<code>if</code>语句检查一个索引是否存在于一个数组中：<code>if(index in arrayName)</code></p>
+<p>可以使用<code>for</code>语句来遍历一个数组：<code>for(var in arrayName)</code>，<code>var</code>会依次被使用数组中的所有索引赋值</p>
+<p>可以使用<code>delete arrayName[index]</code>来删除数组中的一个元素，或者使用<code>delete arrayName</code>来删除整个数组</p>
+<p>可以使用<code>asort(arrayName)</code>来排序数组元素值；awk将数组元素<code>value</code>进行排序并且生成新的<code>key</code>为<code>1~n</code>来覆盖原来的<code>key</code>；如果想保留原来的数组不变，可以使用另外一个参数来作为数组名生成一个新的数组；这个函数的返回值是数组元素的个数</p>
+<p>可以使用<code>asorti(arrayName)</code>来排序一个数组的<code>key</code>，排序之后数组的<code>key</code>为<code>1~n</code>原来的<code>key</code>变为现在的<code>value</code>；同样可以使用另外一个参数来作为新数组名，而让原来的数组不变</p>
+<blockquote>
+<p><code>asort</code> <code>asorti</code>还有第三个可选参数用来指示如何排序，详细内容参考awk手册</p>
+</blockquote>
+<h4 id="awk函数"><a href="#awk函数" class="headerlink" title="awk函数"></a>awk函数</h4><h5 id="字符串相关的函数"><a href="#字符串相关的函数" class="headerlink" title="字符串相关的函数"></a>字符串相关的函数</h5><p><strong><code>sub gsub gensub</code></strong><br>这些函数用来在记录或者目标字符串中查找匹配正则表达式的字符串，然后使用替换字符串替换这些匹配到的字符串；默认在当前记录中查找；正则表达式使用<code>/</code>包围</p>
+<p><code>sub(r, s [, t])</code>在目标字符串<code>t</code>或者当前记录中查找匹配正则表达式<code>r</code>的子串并且使用<code>s</code>来替换，只替换第一次匹配到的</p>
+<p><code>gsub(r, s [, t])</code>可以替换所有匹配到的子串，并且返回值为替换的次数</p>
+<p><code>gensub(r, s, h [, t])</code> <code>h</code>如果是以<code>G</code>或者<code>g</code>字符开头则替换所有匹配到的，否则替换第<code>h</code>个</p>
+<blockquote>
+<p><code>\\0</code>和<code>&amp;</code>可以被用在替换串中表示匹配到的字符串，如果替换串中出现<code>&amp;</code>要使用<code>\&amp;</code>的形式，可以在正则表达式中使用<code>()</code>，然后在替换串中使用<code>\\n</code>来引用</p>
+<p><code>gensub</code>不同于另外两个函数，<code>gensub</code>不会修改源字符串，只是将修改后的字符串返回；而另外两个函数则是修改源字符串</p>
+</blockquote>
+<p><strong><code>index</code></strong><br><code>index(s, t)</code> 返回字符串<code>t</code>在<code>s</code>中第一次出现的位置，偏移量从1开始</p>
+<p><strong><code>length</code></strong><br><code>length([s])</code> 返回字符串<code>s</code>的长度或者记录的长度</p>
+<p><strong><code>substr</code></strong><br><code>substr(s, l[, p])</code> 返回字符串<code>s</code>中从<code>l</code>开始的<code>p</code>长度的子串；如果<code>p</code>为空则返回到字符串末尾</p>
+<p><strong><code>match</code></strong><br><code>match(s, r [, a])</code> 返回正则表达式<code>r</code>在字符串<code>s</code>中出现的位置，如果没有出现则返回0；<code>match</code>函数会将内置变量<code>RSTART</code>设置为子串在字符串中的起始位置，将<code>RLENGTH</code>变量设置为匹配的子串长度，这样就可以使用这两个变量和<code>substr</code>函数来提取匹配的子串（弥补了<code>substr</code>不能使用正则的问题）；如果指定<code>a</code>参数则表示一个数组名，则awk会使用匹配到的子串来填充这个数组：<code>a[0]</code>表示正则<code>r</code>匹配到的整个子串，<code>a[1]</code>表示正则<code>r</code>中的第一个<code>()</code>表达式匹配到的子串，依次类推；同时每个元素还有另外两个子元素<code>a[n, &quot;start&quot;]</code> <code>a[n, &quot;length&quot;]</code>来表示每一个子串的起始位置和长度</p>
+<p><strong><code>split patsplit</code></strong><br><code>split(s, a [, r [, seps] ])</code> 将字符串<code>s</code>分隔，并将所有元素放入数组<code>a</code>，返回数组元素的个数；默认使用<code>FS</code>作为分隔符，如果指定<code>r</code>则使用其作为分隔符；如果指定第四个参数<code>seps</code>则表示一个数组名，这个数组的第<code>i</code>个元素是数组<code>a[i]</code>和<code>a[i+1]</code>之间的分隔符；如果使用空格作为分隔符，则所有前导和末尾的空格分别作为<code>seps[0]</code>和<code>spes[n]</code>的值，<code>n</code>表示<code>split</code>函数的返回值</p>
+<p><code>patsplit(s, a [, r [, seps] ])</code>同<code>split</code>但是在<code>r</code>为空时使用<code>FPAT</code>内置变量作为分隔符</p>
+<p><strong><code>sprintf</code></strong><br>用法同<code>printf</code>表达式，但这是一个函数；并且不会向终端打印字符串，而是返回这个字符串</p>
+<p><strong><code>strtonum</code></strong><br><code>strtonum(num)</code>将字符串转换为数字，如果字符串第一个字符非数字则返回0，否则将前缀中的数字字符串提取出来转换为数字；如果第一个字符是<code>0</code>或者<code>0x</code>则分别被当作8进制和十六进制进行转换</p>
+<p><strong><code>tolower toupper</code></strong><br>分别将字符串中的字母转换为小写或者大写，非字母字符不变</p>
+<h5 id="数值相关的函数"><a href="#数值相关的函数" class="headerlink" title="数值相关的函数"></a>数值相关的函数</h5><p><strong><code>int</code></strong><br><code>int(expr)</code> 将<code>expr</code>截断为整数</p>
+<p><strong><code>rand</code></strong><br><code>rand()</code>返回一个大于等于0，小于1的随机数</p>
+<p><strong><code>srand</code></strong><br><code>srand([expr])</code>为<code>rand()</code>函数产生一个随机数种子，默认使用当前时间，返回值为前一个随机数种子</p>
+<h5 id="时间相关的函数"><a href="#时间相关的函数" class="headerlink" title="时间相关的函数"></a>时间相关的函数</h5><p><strong><code>systime</code></strong><br><code>systime()</code>返回自<code>1970-01-01 00:00:00 UTC</code>以来的秒数</p>
+<p><strong><code>strftime</code></strong><br><code>strftime([format [, timestamp[, utc-flag]]])</code> 根据<code>format</code>提供的格式，将<code>timestamp</code>进行格式化处理，<code>utc-flag</code>如果非空则表示使用<code>UTC</code>时间，否则使用系统指定的时区</p>
+<pre><code>%a  简写的星期名   %A完整的星期名    %b简写的月名称  %B 完整的月份名称  %d用数字表示月份  %D使用月/日/年的形式
+%c本地日期和时间   %e月份中的某一天,如果只有一个数字用0填充    %H数字表示24小时的中小时   %I数字表示12小时中的小时
+%j从1月1日到现在的天数   %m数字表示的月份   %M数字表示的分钟数   %p12小时中的AM/PM  %S数字表示的秒数
+%U数字表示一年中的周数，周日作为一周的开始   %W数字表示一年中的周数，周一作为一周的开始     %w数字表示星期几 
+%x本地日期   %X本地时间    %y数字表示的年份    %Y完整的数字年份   %%  %字符标记
+</code></pre><h4 id="getline"><a href="#getline" class="headerlink" title="getline"></a>getline</h4><p>awk可以使用<code>getline</code>函数从<code>管道</code> <code>标准输入</code>或者<code>其他文件</code>读取输入<br><code>getline</code>函数用于读取输入的下一行，并且设置内置变量<code>NF</code> <code>NR</code> <code>FNR</code>如果读取到一条记录函数就返回1，如果读取到EOF则返回0，如果发生错误，比如文件不存在则返回-1</p>
+<p><code>getline</code> 会获取输入文件的下一行赋给<code>$0</code>，同时设置<code>NF</code> <code>NR</code> <code>FNR</code>变量</p>
+<p><code>getline &lt; filename</code> 表示从<code>filename</code>中获取下一行并赋给<code>$0</code>，同时设置<code>NF</code>变量</p>
+<p><code>getline var</code> 会获取输入文件的下一行并且赋值给<code>var</code>，同时设置<code>NR</code> <code>FNR</code>变量</p>
+<p><code>getline var &lt; filename</code> 表示从<code>filename</code>中获取下一行并且赋值给<code>var</code></p>
+<p><code>command | getline [var]</code>  将command命令的结果的第一行通过管道赋值给<code>$0</code>或者<code>var</code>；command是一个系统命令并且需要使用双引号，command命令显示结果通过管道发送，调用一次<code>getline</code>命令只能获取第一行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">awk BEGIN&#123;<span class="string">"date"</span> | getline a; <span class="built_in">print</span> a&#125;<span class="string">''</span>         <span class="comment">##从命令获取输入</span></span><br><span class="line">awk <span class="string">'BEGIN&#123;while("cal" | getline a) print a&#125;'</span>      <span class="comment">##从命令获取多行输入</span></span><br><span class="line">awk <span class="string">'BEGIN&#123;print "what is your name?";getline name &lt; "/dev/tty";print "you name is",name,"bye bye"&#125;'</span>      <span class="comment">##从标准输入获取输入</span></span><br><span class="line">awk <span class="string">'BEGIN&#123;while(getline &lt;"/etc/passwd" &gt; 0)count++;print count&#125;'</span>    <span class="comment">##统计文件的行数，注意这里一定要添加&gt;0，否则当/etc/passwd不存在时候，会进入死循环，因为此时getline返回-1  不为0</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="awk中的重定向和管道"><a href="#awk中的重定向和管道" class="headerlink" title="awk中的重定向和管道"></a>awk中的重定向和管道</h4><p>当使用<code>print</code>或者<code>printf</code>命令打印时可以使用<code>&gt;</code>或者<code>&gt;&gt;</code>重定向操作符将内容重定向到某个文件，文件名字使用双引号包围</p>
+<pre><code>awk &apos;{print $1 &gt; &quot;another.txt&quot;}&apos; test.txt 
+</code></pre><blockquote>
+<p>在文本中的所有行未处理完毕之前&gt;不会清空文件another.txt文件内容</p>
+</blockquote>
+<p>如果在awk中打开了管道，就必须先关闭它才能打开另一个管道(在整个文件处理过程中也只能使用一个管道)</p>
+<pre><code>awk &apos;{print $1,$2,$3 | &quot;sort -r +1 -2 +0 -1&quot;}END{close(&quot;sort -r +1 -2 +0 -1&quot;)}&apos;
+</code></pre><p>close(file [, how])<br>Close file, pipe or co-process. The optional how should only be used when closing one  end of a two-way pipe to a co-process. It must be a string value, either “to” or “from”.</p>
+<p>在重定向和管道以及<code>getline</code>中可以使用一系列的特殊文件名，通过这些文件名可以访问继承自父进程(通常是shell)打开的文件描述符，从而可以进行一些读写操作</p>
+<pre><code>/dev/stdin     The standard input.
+/dev/stdout     The standard output.
+/dev/stderr     The standard error output.
+/dev/fd/n     The file associated with the open file descriptor n.
+</code></pre><h4 id="awk其他使用技巧"><a href="#awk其他使用技巧" class="headerlink" title="awk其他使用技巧"></a>awk其他使用技巧</h4><p>在awk中执行系统命令：</p>
+<p><code>print ... | command</code> 将打印内容通过管道发送，<code>command</code>通过管道获取输入然后执行命令</p>
+<p><code>command | getline [var]</code> 在前面已经介绍过</p>
+<p><code>system(command)</code>函数将系统命令作为参数，执行这个命令并且将退出状态返回给awk</p>
+<blockquote>
+<p>上面三种情况的<code>command</code>都必须加双引号</p>
+</blockquote>
+<p><code>FIELDWIDTHS</code>变量可以指定每个字段为特定的字符数，如：awk -vFIELDWIDTHS=”1 2 9999”指定第一个字段为行中的第一个字符，第二个字段为接下来的2个字符第三个字段为接下来的9999个字符(因为linux行字符数的限制，这个基本上可以表示剩下的所有字符了)，注意如果实际行的字符数大于指定的字符数的和，则还会按照指定数字的字符显示，剩下的被舍弃，但是$0仍表示整行</p>
+<p><code>next/nextfile</code>命令读取文件的下一行/下一个文件，并从脚本的顶部开始执行</p>
+<p>可以在awk的<code>{action}</code>后面加一个1或者其他非0数字来让awk打印每一行(不管前面的action是否有打印命令)，注意1表示<code>1{print}</code>，其中<code>1</code>和<code>{print}</code>可以省略其中一个都表示同样的意思</p>
 
       
     </div>
@@ -681,7 +747,7 @@ for(initialization;condition;increment/decrement)
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#awk基本语法和命令"><span class="nav-number">1.</span> <span class="nav-text">awk基本语法和命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#awk命令语法"><span class="nav-number">1.1.</span> <span class="nav-text">awk命令语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#应用实例"><span class="nav-number">1.2.</span> <span class="nav-text">应用实例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#awk程序结构"><span class="nav-number">1.3.</span> <span class="nav-text">awk程序结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#打印命令"><span class="nav-number">1.4.</span> <span class="nav-text">打印命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#行选取"><span class="nav-number">1.5.</span> <span class="nav-text">行选取</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#awk内置变量"><span class="nav-number">2.</span> <span class="nav-text">awk内置变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#awk变量和运算符"><span class="nav-number">3.</span> <span class="nav-text">awk变量和运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#变量"><span class="nav-number">3.1.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#运算符"><span class="nav-number">3.2.</span> <span class="nav-text">运算符</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#条件和循环语句"><span class="nav-number">4.</span> <span class="nav-text">条件和循环语句</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#awk基本语法和命令"><span class="nav-number">1.</span> <span class="nav-text">awk基本语法和命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#awk命令语法"><span class="nav-number">1.1.</span> <span class="nav-text">awk命令语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#应用实例"><span class="nav-number">1.2.</span> <span class="nav-text">应用实例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#awk程序结构"><span class="nav-number">1.3.</span> <span class="nav-text">awk程序结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#打印命令"><span class="nav-number">1.4.</span> <span class="nav-text">打印命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#行选取"><span class="nav-number">1.5.</span> <span class="nav-text">行选取</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#awk内置变量"><span class="nav-number">2.</span> <span class="nav-text">awk内置变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#awk变量和运算符"><span class="nav-number">3.</span> <span class="nav-text">awk变量和运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#变量"><span class="nav-number">3.1.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#运算符"><span class="nav-number">3.2.</span> <span class="nav-text">运算符</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#条件和循环语句"><span class="nav-number">4.</span> <span class="nav-text">条件和循环语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#awk数组"><span class="nav-number">5.</span> <span class="nav-text">awk数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#awk函数"><span class="nav-number">6.</span> <span class="nav-text">awk函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#字符串相关的函数"><span class="nav-number">6.1.</span> <span class="nav-text">字符串相关的函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数值相关的函数"><span class="nav-number">6.2.</span> <span class="nav-text">数值相关的函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#时间相关的函数"><span class="nav-number">6.3.</span> <span class="nav-text">时间相关的函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getline"><span class="nav-number">7.</span> <span class="nav-text">getline</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#awk中的重定向和管道"><span class="nav-number">8.</span> <span class="nav-text">awk中的重定向和管道</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#awk其他使用技巧"><span class="nav-number">9.</span> <span class="nav-text">awk其他使用技巧</span></a></li></ol></div>
             
           </div>
         </section>
