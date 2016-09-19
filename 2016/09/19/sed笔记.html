@@ -1,0 +1,769 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="bash,sed," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="sed基本语法和命令示例文本：1234567cat employee.txt101,John Doe, CEO102,Jason Smith,IT Manager103,Raj Reddy,Sysadmin104,Anand Ram,Developer105,Jane Miller,Sales Manager">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sed笔记">
+<meta property="og:url" content="http://blog.yoopig.com/2016/09/19/sed笔记.html">
+<meta property="og:site_name" content="lifayi2008">
+<meta property="og:description" content="sed基本语法和命令示例文本：1234567cat employee.txt101,John Doe, CEO102,Jason Smith,IT Manager103,Raj Reddy,Sysadmin104,Anand Ram,Developer105,Jane Miller,Sales Manager">
+<meta property="og:updated_time" content="2016-09-19T09:46:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sed笔记">
+<meta name="twitter:description" content="sed基本语法和命令示例文本：1234567cat employee.txt101,John Doe, CEO102,Jason Smith,IT Manager103,Raj Reddy,Sysadmin104,Anand Ram,Developer105,Jane Miller,Sales Manager">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://blog.yoopig.com/2016/09/19/sed笔记.html"/>
+
+  <title> sed笔记 | lifayi2008 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">lifayi2008</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">压力不是有人比你努力，而是比你牛逼的人依然比你努力</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                sed笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-19T17:44:05+08:00" content="2016-09-19">
+              2016-09-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Bash/" itemprop="url" rel="index">
+                    <span itemprop="name">Bash</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="sed基本语法和命令"><a href="#sed基本语法和命令" class="headerlink" title="sed基本语法和命令"></a>sed基本语法和命令</h4><p>示例文本：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cat employee.txt</span><br><span class="line"></span><br><span class="line">101,John Doe, CEO</span><br><span class="line">102,Jason Smith,IT Manager</span><br><span class="line">103,Raj Reddy,Sysadmin</span><br><span class="line">104,Anand Ram,Developer</span><br><span class="line">105,Jane Miller,Sales Manager</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p><strong>1.sed命令语法</strong></p>
+<pre><code>sed [options] {sed-commands} {input-file}
+</code></pre><p>sed一次从<code>input-file</code>读入一行数据，然后将<code>sed-commands</code>作用于这行数据，然后再读入一行，重复这样的过程直到文件结尾</p>
+<p>可选的<code>options</code>用于指定一个选项</p>
+<p><code>input-file</code>可以是一个普通文件，也可以是管道</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sed -n <span class="string">'p'</span> /etc/passwd</span><br><span class="line"><span class="comment">##打印/etc/passwd文件所有行</span></span><br><span class="line"></span><br><span class="line">p表示sed-commands，这样的命令可以同时有一个或者多个</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sed -n <span class="_">-f</span> <span class="built_in">test</span>-script.sed /etc/passwd </span><br><span class="line"><span class="comment">##打印以root开始或者以nobody开始的行</span></span><br><span class="line"></span><br><span class="line"><span class="_">-f</span> 指定一个sed命令的脚本文件</span><br><span class="line"></span><br><span class="line">cat <span class="built_in">test</span>-script.sed</span><br><span class="line">/^root/ p</span><br><span class="line">/^nobody/ p</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：这里在一个文件中包含了多个sed命令，多条命令将依次作用于输入的行</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">sed -n <span class="_">-e</span> <span class="string">'/^root/ p'</span> <span class="_">-e</span> <span class="string">'/^nobody/ p'</span> /etc/passwd</span><br><span class="line"><span class="comment">##打印/etc/passwd文件以root和nobody开头的行</span></span><br><span class="line"></span><br><span class="line">也可以下面这样，当命令很长的时候分成多行。</span><br><span class="line">sed -n \</span><br><span class="line"> <span class="_">-e</span> <span class="string">'/^root/ p'</span> \</span><br><span class="line"> <span class="_">-e</span> <span class="string">'/^nobody/ p'</span> \</span><br><span class="line">  /etc/passwd</span><br><span class="line">  </span><br><span class="line">还可以使用<span class="string">'&#123;&#125;'</span></span><br><span class="line"></span><br><span class="line">sed -n  <span class="string">'&#123;</span><br><span class="line"> /^root/ p</span><br><span class="line"> /^nobody/ p</span><br><span class="line">&#125;'</span> /etc/passwd</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>sed 不会修改原文件，总是打印输出到标准输出，如果想保存改变请用输出重定向。</p>
+<p>使用多个命令处理同一行数据时，可以使用<code>/patten/{command;command}</code>的形式控制只有特定的行才会应用相关的命令；<strong><code>/pattern/</code>后面可以使用<code>!</code>来表示取反的操作</strong> ，即对不匹配的行执行操作</p>
+</blockquote>
+<p><strong>2. sed脚本流</strong></p>
+<p>sed脚本按照<code>read</code>，<code>execution</code>，<code>print</code>，<code>repeat</code>顺序来执行</p>
+<p><strong><code>read</code></strong>：读一行数据到模式空间(一个存放读入数据的内部临时缓冲区)</p>
+<p><strong><code>execution</code></strong>：对模式空间中的一行数据执行命令，如果有多个命令，则按照顺序依次执行</p>
+<p><strong><code>print</code></strong>：打印模式空间中的一行数据，清空模式空间(-n参数可以关闭默认的打印)</p>
+<p><strong><code>repeat</code></strong>：重复执行上面的三个步骤，直到文件结尾</p>
+<p><strong>3. 打印模式空间</strong></p>
+<blockquote>
+<p>注意：p表示的打印是在sed脚本流中的第二个步骤(<code>execute</code>)中执行的，与第三个步骤的<code>print</code>不同</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(1)sed <span class="string">'p'</span> employee.txt <span class="comment">##打印每一行两次</span></span><br><span class="line">(2)sed -n <span class="string">'p'</span> employee.txt <span class="comment">##打印每行一次，类似cat</span></span><br><span class="line">(3)sed -n <span class="string">'2 p'</span> employee.txt <span class="comment">##打印第二行</span></span><br><span class="line">(4)sed -n <span class="string">'1,4 p'</span> employee.txt <span class="comment">## 打印1到4行</span></span><br><span class="line">(5)sed -n <span class="string">'2,$ p'</span> employee.txt <span class="comment">##打印第二行到最后一行</span></span><br><span class="line">(6)sed -n <span class="string">'1~2 p'</span> employee.txt</span><br><span class="line">(7) sed -n <span class="string">'/Jane/ p'</span> employee.txt <span class="comment">##打印每一个匹配Jane的行</span></span><br><span class="line">(8)sed -n <span class="string">'/Jason/,4 p'</span> employee.txt<span class="comment">##打印第一个匹配Jason开始的行到第四行，如果第四行之后又出现Jason那再打印那一行</span></span><br><span class="line">(9)sed -n <span class="string">'/Raj/,$ p'</span> employee.txt <span class="comment">##打印第一个匹配Raj开始到最后一行</span></span><br><span class="line">(10)sed -n <span class="string">'/Raj/,/Jane/ p'</span> employee.txt <span class="comment">##打印匹配Raj开始到第一个匹配Jane那行，如果没有匹配Jane那一行则打印到行末，如果出现Raj和Jane后又一次出现Raj那同样匹配打印</span></span><br><span class="line">(11)sed -n <span class="string">'/Jason/,+2 p'</span> employee.txt <span class="comment">##打印匹配Jason的行和之后的2行，如果两行之后又匹配到Jason后，同样打印</span></span><br></pre></td></tr></table></figure>
+<p><strong><code>,</code></strong> 范围 n,m n到m行</p>
+<p><strong><code>+</code></strong> 联合 n,+m n行到 n+m</p>
+<p><strong><code>~</code></strong> 间隔，1~n，表示匹配1，1+n, 1+n+n行</p>
+<p><strong><code>//</code></strong> 正则匹配</p>
+<blockquote>
+<p>可以混合使用数字和正则</p>
+<p>当指定两个地址(或regexp)来指定一个范围时检查的规则是这样的：一次检查每一行看是否匹配地址1(没有匹配到不会检查地址2)，如果有匹配到地址1则从下一行开始检查地址2，直到第一个匹配到地址2(这期间会忽略地址1)；循环这样的过程</p>
+</blockquote>
+<p>匹配模式中可以使用shell传过来的变量：</p>
+<pre><code>a=test; sed -n &apos;/&apos;$a&apos;/,$p&apos; test.txt
+sed -n &apos;/&apos;&quot;$a&quot;&apos;/,$p&apos; test.txt
+</code></pre><p><strong>4. 删除行(d command)</strong></p>
+<p>删除当前模式空间的内容，然后开始下一次脚本流(跳过了<code>print</code>)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">(1)sed <span class="string">'d'</span> employee.txt <span class="comment">##删除所有行</span></span><br><span class="line"> (2)sed <span class="string">'2 d'</span> employee.txt <span class="comment">##删除第二行</span></span><br><span class="line"> (3)sed <span class="string">'1,4 d'</span> employee.txt <span class="comment">##删除1到4行</span></span><br><span class="line"> (4)sed <span class="string">'2,$ d'</span> employee.txt <span class="comment">##删除第二行到最后一行</span></span><br><span class="line"> (5)sed <span class="string">'1~2 d'</span> employee.txt <span class="comment">##删除奇数的行</span></span><br><span class="line"> (6)sed <span class="string">'/Manager/ d'</span> employee.txt<span class="comment">##删除匹配Manager的行</span></span><br><span class="line"> (7)sed <span class="string">'/Jason/,4 d'</span> employee.txt<span class="comment">##删除匹配Jason开始到第四行</span></span><br><span class="line"> (8)sed <span class="string">'/Raj/,$ d'</span> employee.txt<span class="comment">##删除匹配Raj开始到最后一行</span></span><br><span class="line"> (9)sed <span class="string">'/Raj/,/Jane/ d'</span> employee.txt<span class="comment">##删除匹配开始Raj到匹配Jane的行</span></span><br><span class="line"> (10)sed <span class="string">'/Jason/,+2 d'</span> employee.txt<span class="comment">##删除匹配Jason开始的行和后面2行</span></span><br><span class="line"> (11)sed <span class="string">'/^$/ d'</span> employee.txt<span class="comment">##删除所有空行</span></span><br><span class="line"> (12)sed <span class="string">'/^#/ d'</span> employee.txt<span class="comment">##删除以# 开始的行</span></span><br></pre></td></tr></table></figure>
+<p><strong>5. 写入到一文件(w command)</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(1)sed <span class="string">'w output.txt'</span> employee.txt<span class="comment">##把employee.txt文件写入到output.txt文件然后再屏幕显示</span></span><br><span class="line">(2)sed -n <span class="string">'w output.txt'</span> employee.txt <span class="comment">##和(1)一样，不显示在屏幕。</span></span><br><span class="line">(3)sed -n <span class="string">'2 w output.txt'</span> employee.txt<span class="comment">##仅把第二行写入到output.txt文件</span></span><br><span class="line">(4)sed -n <span class="string">'1,4 w output.txt'</span> employee.txt<span class="comment">##把1到4行学如到output.txt文件</span></span><br><span class="line">(5)sed -n <span class="string">'2,$ w output.txt'</span> employee.txt<span class="comment">##把第二行到最后一行写入到output.txt文件</span></span><br><span class="line">(6)sed -n <span class="string">'1~2 w output.txt'</span> employee.txt<span class="comment">##把奇数行写入到output.txt文件</span></span><br><span class="line">(7)sed -n <span class="string">'/Jane/ w output.txt'</span> employee.txt<span class="comment">##把匹配Jane的行写入到output.txt文件</span></span><br><span class="line">(8)sed -n <span class="string">'/Jason/,4 w output.txt'</span> employee.txt<span class="comment">##匹配Jason开始到第四行写入到output.txt文件</span></span><br><span class="line">(9)sed -n <span class="string">'/Raj/,$ w output.txt'</span> employee.txt<span class="comment">##匹配Raj开始到最后一行写入到output.txt文件</span></span><br><span class="line">(10)sed -n <span class="string">'/Raj/,/Jane/ w output.txt'</span> employee.txt<span class="comment">##匹配Raj开始到匹配Jane那行写入到output.txt文件</span></span><br><span class="line">(11)sed -n <span class="string">'/Jason/,+2 w output.txt'</span> employee.txt<span class="comment">##匹配Jason开始那行后面2行写入到output.txt文件</span></span><br></pre></td></tr></table></figure>
+<h4 id="替换命令"><a href="#替换命令" class="headerlink" title="替换命令"></a>替换命令</h4><p><strong>1. sed替换命令语法</strong></p>
+<pre><code>sed &apos;[address-range|pattern-range] s/original-string/replacement-string/[substitute-flags]&apos; inputfile
+</code></pre><p><code>address</code>和<code>pattern</code>是可选的，如果不指定范围，则对所有行执行替换命令</p>
+<p><code>s</code>命令告诉sed执行替换操作</p>
+<p><code>original-string</code>表示从输入的行中查找的字符串，可以是一个正则表达式</p>
+<p><code>rep-string</code>将会替换掉<code>original-string</code>，<code>rep-string</code>也可以是shell中的变量，例如<code>&quot;$var&quot;</code> <code>${var}</code></p>
+<p><code>flags</code>也是可选的，注意和上节的命令有一部分是相同的，<code>flags</code>需要配合替换命令组合使用，而上节中的命令单独使用</p>
+<p>如果不指定<code>-i</code>参数的话，替换只会发生在模式空间，然后通过<code>print</code>表现出来，源文件不变</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(1)sed <span class="string">'s/Manager/Director/'</span> employee.txt<span class="comment">##把所有出现的Manager替换成Director</span></span><br><span class="line">(2)sed <span class="string">'/Sales/s/Manager/Director/'</span> employee.txt<span class="comment">##包含Sales关键字的行做替换</span></span><br></pre></td></tr></table></figure>
+<p><strong>2. 全局标志(g flag)</strong></p>
+<p>默认只会替换每一行第一次出现的，如果每一行所有出现都做替换使用<code>g</code> flag</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(1)sed <span class="string">'s/a/A/'</span> employee.txt<span class="comment">##每一行第一次出现的a替换A</span></span><br><span class="line">(2)sed <span class="string">'s/a/A/g'</span> employee.txt<span class="comment">##每一行出现做全局替换</span></span><br></pre></td></tr></table></figure>
+<p><strong>3. 数字标志(1,2,3..flag)</strong></p>
+<p>指定第几个出现的做替换<code>1-512</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(1)sed <span class="string">'s/a/A/2'</span> employee.txt <span class="comment">##每一行第二个出现a做替换</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>sed &#39;s/a/A/2g&#39;</code>  ##每一行的第二个到最后一个做替换</p>
+</blockquote>
+<p><strong>4. 打印标志(p flag)</strong></p>
+<p>打印替换成功的行，更多与<code>-n</code>组合使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(1)sed -n <span class="string">'s/John/Johnny/w output.txt'</span> employee.txt<span class="comment">##把替换成功的行写入到output.txt文件</span></span><br><span class="line">(2)sed -n <span class="string">'s/locate/find/2w output.txt'</span> employee.txt<span class="comment">##每行第二次出现的locate替换成find，并把成功的行写入到output.txt文件里。</span></span><br></pre></td></tr></table></figure>
+<p><strong>5. 写入标志(w flag)</strong></p>
+<p>替换成功的行写入到一个文件里。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(1)sed -n <span class="string">'s/John/Johnny/w output.txt'</span> employee.txt<span class="comment">##把替换成功的行写入到output.txt文件</span></span><br><span class="line">(2)sed -n <span class="string">'s/locate/find/2w output.txt'</span> employee.txt<span class="comment">##每行第二次出现的locate替换成find，并把成功的行写入到output.txt文件里。</span></span><br></pre></td></tr></table></figure>
+<p><strong>6. 忽略大小写(i flag)</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(1)sed <span class="string">'s/john/Johnny/'</span> employee.txt<span class="comment">##没有任何匹配可以替换，打印出所有行。</span></span><br><span class="line">(2)sed <span class="string">'s/john/Johnny/i'</span> employee.txt<span class="comment">##忽略大小写，john替换为Johnny</span></span><br></pre></td></tr></table></figure>
+<p><strong>7. 执行标志(e flag)</strong></p>
+<p>执行匹配替换之后任何shell命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat files.txt</span><br><span class="line">/etc/passwd</span><br><span class="line">/etc/group</span><br><span class="line">(1)sed  <span class="string">'s/^/ls -l /'</span> files.txt<span class="comment">## 在每一行开头加入 "ls -l "</span></span><br><span class="line">(2)sed  <span class="string">'s/^/ls -l /e'</span> files.txt<span class="comment">##执行每一行 ls -l 命令</span></span><br></pre></td></tr></table></figure>
+<p>以上标志只要有意义就可以组合在一起使用：</p>
+<pre><code>sed -n &apos;s/Manager/Directory/gipw output.txt&apos; employee.txt##组合g,i,p,w四种flag
+</code></pre><p><strong>8. sed替换定界符</strong></p>
+<p>当<code>&#39;s///&#39;</code>模式中有<code>/</code>需要用<code>\</code>进行转义。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat path.txt</span><br><span class="line">reading /usr/<span class="built_in">local</span>/bin directory</span><br><span class="line"></span><br><span class="line">sed <span class="string">'s/\/usr\/local\/bin/\/usr\/bin/'</span> path.txt<span class="comment">##把/usr/local/bin替换成/usr/bin</span></span><br></pre></td></tr></table></figure>
+<p>这样容易造成混乱，可以使用其他符号代替<code>/</code>，例如这样的模式：s|||,s^^^,s@@@等等</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sed <span class="string">'s|/usr/local/bin|/usr/bin|'</span> path.txt</span><br><span class="line">sed <span class="string">'s^/usr/local/bin^/usr/bin^'</span> path.txt</span><br><span class="line">sed <span class="string">'s@/usr/local/bin@/usr/bin@'</span> path.txt</span><br><span class="line">sed <span class="string">'s!/usr/local/bin!/usr/bin!'</span> path.txt</span><br></pre></td></tr></table></figure>
+<p><strong>9. 多个替换命令影响同一行</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(1)sed <span class="string">'&#123;</span><br><span class="line">s/Developer/IT Manager/</span><br><span class="line">s/Manager/Director/</span><br><span class="line">&#125;'</span> employee.txt  <span class="comment">##把Developer替换为IT Manager然后再把Manager替换成Directory</span></span><br></pre></td></tr></table></figure>
+<p><strong>10. &amp; (取得匹配的样式)</strong></p>
+<p>经常用来字符替换，用来代替原来字符串或者正则表达式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(1)sed <span class="string">'s/^[0-9][0-9][0-9]/[&amp;]/g'</span> employee.txt<span class="comment">##把所有的雇员id都用"[]"括起来。</span></span><br><span class="line">(2)sed <span class="string">'s/^.*/&lt;&amp;&gt;/'</span> employee.txt<span class="comment">##把整行用&lt;&gt;括起来</span></span><br></pre></td></tr></table></figure>
+<p><strong>11. 分组代替</strong></p>
+<p>分组像一个正则表达式，一个组的格式像这样：<code>\(..\)</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(1)sed <span class="string">'s/\([^,]*\).*/\1/g'</span> employee.txt</span><br><span class="line"><span class="comment">## 正则表达式\([^,]*\)匹配字符串到第一个逗号。</span></span><br><span class="line"><span class="comment">## \1 取代第一个匹配的组。</span></span><br><span class="line">    </span><br><span class="line">(2)sed <span class="string">'s/\([^:]*\).*/\1/'</span> /etc/passwd <span class="comment">##显示第一个区域/etc/passwd的用户名</span></span><br><span class="line">(3)<span class="built_in">echo</span> <span class="string">"The Geek Stuff"</span> | sed <span class="string">'s/\(\b[A-Z]\)/\(\1\)/g'</span> <span class="comment">##每一个单词的第一个字母加入一个()</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>分组的范围是<code>1-9</code></p>
+</blockquote>
+<p><strong>12. sed execution</strong></p>
+<p>sed作为解释程序:<code>#!/bin/sed -f</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cat mycript.sed</span><br><span class="line"></span><br><span class="line"><span class="comment">#!/bin/sed -f</span></span><br><span class="line">s/\([^,]*\),\([^,]*\),\(.*\).*/\2,\1,\3/g </span><br><span class="line">s/^.*/&lt;&amp;&gt;/  </span><br><span class="line">s/Developer/IT Manager/ </span><br><span class="line">s/Manager/Director/</span><br><span class="line"></span><br><span class="line">chmod u+x myscript.sed</span><br><span class="line">./myscript.sed employee.txt</span><br></pre></td></tr></table></figure>
+<p>不管是使用解释器程序，还是使用sed -f sedfile的形式，文件中都可以出现#开头的注释</p>
+<blockquote>
+<p>在sed解释程序里，可以使用sed -nf 但是不能调换成 -fn 会出现错误</p>
+</blockquote>
+<h4 id="其他sed命令"><a href="#其他sed命令" class="headerlink" title="其他sed命令"></a>其他sed命令</h4><p><strong>1. 加入新行(a command)行后</strong></p>
+<pre><code>sed &apos;[address] a the-line-to-append&apos; input-file
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(1)sed <span class="string">'2 a 203,Jack Johnson,Engineer'</span> employee.txt<span class="comment">##在第二行后加入一个新记录</span></span><br><span class="line">(2)sed <span class="string">'$ a 106,Jack Johnson,Engineer'</span> employee.txt<span class="comment">##在尾行加入一个新记录</span></span><br><span class="line">加入多行记录</span><br><span class="line">(3)sed <span class="string">'/Jason/a \</span><br><span class="line">203,Jack Johnson,Engineer\</span><br><span class="line">204,Mark Smith,sales Engineer'</span> employee.txt <span class="comment">##匹配Jason的行后加入2行记录</span></span><br></pre></td></tr></table></figure>
+<p><strong>2. 插入新行(i command)行前</strong></p>
+<pre><code>sed &apos;[address] i the-line-to-insert&apos; input-file
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(1)sed <span class="string">'2 i 203,Jack Johnson,Engineer'</span> employee.txt <span class="comment">##在第二行前插入一个新记录</span></span><br><span class="line">(2)sed <span class="string">'$ i 108,Jack Johnson,Engineer'</span> employee.txt <span class="comment">##在行尾前插入一个新记录</span></span><br><span class="line">也可以插入多行记录</span><br><span class="line">(3)sed <span class="string">'/Jason/i \</span><br><span class="line">203,Jack Johnson,Engineer\</span><br><span class="line">204,Mark Smith,sales Engineer'</span> employee.txt<span class="comment">##匹配Jason的行前插入2个记录</span></span><br></pre></td></tr></table></figure>
+<p><strong>3. 改变行 (c command)</strong></p>
+<pre><code>sed &apos;[address] c the-line-to-insert&apos; input-file
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(1)sed <span class="string">'2 c 202,Jack Johnson,Engineer'</span> employee.txt<span class="comment">##删除第二行内容用新内容替换</span></span><br><span class="line">(2)sed <span class="string">'/Raj/c\</span><br><span class="line">203,Jack Johnson,Engineer\</span><br><span class="line">204,Mark Smith Sales Engineer'</span> employee.txt <span class="comment">##匹配Raj的行删除用新记录代替</span></span><br></pre></td></tr></table></figure>
+<p><strong>4. 变形(y command)</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(1)sed <span class="string">'y/abcde/ABCDE/'</span> employee.txt <span class="comment">##把a变换成A，b变换成B，c变换成C等等。</span></span><br><span class="line">(2)sed <span class="string">'y/abcdefghijklmnopqrstuvwxyz/ABCDEFGHIJKLMNOPQRSTUVWXYZ/'</span> employee.txt<span class="comment">##小写字母全部变为大写</span></span><br></pre></td></tr></table></figure>
+<p><strong>5. 退出sed (q command)</strong></p>
+<p>sed普通流程 读，执行，打印，重复 q命令可以终止执行命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(1)sed <span class="string">'q'</span> employee.txt <span class="comment">##仅打印第一行内容，打印一行的内容就退出</span></span><br><span class="line">(2)sed <span class="string">'5 q'</span> employee.txt<span class="comment">##在第5行后退出，所以打印前5行</span></span><br><span class="line">(3)sed <span class="string">'/Manager/q'</span> employee.txt<span class="comment">##打印所有行直到关键字为Manager那行退出</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>q 命令不能使用地址范围，只能用单一地址或者单一匹配，另外如果没有指定-n选项则q之前会打印模式空间的内容</p>
+</blockquote>
+<p><strong>6. 从文件读入(r command)</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(1)sed <span class="string">'$ r log.txt'</span> employee.txt<span class="comment">##在行尾读入文件</span></span><br><span class="line">(2)sed <span class="string">'/Raj/ r log.txt'</span> employee.txt<span class="comment">##在关键字Raj后插入文件</span></span><br></pre></td></tr></table></figure>
+<p><strong>7. (n command)打印模式空间内容并且从输入文件中读取下一行</strong></p>
+<p>这可以改变sed流的执行，比如在<code>n</code>命令之前和之后都有其他命令，则执行<code>n</code>命令之后会导致现在处理的这一行不会应用<code>n</code>命令之后的命令，而下一行内容不会应用n命令之前的命令</p>
+<blockquote>
+<p>如果指定<code>-n</code>选项的话，<code>n</code>命令也不会打印</p>
+</blockquote>
+<p>还有其他的比如：<code>|</code>可以打印文本中的隐藏字符；<code>=</code>可以打印出行号</p>
+<p>sed命令一些选项:</p>
+<p><strong><code>-n(--quiet,--slient)</code></strong> 禁止默认的打印<br><strong><code>-f(--file)</code></strong> 指定一个sed命令文件<br><strong><code>-e(--expression)</code></strong> 执行sed命令表达式<br><strong><code>-i(--in-place)</code></strong> 直接修改文件内容<br><strong><code>-c(--copy)</code></strong> 和<code>-i</code>选项连用 保持所有者权限<br><strong><code>-l(--line-length)</code></strong> 和<code>l</code>命令连用指定行长度   </p>
+<h4 id="sed多行处理，保留空间和循环"><a href="#sed多行处理，保留空间和循环" class="headerlink" title="sed多行处理，保留空间和循环"></a>sed多行处理，保留空间和循环</h4><p>首先，应该明白模式空间的定义。模式空间就是读入行所在的缓存，sed对文本行进行的处理都是在这个缓存中进行的</p>
+<p>在正常情况下，sed将待处理的行读入模式空间，脚本中的命令就一条接着一条的对该行进行处理，直到脚本执行完毕，然后该行被输出，模式空间清空；然后重复刚才的动作，文件中的新的一行被读入，直到文件处理完毕</p>
+<p>但是，各种各样的原因，比如用户希望在某个条件下脚本中的某个命令被执行，或者希望模式空间得到保留以便下一次的处理，都有可能使得sed在处理文件的时候不按照正常的流程来进行。这个时候，sed设置了一些高级命令来满足用户的要求</p>
+<p>总的来说，这些命令可以划分为以下三类：</p>
+<ol>
+<li><code>N</code> <code>D</code> <code>P</code>：处理多行模式空间的问题</li>
+<li><code>H</code> <code>h</code> <code>G</code> <code>g</code> <code>x</code>：将模式空间的内容放入存储空间以便接下来的编辑</li>
+<li><code>:</code> <code>b</code> <code>t</code>：在脚本中实现分支与条件结构</li>
+</ol>
+<h5 id="多行模式空间的处理"><a href="#多行模式空间的处理" class="headerlink" title="多行模式空间的处理"></a>多行模式空间的处理</h5><p>由于正则表达式是面向行的，因此，如若某个词组一部分位于某行的结尾，另外一部分又在下一行的开始，这个时候用<code>grep</code>等命令来处理就相当的困难。然而，借助于sed的多行命令<code>N</code>、<code>D</code>、<code>P</code>，却可以轻易地完成这个任务</p>
+<p><strong><code>N和n命令</code></strong></p>
+<p>多行<code>Next(N)</code>命令是相对于<code>next(n)</code>命令的，后者将模式空间中的内容输出，然后把下一行读入模式空间，脚本从当前的n 命令之后开始执行；而前者则保存原来模式空间中的内容，再把新的一行读入，两者之间依靠一个换行符”\n”来分隔。在N命令执行后，和<code>n</code>一样，控制流将继续用<code>N</code>命令以后的命令对模式空间进行处理</p>
+<blockquote>
+<p>注意：在多行模式中，特殊字符”^”和”$”匹配的是模式空间的最开始与最末尾，而不是内嵌”\n”的开始与末尾。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cat expl.1</span><br><span class="line">Consult Section 3.1 <span class="keyword">in</span> the Owner and Operator</span><br><span class="line">Guide <span class="keyword">for</span> a description of the tape drives</span><br><span class="line">available on your system</span><br><span class="line"></span><br><span class="line">现在要将<span class="string">"Owner and Operator Guide"</span>替换为<span class="string">"Installation Guide"</span></span><br><span class="line"></span><br><span class="line">sed <span class="string">'/Operator$/&#123;N;s/Owner and Operator\nGuide/Installation Guide &#125;'</span> expl.1</span><br></pre></td></tr></table></figure>
+<p>在上面的例子中要注意的是，行与行之间存在内嵌的换行符；另外在用于替代的内容中要插入换行符的话，要用如上的<code>\</code>的转义</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">cat expl.2</span><br><span class="line">Consult Section 3.1 <span class="keyword">in</span> the Owner and Operator</span><br><span class="line">Guide <span class="keyword">for</span> a description of the tape drives</span><br><span class="line">available on your system.</span><br><span class="line">Look <span class="keyword">in</span> the Owner and Operator Guide shipped with your system.</span><br><span class="line">Two manuals are provided including the Owner and</span><br><span class="line">Operator Guide and the User Guide.</span><br><span class="line">The Owner and Operator Guide is shipped with your system.</span><br><span class="line"></span><br><span class="line">sed <span class="string">'s/Owner and Operator Guide/Installation Guide/;/Owner/&#123;N;s/*\n/ /;s/Owner and Operator Guide */Installation Guide\/&#125;'</span> expl.2</span><br><span class="line"></span><br><span class="line">结果得到：</span><br><span class="line">Consult Section 3.1 <span class="keyword">in</span> the Installation Guide</span><br><span class="line"><span class="keyword">for</span> a description of the tape drives</span><br><span class="line">available on your system.</span><br><span class="line">Look <span class="keyword">in</span> the Installation Guide shipped with your system.</span><br><span class="line">Two manuals are provided including the Installation Guide</span><br><span class="line">and the User Guide.</span><br><span class="line">The Installation Guide is shipped with your system.</span><br></pre></td></tr></table></figure>
+<p>看上去sed命令中作了两次替换是多余的。实际上，如果去掉第一次替换，再运行脚本，就会发现输出存在两个问题。一个是结果中最后一行不会被替换(在某些版本的sed中甚至不会被输出)。这是因为最后一行匹配了<code>Owner</code>,执行<code>N</code>命令，但是已经到了文件末尾，某些版本就会直接打印这行再退出，而另外一些版本则是不作出打印立即退出。对于这个问题可以通过命令 <strong><code>$!N</code></strong> 来解决。这表示<code>N</code>命令对最后一行不起作用。另外一个问题是”look manuals”一段被拆为两行，而且与下一段的空行被删除了。这是因为内嵌的换行符被替换的结果。因此，sed中做两次替换一点也不是多余的。</p>
+<p><strong><code>d和D命令</code></strong></p>
+<p>命令<code>d</code>作用是删除模式空间的内容，然后读入新的行，sed脚本从头再次开始执行。而命令<code>D</code>的不同之处在于它删除的是直到第一个内嵌换行符为止的模式空间的一部分，但是不会读入新的行，脚本将回到开始对剩下内容进行处理</p>
+<p><strong><code>p和P命令</code></strong></p>
+<p>sed对文件中每一行(不管处理与否)的默认动作是将其输出，如果加上选项<code>-n</code>，则输出动作会被抑制，这时还希望输出就需要打印命令。<code>P</code>命令打印的是模式空间中直到第一个内嵌换行符为止的一部分；<code>p</code>命令则打印整个模式空间中的内容</p>
+<p><code>P</code>命令通常出现在<code>N</code>命令之后<code>D</code>命令之前，由此构成一个输入输出循环。在这种情况下，模式空间中始终存在两行文本，而输出始终是一行文本。使用这种循环的目的在于输出模式空间中的第一行，然后脚本回到起始处，再对空间中的第二行进行处理。设想一下，如果没有这个循环，当脚本执行完备，模式空间中的内容都会被输出，可能就不符合使用者的要求或者降低了程序执行的效率</p>
+<h5 id="对行进行存储"><a href="#对行进行存储" class="headerlink" title="对行进行存储"></a>对行进行存储</h5><p>前面已经解释了模式空间的定义，而在sed中还有一个缓存叫作存储空间。在模式空间和存储空间中的内容可以通过一组命令互相拷贝</p>
+<p><code>Hold h</code>或<code>H</code> 将模式空间的内容拷贝或附加到存储空间<br><code>Get g</code>或<code>G</code> 将存储空间的内容拷贝或附加到模式空间<br><code>Exchange x</code> 交换模式空间和存储空间中的内容</p>
+<p>命令的大小写的区别在于大写的命令是将源空间的内容附加到目标空间，而小写的命令则是用源空间的内容覆盖目标空间。值得注意的是，不管是<code>Hold</code>命令还是<code>Get</code>命令，<strong>都会在目的空间的原有内容之后加上一个换行符</strong>，然后才把源空间中的内容加到换行符的后面</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cat expl.7</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">11</span><br><span class="line">22</span><br><span class="line">111</span><br><span class="line">222</span><br><span class="line"></span><br><span class="line">我们要做的工作就是将第一行与第二行，第三行与第四行，第五行与第六行互换</span><br><span class="line"></span><br><span class="line">sed <span class="string">'/1/&#123;h;d;&#125;;/2/&#123;G&#125;'</span> expl.7</span><br></pre></td></tr></table></figure>
+<p>这个过程是这样的：首先，sed将第一行读入模式空间，然后<code>h</code>命令将其放入存储空间保存起来，一个<code>d</code>命令又把模式空间中的内容清空；接着sed把第二行读入模式空间，然后<code>G</code>命令把存储空间中的内容附加到模式空间(注意的是在模式空间的原内容末尾是加了一个换行符的)</p>
+<p>使用<code>H</code>或<code>h</code>命令的时候，比较常见的是在这个命令之后加上<code>d</code>命令，这样一来，sed脚本不会到达最后，因而模式空间中的内容也就不会输出了。另外，如果把<code>d</code>换作<code>n</code>，或者把<code>G</code>换作<code>g</code>，都不会达到目的的</p>
+<blockquote>
+<p>在正则的<code>[]</code>中，仅仅只有<code>\</code>是有特殊含意的，言下之意就是<code>*</code>、<code>.</code>都是理解为字面意思，要使他们具有特殊意义就必须使用<code>\</code>的转义了</p>
+</blockquote>
+<h5 id="流程控制命令"><a href="#流程控制命令" class="headerlink" title="流程控制命令"></a>流程控制命令</h5><p>为了使使用者在书写sed脚本的时候真正的自由，sed还允许在脚本中用<code>:</code>设置记号，然后用<code>b</code>和<code>t</code>命令进行流程控制</p>
+<p><strong><code>标签</code></strong> 的格式：</p>
+<pre><code>:[lablename]
+</code></pre><p>这个标签放置在你希望流程所开始的地方，以冒号开始。冒号与标签之间不允许有空格或者制表符，标签最后如果有空格的话，也会被认为是标签的一部分</p>
+<p><strong><code>b命令</code></strong>  它的格式：</p>
+<pre><code>[address]b[lablename]
+</code></pre><p>它的含意是，如果满足<code>address</code>，则sed流程跟随标签跳转至<code>labelname</code>处执行；如果这个标签不存在或者未指定<code>labelname</code>，则控制流程就直接跳到脚本的末尾</p>
+<p>在某些情况下，<code>b</code>命令和<code>!</code>命令有些相似，但是<code>!</code>命令只能对紧挨它的<code>{}</code>中的内容起作用，而<code>b</code>命令则给予使用者足够的自由在sed脚本中选择哪些命令应该被执行，哪些命令不应该被执行</p>
+<p><strong><code>t命令</code></strong> 的格式：</p>
+<pre><code>s/pattern/replacement/;t[lablename]
+</code></pre><p>它表示的是如果前面的<code>s</code>命令替换成功的话，sed脚本就会根据<code>t</code>命令指示的标签进行流程转移。而标签的规则和上面讲的<code>b</code>命令的规则是一样的</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/bash/" rel="tag">#bash</a>
+          
+            <a href="/tags/sed/" rel="tag">#sed</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/14/awk笔记.html" rel="next" title="awk笔记">
+                <i class="fa fa-chevron-left"></i> awk笔记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="lifayi2008" />
+          <p class="site-author-name" itemprop="name">lifayi2008</p>
+          <p class="site-description motion-element" itemprop="description">压力不是有人比你努力，而是比你牛逼的人依然比你努力</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#sed基本语法和命令"><span class="nav-number">1.</span> <span class="nav-text">sed基本语法和命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#替换命令"><span class="nav-number">2.</span> <span class="nav-text">替换命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他sed命令"><span class="nav-number">3.</span> <span class="nav-text">其他sed命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sed多行处理，保留空间和循环"><span class="nav-number">4.</span> <span class="nav-text">sed多行处理，保留空间和循环</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#多行模式空间的处理"><span class="nav-number">4.1.</span> <span class="nav-text">多行模式空间的处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对行进行存储"><span class="nav-number">4.2.</span> <span class="nav-text">对行进行存储</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#流程控制命令"><span class="nav-number">4.3.</span> <span class="nav-text">流程控制命令</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lifayi2008</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
