@@ -1,0 +1,692 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="bash,tools," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="语法
+curl [options] [URL...]
+简介">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Curl文档(译)">
+<meta property="og:url" content="http://blog.yoopig.com/2016/09/24/Curl文档-译.html">
+<meta property="og:site_name" content="lifayi2008">
+<meta property="og:description" content="语法
+curl [options] [URL...]
+简介">
+<meta property="og:updated_time" content="2016-09-24T06:22:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Curl文档(译)">
+<meta name="twitter:description" content="语法
+curl [options] [URL...]
+简介">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://blog.yoopig.com/2016/09/24/Curl文档-译.html"/>
+
+  <title> Curl文档(译) | lifayi2008 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">lifayi2008</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">压力不是有人比你努力，而是比你牛逼的人依然比你努力</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Curl文档(译)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-24T14:19:22+08:00" content="2016-09-24">
+              2016-09-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index">
+                    <span itemprop="name">Tools</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>语法</strong></p>
+<pre><code>curl [options] [URL...]
+</code></pre><p><strong>简介</strong><br><a id="more"></a><br><strong><code>curl</code></strong> 是一个向服务器发送/接收数据的工具，可以支持下列协议<code>DICT</code>, <code>FILE</code>, <code>FTP</code>, <code>FTPS</code>, <code>GOPHER</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>IMAP</code>,<br>       <code>IMAPS</code>, <code>LDAP</code>, <code>LDAPS</code>, <code>POP3</code>, <code>POP3S</code>, <code>RTMP</code>, <code>RTSP</code>, <code>SCP</code>, <code>SFTP</code>, <code>SMTP</code>, <code>SMTPS</code>, <code>TELNET</code>, <code>TFTP</code>。这个工具被设置为一次性请求，而不是交互式的</p>
+<p><code>curl</code>提供了很多有用的功能比如：代理支持、用户认证、FTP上传、HTTP post、SSL连接、cookies支持、文件断点传输、Metalink等等。下面将会介绍</p>
+<p><strong>URL</strong></p>
+<p><code>URL</code>是协议独立的。详细信息可以参考<code>RFC 3986</code></p>
+<p>你可以使用<code>{}</code>指定多个<code>URL</code>或者<code>URL</code>部分：</p>
+<pre><code>http://site.{one,two,three}.com
+</code></pre><p>也可以使用<code>[]</code>制定一个字母或者数字序列：</p>
+<pre><code>ftp://ftp.numericals.com/file[1-100].txt
+ftp://ftp.numericals.com/file[001-100].txt    ##with leading zeros
+ftp://ftp.letters.com/file[a-z].txt
+</code></pre><p>不能嵌套使用这些标记，但是可以在一个<code>URL</code>中同时使用多个：</p>
+<pre><code>http://any.org/archive[1996-1999]/vol[1-4]/part{a,b,c}.html
+</code></pre><p>也可以指定步进值：</p>
+<pre><code>http://www.numericals.com/file[1-100:10].txt
+http://www.letters.com/file[a-z:2].txt
+</code></pre><p>可以在命令行中指定任意数量的<code>URL</code>。curl会按照给出的顺序一个一个的取数据</p>
+<p>如果你指定的<code>URL</code>没有协议前缀，curl会默认使用<code>HTTP</code>协议进行取数据，并且会根据你的主机前缀进行猜测，比如：<code>ftp.test.com</code> <code>curl</code>会尝试使用<code>FTP</code>协议进行连接；curl不会进行<code>URL</code>的合法性检查</p>
+<p>在一个命令中向同一个服务器请求多个资源时，curl会尝试重用<code>TCP</code>连接，这样可以加快速度</p>
+<p><strong>处理进度</strong> </p>
+<p>curl在处理过程中默认会显示一个处理进度，表示已经传输的数据、传输速度、和消耗的时间信息，curl默认将这些信息打印到终端；如果你的curl请求会返回大量的数据则curl不会显示这些信息</p>
+<blockquote>
+<p>大部分情况下你可以使用重定向操作符<code>&gt;</code>或者<code>-o</code>选项将返回数据写入到文件，这样可以显示出处理进度信息；使用<code>ftp</code>上传时不可以，因为它不会返回任何信息</p>
+</blockquote>
+<p>可以使用<code>-#</code>来用一个进度条代替常规的进度信息</p>
+<p><strong>选项</strong></p>
+<p>选项使用一个或者两个连字符开始，很多选项需要指定一个参数；使用一个连字符时，比如：<code>-d</code>，它和后面的选项参数之间可以有空格也可以没有空格，而使用两个连字符的选项和后面的参数之间必须有至少一个空格；不需要参数的选项可以连在一起写，比如：<code>-OLv</code></p>
+<p>通常布尔类型的参数，比如使用<code>--option</code>启用的都可以使用<code>--no-option</code>禁用，下面的列表中仅列出了<code>--option</code>的使用</p>
+<p>这些选项中有的连续使用多次是有意义的，比如<code>-d</code>；但是另外一些可能无意义，这样有的是第一个起作用，有的是最后一个起作用，详细信息参考<code>man page</code></p>
+<p><strong><code>-#</code></strong><br>使用<code>#</code>作为进度条来代替默认的处理进度信息</p>
+<p><strong><code>-0/--http1.0 --http1.1 --http2.0</code></strong><br>使用<code>http1.0 http1.1 http2.0</code>协议来发送请求，默认使用<code>http1.1</code>，<code>http2.0</code>需要底层的<code>libcurl</code>编译支持</p>
+<p><strong><code>-1/--tlsv1 -2/--sslv2 -3/--sslv3</code></strong><br>在向远程的<code>TLS/SSL</code>服务器发送请求时使用的协议</p>
+<p><strong><code>-4/--ipv4 -6/--ipv6</code></strong><br>将请求的主机名仅仅解析为<code>ipv4</code>地址/<code>ipv6</code>地址</p>
+<p><strong><code>-a/--append</code></strong><br>在使用<code>FTP/SFTP</code>协议进行上传数据时，告诉服务器将内容添加到目标文件，而不是覆盖。如果文件不存在则创建这个文件。<code>SSH</code>服务器会忽略这个选项</p>
+<p><strong><code>-A/--user-agent &lt;agent string&gt;</code></strong><br>在<code>HTTP</code>协议中指定<code>User-Agent</code>头信息，如果<code>agent string</code>中有空格则使用单引号引用；这个选项可以使用<code>-H --header</code>选项代替</p>
+<p><strong><code>--anyauth</code></strong><br>在<code>HTTP</code>协议中，告诉curl发送请求并选择一个服务器返回的可支持的最安全的认证方法。具体的做法是先发送一个请求，并检查服务器的响应头信息拿到所有可支持的认证方法，这需要多一次的<code>HTTP</code>请求。这用来代替直接指定认证方法：<code>--basic</code> <code>--digest</code> <code>--ntlm</code> <code>--negotiate</code></p>
+<blockquote>
+<p>注意在有提交/上传请求时不要使用这个参数，这可能会导致两次提交</p>
+</blockquote>
+<p><strong><code>-b/--cookie &lt;name=data&gt;</code></strong><br>在<code>HTTP</code>协议中，将<code>name=data</code>作为cookie数据传送给http服务器。通常是上一次请求中从服务器收到的<code>Set-Cookie</code>头信息的内容。数据格式为<code>NAME1=VALUE1; NAME2=VALUE2</code></p>
+<p>如果参数中不包含<code>=</code>则被当作是一个文件名，会根据请求地址从文件中查找匹配的cookies信息；使用这个方法可以启用curl的<code>cookie parser</code>，这样可以保存本次请求收到的cookies信息，也可以制定<code>-L --location</code>选项来手动处理本次请求收到的cookies；文件的格式应该是文本格式包含HTTP头信息，或者是<code>Netscape/Mozilla</code>的cookie文件格式</p>
+<p><strong><code>-B/--use-ascii</code></strong><br>在<code>FTP/LDAP</code>协议中启用ASCII传输。在FTP协议中可以使用在URL末尾加上<code>;type=A</code>的方法达成同样的效果</p>
+<p><strong><code>--basic</code></strong><br>在<code>HTTP</code>协议中使用<code>--basic</code>认证方法，这是默认使用的方法。一般不同指定这个选项，除非你之前的请求使用了别的认证方法，然后在这次请求中要改变它</p>
+<p><strong><code>-c/--cookie-jar &lt;file name&gt;</code></strong><br>用在<code>HTTP</code>协议中，指定curl将所有cookies写入的文件。curl将之前从文件中读取的cookis和从服务器收到的cookies都写入到这个文件。如果没有使用cookies则不会写文件。文件使用<code>Netscape</code>cookie文件格式；如果使用<code>-</code>代替文件名则cookie被写到标准输出</p>
+<p>使用这个选项可以启用curl的cookie处理系统来记录和使用cookie；如果因为其他原因导致文件不能写入，则curl不会执行失败或者报错，使用<code>-V</code>选项可以得到一个警告信息</p>
+<p><strong><code>-C, --continue-at &lt;offset&gt;</code></strong><br>根据特定的<code>offset</code>继续/重启一个之前进行的文件传输。给定的<code>offset</code>表示会被跳过的精确的字节数，从之前准备传输的文件的开始进行计数。如果用在ftp上传文件中，curl不会使用FTP服务器的<code>SIZE</code>命令来获取上传的字节数</p>
+<p>使用<code>-C -</code>表示让curl自动计算出从哪里开始继续传输。然后在文件中找到相应的位置</p>
+<p><strong><code>--ciphers &lt;list of ciphers&gt;</code></strong><br>在<code>SSL</code>连接中指定使用的加密套件。<code>list of ciphers</code>必须是合法的加密套件。关于SSl加密套件列表详情可以查看<a href="http://www.openssl.org/docs/apps/ciphers.html" target="_blank" rel="external">这里</a></p>
+<p><strong><code>--compressed</code></strong><br>在<code>HTTP</code>协议中请求返回一个curl支持的压缩方法的压缩响应内容，然后curl进行解压缩并返回数据。如果使用这个选项并且服务器返回一个不支持的压缩格式，则curl报错</p>
+<p><strong><code>--connect-timeout &lt;seconds&gt;</code></strong><br>指定在连接阶段的超时时间（秒）；如果连接已经建立则这个选项不起作用</p>
+<p><strong><code>--create-dirs</code></strong><br>和<code>-o</code>选项连用时，curl会根据需求在本地创建<code>-o</code>选项指定的目录结构。如果<code>-o</code>选择没有指定目录或者目录已经存在则不会创建</p>
+<p>使用<code>FTP</code> <code>SFTP</code>协议时，如果要在远程创建目录可以使用<code>--ftp-create-dirs</code>选项</p>
+<p><strong><code>--crlf</code></strong>  </p>
+<p><strong><code>--crlfile &lt;file&gt;</code></strong><br>在<code>HTTPS</code> <code>FTPS</code>协议中，提供一个pem格式的吊销证书列表来指定对端的证书已经准备被吊销</p>
+<p><strong><code>-d, --data &lt;data&gt;</code></strong><br><strong><code>--data-ascii &lt;data&gt;</code></strong><br><strong><code>--data-binary &lt;data&gt;</code></strong><br>在<code>HTTP</code>协议中使用POST请求发送指定的数据到服务器，就像在浏览器中填写表单然后点击提交按钮一样。使用这参数curl会在http头中将<code>Content-type</code>设置为<code>application/x-
+              www-form-urlencoded</code>，表示由表单提交过来的数据。可以和<code>-F --form</code>对比一下</p>
+<p>这个选项等同于<code>--data-ascii</code>选项。要使用二进制方式提交数据，需要添加<code>--data-binary</code>选项；如果已经对提交的数据进行过<code>URL</code>编码，请使用<code>--data-urlencode</code>选项</p>
+<p>如果使用多个<code>-d</code>选项，则效果等同于使用<code>&amp;</code>将他们连接起来，合并提交</p>
+<p>如果<code>data</code>以<code>@</code>开始，则其他部分被认为是一个文件名，然后从文件中读取数据；<code>data</code>也可以是<code>-</code>表示从标准输入中读取。也可以指定多个文件，文件中的空行被忽略</p>
+<p><code>--data-binary</code>表示数据/文件不经任何处理直接提交</p>
+<p><strong><code>-D, --dump-header &lt;file&gt;</code></strong><br>在<code>HTTP</code>协议中，用来保存服务器发送过来的响应头信息到<code>file</code>中，然后可以在请求中使用<code>-b</code>选项读取文件中的<code>cookies</code>信息；<code>-c</code>选项可以以更合理的方式存储<code>cookies</code></p>
+<p>也可以用在<code>FTP</code>协议中，ftp响应行被当作头信息存储</p>
+<p><strong><code>--data-urlencode &lt;data&gt;</code></strong><br>在<code>HTTP</code>协议中，表示将数据进行<code>URL-encoding</code>然后再POST提交，<code>&lt;data&gt;</code>可以是如下格式：</p>
+<ul>
+<li><code>content</code> : 如果指定的内容中不包括<code>@</code> <code>=</code>字符，则curl直接进行<code>URL-encoding</code>然后提交，否则按下面规则</li>
+<li><code>=content</code> : 将<code>content</code>进行编码和提交，内容不包括<code>=</code></li>
+<li><code>name=content</code> : 将<code>content</code>进行编码和提交，<code>name</code>应该是已经编码过的内容</li>
+<li><code>@filename</code> : 从文件中读取内容(包括换行)，然后编码提交</li>
+<li><code>name@filename</code> :  This  will  make curl load data from the given file (including any newlines), URL-encode that data and pass it on in the POST.<pre><code>The name part gets an equal sign appended, resulting in name=urlencoded-file-content. Note that the name  is  expected  to  be
+URL-encoded already
+</code></pre></li>
+</ul>
+<p><strong><code>--delegation LEVEL</code></strong>  </p>
+<p><strong><code>--digest</code></strong><br>在<code>HTTP</code>协议中启用HTTP Digest认证方法，这用来避免密码的明文传输；可以和<code>-u</code>选项合用来指定用户名和密码。相关的选项还有<code>--ntlm</code> <code>--negotiate</code> <code>--anyauth</code></p>
+<p><strong><code>--disable-epsv</code></strong><br>在<code>FTP</code>协议中，表示在被动FTP传输时禁用<code>EPSV</code>命令。通常curl会首先使用<code>EPSV</code>，然后才是<code>PASV</code></p>
+<p>这个选项只在被动传输模式下有效；<code>--epsv</code>表示显式的使用<code>EPSV</code>，<code>--no-epsv</code>等同于<code>--disable-epsv</code></p>
+<p><strong><code>--disable-eprt</code></strong><br>在<code>FTP</code>协议中，表示在主动FTP传输时禁用<code>EPRT</code>和<code>LPRT</code>命令。curl总是会首先尝试<code>EPRT</code>，然后是<code>LPRT</code>，最后是<code>PORT</code>，但使用这个选项后curl直接使用<code>PORT</code>命令。<code>EPRT</code> <code>LPRT</code>是FTP协议的扩展，可能有些ftp服务器并未实现这两个命令，但是他们提供了比<code>PORT</code>命令更丰富的功能</p>
+<p>这个选项只在主动传输模式下有效；<code>--eprt</code>表示显式启用<code>EPRT</code>命令，<code>--no-eprt</code>等同于<code>--disable-eprt</code></p>
+<p><strong><code>--dns-interface &lt;interface&gt;</code></strong><br>让curl在进行DNS请求时使用指定的接口发送请求，这个选项需要和<code>--interface</code>合用</p>
+<p><strong><code>--dns-ipv4-addr &lt;ip-address&gt;</code></strong><br><strong><code>--dns-ipv6-addr &lt;ip-address&gt;</code></strong><br>在进行ipv4/ipv6的DNS请求时使用的服务器的地址</p>
+<p><strong><code>--dns-servers &lt;ip-address,ip-address&gt;</code></strong><br>在发送请求时使用制定的DNS服务器列表代替系统配置的。地址列表使用逗号分隔。可选的的可以在地址的后面加上端口：<code>:port</code></p>
+<blockquote>
+<p>上面四个选项都需要在编译libcurl时开启相关支持</p>
+</blockquote>
+<p><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong>  </p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/bash/" rel="tag">#bash</a>
+          
+            <a href="/tags/tools/" rel="tag">#tools</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/19/sed笔记.html" rel="next" title="sed笔记">
+                <i class="fa fa-chevron-left"></i> sed笔记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="lifayi2008" />
+          <p class="site-author-name" itemprop="name">lifayi2008</p>
+          <p class="site-description motion-element" itemprop="description">压力不是有人比你努力，而是比你牛逼的人依然比你努力</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lifayi2008</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
