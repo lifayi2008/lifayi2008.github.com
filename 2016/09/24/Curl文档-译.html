@@ -85,21 +85,18 @@
 
 
 <meta name="description" content="语法
-curl [options] [URL...]
-简介">
+curl [options] [URL...]">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Curl文档(译)">
 <meta property="og:url" content="http://blog.yoopig.com/2016/09/24/Curl文档-译.html">
 <meta property="og:site_name" content="lifayi2008">
 <meta property="og:description" content="语法
-curl [options] [URL...]
-简介">
-<meta property="og:updated_time" content="2016-09-24T06:22:30.000Z">
+curl [options] [URL...]">
+<meta property="og:updated_time" content="2016-10-09T03:20:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Curl文档(译)">
 <meta name="twitter:description" content="语法
-curl [options] [URL...]
-简介">
+curl [options] [URL...]">
 
 
 
@@ -323,7 +320,9 @@ curl [options] [URL...]
       
         <p><strong>语法</strong></p>
 <pre><code>curl [options] [URL...]
-</code></pre><p><strong>简介</strong><br><a id="more"></a><br><strong><code>curl</code></strong> 是一个向服务器发送/接收数据的工具，可以支持下列协议<code>DICT</code>, <code>FILE</code>, <code>FTP</code>, <code>FTPS</code>, <code>GOPHER</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>IMAP</code>,<br>       <code>IMAPS</code>, <code>LDAP</code>, <code>LDAPS</code>, <code>POP3</code>, <code>POP3S</code>, <code>RTMP</code>, <code>RTSP</code>, <code>SCP</code>, <code>SFTP</code>, <code>SMTP</code>, <code>SMTPS</code>, <code>TELNET</code>, <code>TFTP</code>。这个工具被设置为一次性请求，而不是交互式的</p>
+</code></pre><a id="more"></a>
+<p><strong>简介</strong></p>
+<p><strong><code>curl</code></strong> 是一个向服务器发送/接收数据的工具，可以支持下列协议<code>DICT</code>, <code>FILE</code>, <code>FTP</code>, <code>FTPS</code>, <code>GOPHER</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>IMAP</code>,<br>       <code>IMAPS</code>, <code>LDAP</code>, <code>LDAPS</code>, <code>POP3</code>, <code>POP3S</code>, <code>RTMP</code>, <code>RTSP</code>, <code>SCP</code>, <code>SFTP</code>, <code>SMTP</code>, <code>SMTPS</code>, <code>TELNET</code>, <code>TFTP</code>。这个工具被设置为一次性请求，而不是交互式的</p>
 <p><code>curl</code>提供了很多有用的功能比如：代理支持、用户认证、FTP上传、HTTP post、SSL连接、cookies支持、文件断点传输、Metalink等等。下面将会介绍</p>
 <p><strong>URL</strong></p>
 <p><code>URL</code>是协议独立的。详细信息可以参考<code>RFC 3986</code></p>
@@ -356,35 +355,35 @@ http://www.letters.com/file[a-z:2].txt
 <p><strong><code>-1/--tlsv1 -2/--sslv2 -3/--sslv3</code></strong><br>在向远程的<code>TLS/SSL</code>服务器发送请求时使用的协议</p>
 <p><strong><code>-4/--ipv4 -6/--ipv6</code></strong><br>将请求的主机名仅仅解析为<code>ipv4</code>地址/<code>ipv6</code>地址</p>
 <p><strong><code>-a/--append</code></strong><br>在使用<code>FTP/SFTP</code>协议进行上传数据时，告诉服务器将内容添加到目标文件，而不是覆盖。如果文件不存在则创建这个文件。<code>SSH</code>服务器会忽略这个选项</p>
-<p><strong><code>-A/--user-agent &lt;agent string&gt;</code></strong><br>在<code>HTTP</code>协议中指定<code>User-Agent</code>头信息，如果<code>agent string</code>中有空格则使用单引号引用；这个选项可以使用<code>-H --header</code>选项代替</p>
-<p><strong><code>--anyauth</code></strong><br>在<code>HTTP</code>协议中，告诉curl发送请求并选择一个服务器返回的可支持的最安全的认证方法。具体的做法是先发送一个请求，并检查服务器的响应头信息拿到所有可支持的认证方法，这需要多一次的<code>HTTP</code>请求。这用来代替直接指定认证方法：<code>--basic</code> <code>--digest</code> <code>--ntlm</code> <code>--negotiate</code></p>
+<p><strong><code>-A/--user-agent &lt;agent string&gt;</code></strong><br><code>(HTTP)</code>指定<code>User-Agent</code>头信息，如果<code>agent string</code>中有空格则使用单引号引用；这个选项可以使用<code>-H --header</code>选项代替</p>
+<p><strong><code>--anyauth</code></strong><br><code>(HTTP)</code>告诉curl发送请求并选择一个服务器返回的可支持的最安全的认证方法。具体的做法是先发送一个请求，并检查服务器的响应头信息拿到所有可支持的认证方法，这需要多一次的<code>HTTP</code>请求。这用来代替直接指定认证方法：<code>--basic</code> <code>--digest</code> <code>--ntlm</code> <code>--negotiate</code></p>
 <blockquote>
 <p>注意在有提交/上传请求时不要使用这个参数，这可能会导致两次提交</p>
 </blockquote>
-<p><strong><code>-b/--cookie &lt;name=data&gt;</code></strong><br>在<code>HTTP</code>协议中，将<code>name=data</code>作为cookie数据传送给http服务器。通常是上一次请求中从服务器收到的<code>Set-Cookie</code>头信息的内容。数据格式为<code>NAME1=VALUE1; NAME2=VALUE2</code></p>
+<p><strong><code>-b/--cookie &lt;name=data&gt;</code></strong><br><code>(HTTP)</code>将<code>name=data</code>作为cookie数据传送给http服务器。通常是上一次请求中从服务器收到的<code>Set-Cookie</code>头信息的内容。数据格式为<code>NAME1=VALUE1; NAME2=VALUE2</code></p>
 <p>如果参数中不包含<code>=</code>则被当作是一个文件名，会根据请求地址从文件中查找匹配的cookies信息；使用这个方法可以启用curl的<code>cookie parser</code>，这样可以保存本次请求收到的cookies信息，也可以制定<code>-L --location</code>选项来手动处理本次请求收到的cookies；文件的格式应该是文本格式包含HTTP头信息，或者是<code>Netscape/Mozilla</code>的cookie文件格式</p>
-<p><strong><code>-B/--use-ascii</code></strong><br>在<code>FTP/LDAP</code>协议中启用ASCII传输。在FTP协议中可以使用在URL末尾加上<code>;type=A</code>的方法达成同样的效果</p>
-<p><strong><code>--basic</code></strong><br>在<code>HTTP</code>协议中使用<code>--basic</code>认证方法，这是默认使用的方法。一般不同指定这个选项，除非你之前的请求使用了别的认证方法，然后在这次请求中要改变它</p>
-<p><strong><code>-c/--cookie-jar &lt;file name&gt;</code></strong><br>用在<code>HTTP</code>协议中，指定curl将所有cookies写入的文件。curl将之前从文件中读取的cookis和从服务器收到的cookies都写入到这个文件。如果没有使用cookies则不会写文件。文件使用<code>Netscape</code>cookie文件格式；如果使用<code>-</code>代替文件名则cookie被写到标准输出</p>
+<p><strong><code>-B/--use-ascii</code></strong><br><code>(FTP/LDAP)</code>启用ASCII传输。在FTP协议中可以使用在URL末尾加上<code>;type=A</code>的方法达成同样的效果</p>
+<p><strong><code>--basic</code></strong><br><code>(HTTP)</code>使用<code>--basic</code>认证方法，这是默认使用的方法。一般不同指定这个选项，除非你之前的请求使用了别的认证方法，然后在这次请求中要改变它</p>
+<p><strong><code>-c/--cookie-jar &lt;file name&gt;</code></strong><br><code>(HTTP)</code>指定curl将所有cookies写入的文件。curl将之前从文件中读取的cookis和从服务器收到的cookies都写入到这个文件。如果没有使用cookies则不会写文件。文件使用<code>Netscape</code>cookie文件格式；如果使用<code>-</code>代替文件名则cookie被写到标准输出</p>
 <p>使用这个选项可以启用curl的cookie处理系统来记录和使用cookie；如果因为其他原因导致文件不能写入，则curl不会执行失败或者报错，使用<code>-V</code>选项可以得到一个警告信息</p>
 <p><strong><code>-C, --continue-at &lt;offset&gt;</code></strong><br>根据特定的<code>offset</code>继续/重启一个之前进行的文件传输。给定的<code>offset</code>表示会被跳过的精确的字节数，从之前准备传输的文件的开始进行计数。如果用在ftp上传文件中，curl不会使用FTP服务器的<code>SIZE</code>命令来获取上传的字节数</p>
 <p>使用<code>-C -</code>表示让curl自动计算出从哪里开始继续传输。然后在文件中找到相应的位置</p>
-<p><strong><code>--ciphers &lt;list of ciphers&gt;</code></strong><br>在<code>SSL</code>连接中指定使用的加密套件。<code>list of ciphers</code>必须是合法的加密套件。关于SSl加密套件列表详情可以查看<a href="http://www.openssl.org/docs/apps/ciphers.html" target="_blank" rel="external">这里</a></p>
-<p><strong><code>--compressed</code></strong><br>在<code>HTTP</code>协议中请求返回一个curl支持的压缩方法的压缩响应内容，然后curl进行解压缩并返回数据。如果使用这个选项并且服务器返回一个不支持的压缩格式，则curl报错</p>
+<p><strong><code>--ciphers &lt;list of ciphers&gt;</code></strong><br><code>(SSL)</code>指定使用的加密套件。<code>list of ciphers</code>必须是合法的加密套件。关于SSl加密套件列表详情可以查看<a href="http://www.openssl.org/docs/apps/ciphers.html" target="_blank" rel="external">这里</a></p>
+<p><strong><code>--compressed</code></strong><br><code>(HTTP)</code>请求返回一个curl支持的压缩方法的压缩响应内容，然后curl进行解压缩并返回数据。如果使用这个选项并且服务器返回一个不支持的压缩格式，则curl报错</p>
 <p><strong><code>--connect-timeout &lt;seconds&gt;</code></strong><br>指定在连接阶段的超时时间（秒）；如果连接已经建立则这个选项不起作用</p>
 <p><strong><code>--create-dirs</code></strong><br>和<code>-o</code>选项连用时，curl会根据需求在本地创建<code>-o</code>选项指定的目录结构。如果<code>-o</code>选择没有指定目录或者目录已经存在则不会创建</p>
 <p>使用<code>FTP</code> <code>SFTP</code>协议时，如果要在远程创建目录可以使用<code>--ftp-create-dirs</code>选项</p>
 <p><strong><code>--crlf</code></strong>  </p>
-<p><strong><code>--crlfile &lt;file&gt;</code></strong><br>在<code>HTTPS</code> <code>FTPS</code>协议中，提供一个pem格式的吊销证书列表来指定对端的证书已经准备被吊销</p>
+<p><strong><code>--crlfile &lt;file&gt;</code></strong><br><code>(HTTPS FTPS)</code>提供一个pem格式的吊销证书列表来指定对端的证书已经准备被吊销</p>
 <p><strong><code>-d, --data &lt;data&gt;</code></strong><br><strong><code>--data-ascii &lt;data&gt;</code></strong><br><strong><code>--data-binary &lt;data&gt;</code></strong><br>在<code>HTTP</code>协议中使用POST请求发送指定的数据到服务器，就像在浏览器中填写表单然后点击提交按钮一样。使用这参数curl会在http头中将<code>Content-type</code>设置为<code>application/x-
               www-form-urlencoded</code>，表示由表单提交过来的数据。可以和<code>-F --form</code>对比一下</p>
 <p>这个选项等同于<code>--data-ascii</code>选项。要使用二进制方式提交数据，需要添加<code>--data-binary</code>选项；如果已经对提交的数据进行过<code>URL</code>编码，请使用<code>--data-urlencode</code>选项</p>
 <p>如果使用多个<code>-d</code>选项，则效果等同于使用<code>&amp;</code>将他们连接起来，合并提交</p>
 <p>如果<code>data</code>以<code>@</code>开始，则其他部分被认为是一个文件名，然后从文件中读取数据；<code>data</code>也可以是<code>-</code>表示从标准输入中读取。也可以指定多个文件，文件中的空行被忽略</p>
 <p><code>--data-binary</code>表示数据/文件不经任何处理直接提交</p>
-<p><strong><code>-D, --dump-header &lt;file&gt;</code></strong><br>在<code>HTTP</code>协议中，用来保存服务器发送过来的响应头信息到<code>file</code>中，然后可以在请求中使用<code>-b</code>选项读取文件中的<code>cookies</code>信息；<code>-c</code>选项可以以更合理的方式存储<code>cookies</code></p>
+<p><strong><code>-D, --dump-header &lt;file&gt;</code></strong><br><code>(HTTP)</code>用来保存服务器发送过来的响应头信息到<code>file</code>中，然后可以在请求中使用<code>-b</code>选项读取文件中的<code>cookies</code>信息；<code>-c</code>选项可以以更合理的方式存储<code>cookies</code></p>
 <p>也可以用在<code>FTP</code>协议中，ftp响应行被当作头信息存储</p>
-<p><strong><code>--data-urlencode &lt;data&gt;</code></strong><br>在<code>HTTP</code>协议中，表示将数据进行<code>URL-encoding</code>然后再POST提交，<code>&lt;data&gt;</code>可以是如下格式：</p>
+<p><strong><code>--data-urlencode &lt;data&gt;</code></strong><br><code>(HTTP)</code>表示将数据进行<code>URL-encoding</code>然后再POST提交，<code>&lt;data&gt;</code>可以是如下格式：</p>
 <ul>
 <li><code>content</code> : 如果指定的内容中不包括<code>@</code> <code>=</code>字符，则curl直接进行<code>URL-encoding</code>然后提交，否则按下面规则</li>
 <li><code>=content</code> : 将<code>content</code>进行编码和提交，内容不包括<code>=</code></li>
@@ -395,10 +394,10 @@ URL-encoded already
 </code></pre></li>
 </ul>
 <p><strong><code>--delegation LEVEL</code></strong>  </p>
-<p><strong><code>--digest</code></strong><br>在<code>HTTP</code>协议中启用HTTP Digest认证方法，这用来避免密码的明文传输；可以和<code>-u</code>选项合用来指定用户名和密码。相关的选项还有<code>--ntlm</code> <code>--negotiate</code> <code>--anyauth</code></p>
-<p><strong><code>--disable-epsv</code></strong><br>在<code>FTP</code>协议中，表示在被动FTP传输时禁用<code>EPSV</code>命令。通常curl会首先使用<code>EPSV</code>，然后才是<code>PASV</code></p>
+<p><strong><code>--digest</code></strong><br><code>(HTTP)</code>启用HTTP Digest认证方法，这用来避免密码的明文传输；可以和<code>-u</code>选项合用来指定用户名和密码。相关的选项还有<code>--ntlm</code> <code>--negotiate</code> <code>--anyauth</code></p>
+<p><strong><code>--disable-epsv</code></strong><br><code>(FTP)</code>表示在被动FTP传输时禁用<code>EPSV</code>命令。通常curl会首先使用<code>EPSV</code>，然后才是<code>PASV</code></p>
 <p>这个选项只在被动传输模式下有效；<code>--epsv</code>表示显式的使用<code>EPSV</code>，<code>--no-epsv</code>等同于<code>--disable-epsv</code></p>
-<p><strong><code>--disable-eprt</code></strong><br>在<code>FTP</code>协议中，表示在主动FTP传输时禁用<code>EPRT</code>和<code>LPRT</code>命令。curl总是会首先尝试<code>EPRT</code>，然后是<code>LPRT</code>，最后是<code>PORT</code>，但使用这个选项后curl直接使用<code>PORT</code>命令。<code>EPRT</code> <code>LPRT</code>是FTP协议的扩展，可能有些ftp服务器并未实现这两个命令，但是他们提供了比<code>PORT</code>命令更丰富的功能</p>
+<p><strong><code>--disable-eprt</code></strong><br><code>(FTP)</code>表示在主动FTP传输时禁用<code>EPRT</code>和<code>LPRT</code>命令。curl总是会首先尝试<code>EPRT</code>，然后是<code>LPRT</code>，最后是<code>PORT</code>，但使用这个选项后curl直接使用<code>PORT</code>命令。<code>EPRT</code> <code>LPRT</code>是FTP协议的扩展，可能有些ftp服务器并未实现这两个命令，但是他们提供了比<code>PORT</code>命令更丰富的功能</p>
 <p>这个选项只在主动传输模式下有效；<code>--eprt</code>表示显式启用<code>EPRT</code>命令，<code>--no-eprt</code>等同于<code>--disable-eprt</code></p>
 <p><strong><code>--dns-interface &lt;interface&gt;</code></strong><br>让curl在进行DNS请求时使用指定的接口发送请求，这个选项需要和<code>--interface</code>合用</p>
 <p><strong><code>--dns-ipv4-addr &lt;ip-address&gt;</code></strong><br><strong><code>--dns-ipv6-addr &lt;ip-address&gt;</code></strong><br>在进行ipv4/ipv6的DNS请求时使用的服务器的地址</p>
@@ -406,7 +405,56 @@ URL-encoded already
 <blockquote>
 <p>上面四个选项都需要在编译libcurl时开启相关支持</p>
 </blockquote>
-<p><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong>  </p>
+<p><strong><code>-e, --referer &lt;URL&gt;</code></strong><br>设置<code>HTTP</code>头中的<code>Referer</code>信息。也可以使用<code>-H</code>选项设置。在和<code>-L</code>选项同时使用时，可以在<code>--referer</code>的选项参数后面加上<code>;auto</code>，这样HTTP在进行跳转时会自动将命令行中的URL设置为跳转时请求的头中的<code>Referer</code>字段</p>
+<p><strong><code>-E, --cert &lt;certificate[:password]&gt;</code></strong><br><code>(SSL)</code>让curl使用指定的客户端证书文件。如果使用<code>Secure Transport</code>的话证书必须是<code>PKCS#12</code>格式，如果使用其他安全引擎的话证书必须是<code>PEM</code>格式。如果可选的<code>:password</code>未给出则会在终端中请求输入。注意本选项中的<code>certificate</code>应该是私钥文件</p>
+<p>If  curl  is  built  against the NSS SSL library then this option can tell curl the nickname of the certificate to use within the NSS<br>              database defined by the environment variable SSL_DIR (or by default /etc/pki/nssdb). If the NSS PEM PKCS#11 module (libnsspem.so)  is<br>              available  then PEM files may be loaded. If you want to use a file from the current directory, please precede it with “./“ prefix, in<br>              order to avoid confusion with a nickname.  If the nickname contains “:”, it needs to be preceded by “\” so that it is not  recognized<br>              as  password delimiter.  If the nickname contains “\”, it needs to be escaped as “\“ so that it is not recognized as an escape char‐<br>              acter.</p>
+<p>(iOS and Mac OS X only) If curl is built against Secure Transport, then the certificate string can either be the name of  a  certifi‐<br>              cate/private  key  in the system or user keychain, or the path to a PKCS#12-encoded certificate and private key. If you want to use a<br>              file from the current directory, please precede it with “./“ prefix, in order to avoid confusion with a nickname.</p>
+<p><strong><code>--engine &lt;name&gt;</code></strong><br>选择加密操作的OpenSSL引擎。使用<code>--engine list</code>选项参数可以列出支持的引擎列表。注意：不是所有的引擎在运行时都是可用的</p>
+<p><strong><code>--environment</code></strong>  </p>
+<p><strong><code>--egd-file &lt;file&gt;</code></strong>  </p>
+<p><strong><code>--cert-type &lt;type&gt;</code></strong><br>告诉curl使用的证书的格式。可以支持<code>PEM</code> <code>DER</code>  <code>ENG</code>类型。默认使用<code>PEM</code>格式</p>
+<p><strong><code>--cacert &lt;CA certificate&gt;</code></strong><br><code>(SSL)</code>告诉curl使用指定的证书文件来验证对端。文件中可以包含多个CA证书。证书必须是<code>PEM</code>格式。通常curl会使用默认的证书文件，这个选项可以让curl使用另外的证书文件</p>
+<p>curl可以识别<code>CURL_CA_BUNDLE</code>环境变量，并使用其值来作为证书文件所在的路径；使用这个选项参数可以覆盖这个环境变量的设置</p>
+<p><strong><code>--capath &lt;CA certificate directory&gt;</code></strong><br><code>(SSL)</code>告诉curl在指定的目录中查找证书文件来验证对端。可以使用多个路径–路径中间使用<code>:</code>隔开。证书必须是<code>PEM</code>格式，并且如果curl被编译不支持OpenSSL，则使用OPenSSL提供的目录时必须首先使用<code>c_rehash</code>工具进行处理。Using –capath can allow OpenSSL-powered curl to make SSL-<br>              connections much more efficiently than using –cacert if the –cacert file contains many CA certificates.</p>
+<p><strong><code>-f, --fail</code></strong><br><code>(HTTP)</code>抑制服务器返回错误时的输出信息。这在脚本中进行错误尝试时有用。一般情况下当请求的资源不存在或者服务器内部错误时，服务器会返回一个表示出错原因的页面，使用这个选项可以让curl不显示这个页面，而使用一个22退出状态表示错误</p>
+<p><strong><code>-F, --form &lt;name=content&gt;</code></strong><br><code>(HTTP)</code>让curl模拟提交一个已经填写的表单。curl会使用POST发送请求并且在请求头中将<code>Content-Type</code>设置为<code>multipart/form-data</code>，这也允许进行二进制文件上传。在<code>content</code>前置一个<code>@</code>表示这是一个文件名，而要从文件中获取内容进行提交的话在<code>content</code>之前加一个<code>&lt;</code>符号；可以使用<code>-</code>代替文件名表示从标准输入获取内容</p>
+<p>可以在<code>content</code>内容之后增加<code>;type=&lt;type&gt;</code>来指定提交的数据的类型：</p>
+<pre><code>curl -F &quot;web=@index.html;type=text/html&quot; url.com
+</code></pre><p><strong><code>--ftp-account [data]</code></strong><br><strong><code>--ftp-alternative-to-user &lt;command&gt;</code></strong><br><strong><code>--ftp-create-dirs</code></strong><br><strong><code>--ftp-method [method]</code></strong><br><strong><code>--ftp-pasv</code></strong><br><strong><code>--ftp-skip-pasv-ip</code></strong><br><strong><code>--ftp-pret</code></strong><br><strong><code>--ftp-ssl-ccc</code></strong><br><strong><code>--ftp-ssl-ccc-mode [active/passive]</code></strong><br><strong><code>--ftp-ssl-control</code></strong>  </p>
+<p><strong><code>--form-string &lt;name=string&gt;</code></strong><br><code>(HTTP)</code>类似于<code>--form</code>，区别是<code>string</code>总是一个字符串；前置的<code>@</code> <code>&lt;</code>和<code>;type=</code>形式都没有特殊意义。如果要提交的字符串值中出现<code>@</code>和<code>&lt;</code>则应该优先使用这个选项</p>
+<p><strong><code>-g, --globoff</code></strong><br>这个选项关闭<code>URL globbing parser</code>。使用这个选项你可以在URL中包含<code>{}</code> <code>[]</code>字符，这些字符不会被curl解释。注意这些字符不是正常合法的URL组成部分，所以需要转码</p>
+<p><strong><code>-G, --get</code></strong><br>使用这个选项，则所有指定提交数据的选项<code>-d</code> <code>--data</code> <code>--data-binary</code> <code>--data-urlencode</code>都使用GET请求代替POST请求，如果不指定这个选项则默认使用POST提交。所有提交的数据都会被添加在URL的后面</p>
+<p>如果和<code>-I</code>合用，则会使用<code>HEAD</code>请求并将提交的数据添加到URL后面</p>
+<p><strong><code>-H, --header &lt;header&gt;</code></strong><br><code>(HTTP)</code>指定请求时使用的额外头信息。你可以指定任意数量的头。注意，如果你添加的头的字段名和curl使用的内置的头字段名重复的话，这个内置的头字段值被替换。所以这允许你更改所有的请求信息，但是除非你很熟悉这些内容，否则最好不要更改默认的头信息。如果要去掉一个内置头信息可以将<code>&lt;header&gt;</code>中冒号右边的部分置空，比如 <code>-H &quot;Host:&quot;</code>，如果要发送一个自定义的无值的头信息则需要以冒号结尾:<code>-H &quot;X-Custom-Header;&quot;</code>。curl会保证你发送的所有头信息都有正确的行结尾标志，所以你不必自行添加</p>
+<p><strong><code>--hostpubmd5 &lt;md5&gt;</code></strong><br><code>(SCP/SFTP)</code>发送一个包含32为十六进制数值的字符串。字符串的内容是远程主机公钥的128位md5值，除非md5值匹配否则curl拒绝连接（不能理解）</p>
+<p><strong><code>--ignore-content-length</code></strong><br><code>(HTTP)</code>忽略<code>Content-Length</code>头信息。这在Apache1.x版本的服务器中有用，因为如果传输的文件大于2G的服务器会报错</p>
+<p><strong><code>-i, --include</code></strong><br><code>(HTTP)</code>让curl的响应输出包括<code>HTTP</code>头信息</p>
+<p><strong><code>-I, --head</code></strong><br><code>(HTTP)</code>只获取相应的头信息。在<code>FTP/FILE</code>中curl只显示文件大小和最后更改时间</p>
+<p><strong><code>--interface &lt;name&gt;</code></strong><br>在指定的接口上发出请求，<code>name</code>可以是接口名、IP地址和主机名</p>
+<p><strong><code>-j, --junk-session-cookies</code></strong><br><code>(HTTP)</code>当curl从文件中读取cookies数据时，这个选项可以让curl丢弃所有 session cookies。效果如同开启了一个新的会话。典型的浏览器总是在被关闭时丢弃所有的 session cookies</p>
+<p><strong><code>-J, --remote-header-name</code></strong>  </p>
+<p><strong><code>-k, --insecure</code></strong><br><code>(SSL)</code>这个选项显式的允许不安全的<code>SSL</code>连接和传输。默认情况下所有的<code>SSL</code>连接都使用安装的CA证书进行安全性验证，服务器认为不安全的连接会失败</p>
+<p><strong><code>-K, --config &lt;config file&gt;</code></strong><br>指定读取命令行参数、选项的文件，这个文件是一个文本文件，文件的内容可以是所有可以在命令行指定的选项</p>
+<p>选项和选项对应的参数必须是在同一行，并且使用空格或者冒号分隔；长选项可以不用写出前面的两个连字符<code>--</code>，如果这样使用的话，长选项和对应的参数使用空格和分号分隔。如果使用一个或者两个连字符则长选项和对应的参数之间可以没有分隔符</p>
+<p>如果参数值中有空格则需要使用引用。在双引号引用中，下面的这些转义字符有特殊意义：<code>\\</code> <code>\&quot;</code> <code>\t</code> <code>\n</code> <code>\r</code> <code>\v</code>，在其他任何字符前加一个反斜线都是无效的。文件中如果第一个字符是<code>#</code>则本行其他的内容当作注释</p>
+<p>将文件名指定为<code>-</code>则curl从标准输入读取文件</p>
+<p>注意：如果要在文件中指定URL地址则需要使用<code>--url</code>选项，形如：<code>url = &quot;http://curl.haxx.se/docs/&quot;</code></p>
+<p>当调用curl命令时，它会总是查找并使用一个默认的配置文件（除非使用<code>-q</code>选项），默认从下面制定的位置和顺序进行查找：</p>
+<ul>
+<li>首先会从<code>home</code>目录中进行查找，<code>home</code>目录是变量<code>CURL_HOME</code>或者<code>HOME</code>的值。如果获取<code>home</code>目录失败，则调用<code>getpwuid()</code>函数，这个函数会返回系统中当前用户的家目录；如果在windows系统中，则会接着解析<code>APPDATA</code>变量，or as a last resort the ‘%USERPROFILE%\Application Data’</li>
+<li>在windows系统中如果<code>home</code>目录中没有<code>_curlrc</code>文件，则会查找curl可执行文件所在的目录；在Unix系统中，curl只会从得到的<code>home</code>目录中导入<code>.curlrc</code>文件</li>
+</ul>
+<p>下面是一个文件示例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># --- Example file ---</span></span><br><span class="line"><span class="comment"># this is a comment</span></span><br><span class="line">url = <span class="string">"curl.haxx.se"</span></span><br><span class="line">output = <span class="string">"curlhere.html"</span></span><br><span class="line">user-agent = <span class="string">"superagent/1.0"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># and fetch another URL too</span></span><br><span class="line">url = <span class="string">"curl.haxx.se/docs/manpage.html"</span></span><br><span class="line">-O</span><br><span class="line">referer = <span class="string">"http://nowhereatall.com/"</span></span><br><span class="line"><span class="comment"># --- End of example file ---</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意这个选项也可以使用多次，导入多个文件</p>
+</blockquote>
+<p><strong><code>--keepalive-time &lt;seconds&gt;</code></strong><br>这个选项指定了<code>保活</code>数据包发送的间隔时间，默认使用操作系统提供的<code>TCP_KEEPIDLE</code>和<code>TCP_KEEPINTVL</code>套接字选项值。如果指定<code>--no-keepalive</code>选项则这个选项无效</p>
+<p>默认的超时时间是60秒，如果这个选项指定多次则最后一个生效</p>
+<p><strong><code>--key &lt;key&gt;</code></strong><br><code>(SSL/SSH)</code>私钥文件名。可以让你将私钥放在单独的文件中并单独提供</p>
+<p><strong><code>--key-type &lt;type&gt;</code></strong><br><code>(SSL)</code>指定私钥类型。支持<code>DER</code> <code>PEM</code> <code>ENG</code>，默认是<code>PEM</code></p>
+<p><strong><code>--krb &lt;level&gt;</code></strong><br><code>(FTP)</code>启用<code>Kerberos</code>认证。<code>level</code>必须提供，可以是<code>clear</code> <code>safe</code> <code>confidential</code> <code>private</code>，其他值都被认为是<code>private</code></p>
+<p>这个选项需要在编译时启用<code>kerberos4</code>或者<code>GSSAPI(GSS-Negotiate)</code>支持，这个可能在某些系统中并不支持，可以使用<code>-V, --version</code>选项来查看是否支持</p>
+<p><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong>  </p>
 
       
     </div>

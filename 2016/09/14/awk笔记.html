@@ -92,7 +92,7 @@ awk -Fs &amp;apos;{action}&amp;apos; input-file">
 <meta property="og:site_name" content="lifayi2008">
 <meta property="og:description" content="awk基本语法和命令awk命令语法awk -Fs  &amp;apos;/pattern/ {action}&amp;apos; input-file
 awk -Fs &amp;apos;{action}&amp;apos; input-file">
-<meta property="og:updated_time" content="2016-09-18T06:29:40.000Z">
+<meta property="og:updated_time" content="2016-09-30T01:23:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="awk笔记">
 <meta name="twitter:description" content="awk基本语法和命令awk命令语法awk -Fs  &amp;apos;/pattern/ {action}&amp;apos; input-file
@@ -394,7 +394,10 @@ $ awk &apos;BEGIN { printf &quot;%6s\n&quot;, substr(&quot;Good Boy!&quot;,1,6) 
 <p>可以在记录选取中使用逻辑运算符和正则表达式配合字段进行行选取：</p>
 <pre><code>$ awk -F &quot;,&quot; &apos;$1 == 103 {print $2}&apos; items.txt
 $ awk -F &apos;:&apos; &apos;$NF ~ /\/bin\/sh/ { n++ }; END { print n }&apos; /etc/passwd
-</code></pre><h4 id="awk内置变量"><a href="#awk内置变量" class="headerlink" title="awk内置变量"></a>awk内置变量</h4><ol>
+</code></pre><blockquote>
+<p>awk在使用正则选取行时和sed不同：awk会在匹配第一个正则的行中继续查找是否匹配第二个正则；而sed则从下一行中开始匹配查找</p>
+</blockquote>
+<h4 id="awk内置变量"><a href="#awk内置变量" class="headerlink" title="awk内置变量"></a>awk内置变量</h4><ol>
 <li><code>FS</code>输入域分隔符</li>
 </ol>
 <p>awk默认使用空格作为字段分隔符，也可以指定其他的字符作为分隔符，甚至可以使用正则表达式匹配到的字符作为分隔符</p>
