@@ -84,16 +84,16 @@
 
 
 
-<meta name="description" content="介绍什么是BashBash是GNU操作系统的shell，或者说是命令语言解释器。Bash是”Broune-Again Shell”的一个简称，也是对当前Unix shell ‘sh’最初作者的一个调侃，sh最早出现在第七版的贝尔实验室的Unix系统上">
+<meta name="description" content="介绍什么是BashBash是GNU操作系统的shell，或者说是命令语言解释器。Bash是”Broune-Again Shell”的一个简称，也是对当前Unix shell sh 最初作者的一个调侃，sh最早出现在第七版的贝尔实验室的Unix系统上">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Bash文档1--介绍和术语(译)">
 <meta property="og:url" content="http://blog.yoopig.com/2016/06/13/Bash文档1--介绍和术语-译.html">
 <meta property="og:site_name" content="lifayi2008">
-<meta property="og:description" content="介绍什么是BashBash是GNU操作系统的shell，或者说是命令语言解释器。Bash是”Broune-Again Shell”的一个简称，也是对当前Unix shell ‘sh’最初作者的一个调侃，sh最早出现在第七版的贝尔实验室的Unix系统上">
-<meta property="og:updated_time" content="2016-08-17T09:21:23.000Z">
+<meta property="og:description" content="介绍什么是BashBash是GNU操作系统的shell，或者说是命令语言解释器。Bash是”Broune-Again Shell”的一个简称，也是对当前Unix shell sh 最初作者的一个调侃，sh最早出现在第七版的贝尔实验室的Unix系统上">
+<meta property="og:updated_time" content="2016-10-11T08:14:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Bash文档1--介绍和术语(译)">
-<meta name="twitter:description" content="介绍什么是BashBash是GNU操作系统的shell，或者说是命令语言解释器。Bash是”Broune-Again Shell”的一个简称，也是对当前Unix shell ‘sh’最初作者的一个调侃，sh最早出现在第七版的贝尔实验室的Unix系统上">
+<meta name="twitter:description" content="介绍什么是BashBash是GNU操作系统的shell，或者说是命令语言解释器。Bash是”Broune-Again Shell”的一个简称，也是对当前Unix shell sh 最初作者的一个调侃，sh最早出现在第七版的贝尔实验室的Unix系统上">
 
 
 
@@ -315,23 +315,23 @@
       
 
       
-        <h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><h5 id="什么是Bash"><a href="#什么是Bash" class="headerlink" title="什么是Bash"></a>什么是Bash</h5><p>Bash是GNU操作系统的shell，或者说是命令语言解释器。Bash是”Broune-Again Shell”的一个简称，也是对当前Unix shell ‘sh’最初作者的一个调侃，sh最早出现在第七版的贝尔实验室的Unix系统上<br><a id="more"></a><br>Bash在最大限度上兼容sh，并且从Korn shell和C shell中借鉴了很多有用的特性。Bash目标是成为IEEE POSIX规范（IEEE标准1003.1）中的一个符合IEEE POSIX标准的SHELL和工具。它在交互和编程方面都对sh进行了功能性的改进</p>
+        <h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><h5 id="什么是Bash"><a href="#什么是Bash" class="headerlink" title="什么是Bash"></a>什么是Bash</h5><p>Bash是GNU操作系统的shell，或者说是命令语言解释器。Bash是”Broune-Again Shell”的一个简称，也是对当前Unix shell <code>sh</code> 最初作者的一个调侃，sh最早出现在第七版的贝尔实验室的Unix系统上<br><a id="more"></a><br>Bash在最大限度上兼容sh，并且从Korn shell和C shell中借鉴了很多有用的特性。Bash目标是成为IEEE POSIX规范（IEEE标准1003.1）中的一个符合IEEE POSIX标准的SHELL和工具。它在交互和编程方面都对sh进行了功能性的改进</p>
 <p>GUN操作系统同时也提供了其他的shell，包括C shell，Bash是默认的shell。和其他的GUN软件一样，Bash有很强的可移植性。现在几乎可以运行在所有版本的Unix上面甚至一些其他的操作系统</p>
 <h5 id="什么是shell"><a href="#什么是shell" class="headerlink" title="什么是shell"></a>什么是shell</h5><p>从根本上说，shell是一个简单的可执行命令的宏处理器。宏处理器意味着这样一个功能：文本和符号都会被展开为更大的一个表达式</p>
-<p>Unix shell是一个命令解释器和编程语言。作为一个命令解释器，shell提供了一个用户接口来执行各种各样的GNU工具命令。作为一种编程语言，我们可以将那些命令组合起来一起执行。可以创建一个包含命令的文件，而这个文件自己也成了一个命令。这些命令就和系统命令比如/bin下面的命令一样，让用户和组可以使用这些命令建立自定义的环境和执行自动化任务</p>
+<p>Unix shell是一个命令解释器和编程语言。作为一个命令解释器，shell提供了一个用户接口来执行各种各样的GNU工具命令。作为一种编程语言，我们可以将那些命令组合起来一起执行。可以创建一个包含命令的文件，而这个文件自己也成了一个命令。这些命令就和系统命令比如<code>/bin</code>下面的命令一样，让用户和组可以使用这些命令建立自定义的环境和执行自动化任务</p>
 <p>Shell可以以交互式和非交互式执行。在交互模式中，它从键盘接收输入。当以非交互式执行时，shell从一个文件中读取命令执行</p>
-<p>Shell可以同步或者异步的方式执行GUN命令。如果是同步的方式，shell会等待命令返回才能接收新的输入；异步执行的命令可以和shell并行执行，shell可以同时接收新的命令。redirection结构可以更细粒度的控制命令的输入和输出。另外，shell也可以让我们控制命令的执行环境</p>
-<p>Shell也提供了一系列内置命令(builtins)来实现那些不可能或者不便于使用外部可执行文件实现的功能。比如cd、break、continue和exec，这些命令不能使用外部命令来实现，因为这些命令是直接对shell自己进行操作。history、getopts、kill或者pwd命令可以使用外部命令实现，但是使用内置命令更方便。所有的内置命令在后面的章节中描述</p>
+<p>Shell可以同步或者异步的方式执行GUN命令。如果是同步的方式，shell会等待命令返回才能接收新的输入；异步执行的命令可以和shell并行执行，shell可以同时接收新的命令。<code>redirection</code>结构可以更细粒度的控制命令的输入和输出。另外，shell也可以让我们控制命令的执行环境</p>
+<p>Shell也提供了一系列内置命令(<code>builtins</code>)来实现那些不可能或者不便于使用外部可执行文件实现的功能。比如<code>cd</code> <code>break</code> <code>continue</code> <code>exec</code>，这些命令不能使用外部命令来实现，因为这些命令是直接对shell自己进行操作。<code>history</code> <code>getopts</code> <code>kill</code> <code>pwd</code>命令可以使用外部命令实现，但是使用内置命令更方便。所有的内置命令在后面的章节中描述</p>
 <p>执行命令是必不可少的功能，但是shell更强大之处是内置的编程语言。就像高等级的编程语言，shell提供了变量、控制结构、引用和函数</p>
-<p>shell也提供了一些为交互式特别准备的特性。这些交互式特性包括作业控制、命令行编辑、命令历史和别名，这些特性都将在本手册中描述</p>
+<p>shell也提供了一些为交互式特别准备的特性。这些交互式特性包括<code>作业控制</code> <code>命令行编辑</code> <code>命令历史</code> <code>别名</code>，这些特性都将在本手册中描述</p>
 <h4 id="术语（未按字母顺序）"><a href="#术语（未按字母顺序）" class="headerlink" title="术语（未按字母顺序）"></a>术语（未按字母顺序）</h4><p>下面的这些术语将在整个手册中使用</p>
 <p><strong>POSIX</strong>：一系列基于Unix的开放系统标准。Bash主要关心POSIX1003.1标准的Shell和工具部分</p>
-<p><strong>blank</strong>：空格或者tab字符</p>
+<p><strong>blank</strong>：空格或者<code>tab</code>字符</p>
 <p><strong>operator</strong>：包括控制操作符(control operator)和重定向操作符(redirection operator)。operator至少要包括一个未被引用的元字符(metacharacter)</p>
 <p><strong>word</strong>：被shell作为单个单元的一串字符。words不包括未被引用的元字符（operator）</p>
-<p><strong>token</strong>：被shell作为单个单元的一串字符。是一个word或者operator</p>
-<p><strong>control operator</strong>：起控制作用的token，包括换行和 <code>||</code> <code>&amp;&amp;</code> <code>&amp;</code> <code>;</code> <code>;;</code> <code>|</code> <code>|&amp;</code> <code>(</code> <code>)</code>单引号中的字符</p>
-<p><strong>matecharacter</strong>：未被引用的元字符用来分割words。元字符包括blank和<code>|</code> <code>&amp;</code> <code>;</code> <code>(</code> <code>)</code> <code>&lt;</code> <code>&gt;</code>单引号中的字符</p>
+<p><strong>token</strong>：被shell作为单个单元的一串字符。是一个<code>word</code>或者<code>operator</code></p>
+<p><strong>control operator</strong>：起控制作用的token，包括<code>换行</code>和 <code>||</code> <code>&amp;&amp;</code> <code>&amp;</code> <code>;</code> <code>;;</code> <code>|</code> <code>|&amp;</code> <code>(</code> <code>)</code>字符</p>
+<p><strong>matecharacter</strong>：未被引用的元字符用来分隔words。元字符包括<code>tab</code> <code>空格</code> <code>换行</code>和<code>|</code> <code>&amp;</code> <code>;</code> <code>(</code> <code>)</code> <code>&lt;</code> <code>&gt;</code>字符</p>
 <p><strong>builtin</strong>：shell内部实现的一个命令</p>
 <p><strong>exit status</strong>：命令返回给调用者的值。值被限制为8位，所以最大为255</p>
 <p><strong>return status</strong>：等同于exit status</p>
