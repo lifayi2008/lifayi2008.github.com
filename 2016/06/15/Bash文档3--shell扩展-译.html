@@ -106,7 +106,7 @@ command substitution
 arithmetic expansion
 word splitting
 filename expansion">
-<meta property="og:updated_time" content="2016-08-17T09:21:23.000Z">
+<meta property="og:updated_time" content="2016-10-14T06:39:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Bash文档3--shell扩展(译)">
 <meta name="twitter:description" content="命令行被划分为tokens后，shell就会进行各种扩展；bash中共有7中扩展：
@@ -351,14 +351,14 @@ filename expansion">
 </li>
 </ul>
 <p>扩展操作的顺序就是上面给出列表的先后顺序；并且从左到右</p>
-<p>如果系统支持，还有另外一种扩展：process substitution。这种扩展和tilde、parameter variable 和arithmetic expansion和command substitution一起进行</p>
-<p>只有brace expansion、word splitting和filename expansion可能会改变扩展后的word数量，其他的扩展都是将一个word扩展为另外一个word。有两个例外是<code>$@</code>和<code>${name[@]}</code></p>
-<p>所有扩展进行完毕后，quote removal才进行</p>
-<h4 id="大括号扩展"><a href="#大括号扩展" class="headerlink" title="大括号扩展"></a>大括号扩展</h4><p>brace expansion是一种产生任意字符串的技巧。这种技巧和filename expansion中的<code>[]</code>有些类似，但是不需要相应的文件名存在。 大括号扩展的格式是：一个可选的前导字符串，然后是一系列括在大括号中的逗号分隔的字符串或者序列表达式，最后一个可选的后缀字符串。前导字符串会和大括号中的每一个项目连接，然后再连接后缀字符串。扩展按大括号中项目的顺序从左到右进行<br>brace expansion可以嵌套。每一个扩展的结果没有进行排序，而是从左到右的顺序排列。例如：<br><code>bash$ echo a{b,c,d}e</code>扩展为<code>abe ace ade</code></p>
+<p>如果系统支持，还有另外一种扩展：<code>process substitution</code>。这种扩展和<code>tilde</code>、<code>parameter variable 和arithmetic expansion</code>和<code>command substitution</code>一起进行</p>
+<p>只有<code>brace expansion</code>、<code>word splitting</code>和<code>filename expansion</code>可能会改变扩展后的word数量，其他的扩展都是将一个word扩展为另外一个word。有两个例外是<code>$@</code>和<code>${name[@]}</code></p>
+<p>所有扩展进行完毕后，<code>quote removal</code>才进行</p>
+<h4 id="大括号扩展"><a href="#大括号扩展" class="headerlink" title="大括号扩展"></a>大括号扩展</h4><p><code>brace expansion</code>是一种产生任意字符串的技巧。这种技巧和<code>filename expansion</code>中的<code>[]</code>有些类似，但是不需要相应的文件名存在。 大括号扩展的格式是：一个可选的前导字符串，然后是一系列括在大括号中的逗号分隔的字符串或者序列表达式，最后一个可选的后缀字符串。前导字符串会和大括号中的每一个项目连接，然后再连接后缀字符串。扩展按大括号中项目的顺序从左到右进行<br><code>brace expansion</code>可以嵌套。每一个扩展的结果没有进行排序，而是从左到右的顺序排列。例如：<br><code>bash$ echo a{b,c,d}e</code>扩展为<code>abe ace ade</code></p>
 <p>序列表达式是以<code>{x..y[..incr]}</code>的形式，x和y可以是数字或者单个字符；<code>incr</code>表示增量，也是一个整数。当使用整数的时候，表达式扩展为x到y之间的所有数字，包括x和y。整数还可以使用若干个前导0，强制扩展后的数字宽度相等；当x或者y以0开始的时候，shell会在扩展产生的每个数字前面按需要补若干个0。当使用字符的时候，扩展为x和y之间按字母顺序的所有字符；注意x和y需要时相同的类型。当提供increment时，表示每隔incr产生一个字符或数字。默认的incr是1或者-1</p>
-<p>brace expansion在其他的扩展之前进行，并且任何被其他扩展认为是特殊字符的将会保留。而且严格按原文。bash不会对扩展前的内容进行语法解释。注意<code>${}</code>是参数扩展，而<code>{}</code>才是大括号扩展</p>
-<p>正确的brace expansion的形式是一对未引用的大括号和至少一个未引用的逗号或者一个合法的序列表达式。任何不正确的形式都不会进行brace expansion扩展</p>
-<p><code>{</code>和<code>,</code>都可以使用反斜线引用，来放置bash将它作为brace expansion形式的一部分。brace expansion经常被用来产生一些前缀或者后缀相同的字符串，例如：<br><code>mkdir /usr/local/src/bash/{old,new,dist,bugs}</code><br><code>chown root /usr/{ucb/{ex,edit},lib/{ex?.?*,how_ex}}</code></p>
+<p><code>brace expansion</code>在其他的扩展之前进行，并且任何被其他扩展认为是特殊字符的将会保留。而且严格按原文。bash不会对扩展前的内容进行语法解释。注意<code>${}</code>是参数扩展，而<code>{}</code>才是大括号扩展</p>
+<p>正确的<code>brace expansion</code>的形式是一对未引用的大括号和至少一个未引用的<code>逗号</code>或者一个合法的<code>序列表达式</code>。任何不正确的形式都不会进行<code>brace expansion</code>扩展</p>
+<p><code>{</code>和<code>,</code>都可以使用反斜线引用，来放置bash将它作为<code>brace expansion</code>形式的一部分。<code>brace expansion</code>经常被用来产生一些前缀或者后缀相同的字符串，例如：<br><code>mkdir /usr/local/src/bash/{old,new,dist,bugs}</code><br><code>chown root /usr/{ucb/{ex,edit},lib/{ex?.?*,how_ex}}</code></p>
 <h4 id="波浪线扩展"><a href="#波浪线扩展" class="headerlink" title="波浪线扩展"></a>波浪线扩展</h4><p>如果一个word以未被引用的<code>~</code>开始，则这个字符后面直到第一个未被引用的反斜线中间的字符都被认为是tilde-prefix。如果tidle-prefix中的所有字符都未被引用，则tidle-prefix中跟着<code>~</code>字符的所有字符串被作为一个login name。如果这部分字符串为空（即tilde-prefix只有一个<code>~</code>号），则<code>~</code>被替换为环境变量HOME的值。如果HOME变量未设置则使用执行当前shell用户的家目录。如果tilde-prefix并非只有一个<code>~</code>号，则整个tilde-prefix被替换为上午提到的login name的家目录</p>
 <p>如果tilde-prefix是<code>~+</code>，则使用环境变量PWD的值替换。如果tilde-prefix是<code>~-</code>则使用OLDPWD环境变量的值替换</p>
 <p>如果<code>~</code>后面的tilde-prefix是一个数字N，可选的N前面还有一个<code>+</code>或者一个<code>-</code>，则这个tilde-prefix会被目录栈（directory stack）中相应的元素替换，就像使用tilde-prefix作为参数调用dirs内置命令一样。 If the tilde-prefix, sans the tilde, consists of a number without a leading <code>+</code> or <code>-</code>, <code>+</code>is assumed</p>
@@ -372,12 +372,12 @@ filename expansion">
 <p><strong><code>~N</code></strong>  命令<code>dirs +N</code>显示的目录</p>
 <p><strong><code>~+N</code></strong>  命令<code>dirs +N</code>显示的目录</p>
 <p><strong><code>~-N</code></strong>  命令<code>dirs -N</code>显示的目录</p>
-<h4 id="Shell参数扩展"><a href="#Shell参数扩展" class="headerlink" title="Shell参数扩展"></a>Shell参数扩展</h4><p>Shell中的<code>$</code>字符，引入了参数扩展，命令扩展和算术扩展。可以使用大括号将参数名或者符号(变量名)括起来，以防止紧跟着参数名的字符也被shell当成是名称的一部分</p>
+<h4 id="参数扩展"><a href="#参数扩展" class="headerlink" title="参数扩展"></a>参数扩展</h4><p>Shell中的<code>$</code>字符，引入了参数扩展，命令扩展和算术扩展。可以使用大括号将参数名或者符号(变量名)括起来，以防止紧跟着参数名的字符也被shell当成是名称的一部分</p>
 <p>如果使用大括号，结束的大括号应该是第一个未被转义(反斜线或者单引号)的<code>}</code>，而且也不在一个内嵌的算术扩展，命令扩展或者参数扩展之内</p>
 <p>参数扩展的基本形式是<code>${parameter}</code>。parameter参数的值被替换。parameter是一个shell参数或者数组引用。如果parameter是一个位置参数并且是两位数，或者后面跟一个不是parameter一部分的字符时应该给parameter加大括号</p>
 <p>如果parameter的第一个字符是感叹号<code>!</code>，表示间接变量。bash使用感叹号后面的这部分参数名的值作为一个参数名；然后参数名被扩展，扩展的结果作为整个替换的结果。这称为间接扩展。这种形式的例外情况是下面将要描述的<code>${!prefix*}</code>和<code>${!prefix@}</code>。要表示间接扩展感叹号必须紧跟着大括号的左边括号</p>
-<p>下面描述的每种情况，<strong>word</strong>都要经过 <em>tilde expansion\ parameter expansion、 command substitution</em>和 <em>算术扩展</em></p>
-<p>如果不是进行求子串的扩展，使用下面的这种形式<code>:-</code>，表示测试parameter为空或者未设置。没有冒号时，只检查parameter是否未设置然后进行扩展操作。换句话说，如果包含冒号，操作符检查的条件是parameter是否为空或者未设置，而没有冒号时，操作符只检查parameter是否为空</p>
+<p>下面描述的每种情况，<strong>word</strong>都要经过 <em>tilde expansion、parameter expansion、command substitution</em>和 <em>算术扩展</em></p>
+<p>如果不是进行求子串的扩展，使用下面的这种形式<code>:-</code>，表示测试parameter为空或者未设置，没有冒号时，只检查parameter是否未设置然后进行扩展操作</p>
 <p><strong><code>${parameter:-word}</code></strong><br>如果parameter为空或者未设置，替换的结果为word，否则直接使用parameter的值替换</p>
 <p><strong><code>${parameter:=word}</code></strong><br>如果parameter为空或者未设置，将word的值赋给parameter，替换的结果为parameter；否则直接使用parameter的值替换</p>
 <p><strong><code>${parameter:?word}</code></strong><br>如果parameter的值为空或者未设置，将word(or a message to that effect if word is not present)打印到标准错误输出，如果shell是非交互式的，则退出。否则直接使用parameter的值替换</p>
@@ -398,14 +398,14 @@ filename expansion">
 <p><strong><code>${parameter#word}</code></strong><br><strong><code>${parameter##word}</code></strong><br>word按照 <em>filename expansion</em>的规则扩展产生一个pattern。如果pattern匹配parameter的值的开始部分，则扩展的结果是匹配pattern的最短(#)或者最长(##)部分被删除。如果parameter是<code>@</code> or <code>*</code>则将匹配的部分移除会作用于每一个位置参数，扩展的结果是移除匹配部分后的位置参数列表。如果parameter是一个数组名，并且使用<code>@</code> or <code>*</code>的下标，则匹配移除的操作会作用于数组的每一个元素，扩展的结果是移除匹配部分后的数组元素列表</p>
 <p><strong><code>${parameter%word}</code></strong><br><strong><code>${parameter%%word}</code></strong><br>同上，只是匹配从parameter的值，或者每一个位置参数，或者每一个数组元素的末尾开始</p>
 <p><strong><code>${parameter/pattern/string}</code></strong><br>pattern按照 <em>filename expansion</em>的规则扩展产生一个匹配模式。parameter的值中匹配pattern的最长的部分被替换为string。如果pattern是以<code>/</code>开始，pattern匹配到的所有部分都被替换为string，否则只有第一个匹配的部分被替换。如果pattern是以<code>#</code>开始，则必须从parameter的值的第一个字符开始匹配，匹配成功则替换。如果pattern是以<code>%</code>开始，则pattern必须从最后一个字符开始匹配。如果string为空，则匹配的部分被删除。如果parameter为<code>@</code> or <code>*</code>则匹配替换的对象为每一个位置参数，扩展的结果是匹配替换后的位置参数列表。如果parameter是一个数组名并且使用<code>@</code> or <code>*</code>作为下标，则匹配替换的对象为数组中的每一个元素，扩展的结果是匹配替换后的数组元素列表</p>
-<p><strong><code>${parameter^pattern}</code></strong><br><strong><code>${parameter^^pattern}</code></strong><br><strong><code>${parameter,pattern}</code></strong><br><strong><code>${parameter,,pattern}</code></strong><br>这些扩展更改parameter的值的大小写。pattern按照filename expansion的规则产生一个匹配模式。parameter的值的每个字符都按照pattern进行测试，如果匹配则进行大小写转换。pattern不应该尝试匹配多个字符。<code>^</code>操作符将小写字符转换为大写字符，<code>,</code>操作符将大写字符转换为小写；它们都只转换第一个匹配到的字符，而<code>^^</code>和<code>,,</code>则转换每一个匹配到的字符。如果pattern为空则默认是<code>?</code>，表示匹配任意单个字符。如果parameter是位置参数或者数组则操作方式和上面几种情况类似</p>
+<p><strong><code>${parameter^pattern}</code></strong><br><strong><code>${parameter^^pattern}</code></strong><br><strong><code>${parameter,pattern}</code></strong><br><strong><code>${parameter,,pattern}</code></strong><br>这些扩展更改parameter的值的大小写。pattern按照filename expansion的规则产生一个匹配模式。parameter的值的每个字符都按照pattern进行测试，如果匹配则进行大小写转换。<em>pattern不应该尝试匹配多个字符</em>。<code>^</code>操作符将小写字符转换为大写字符，<code>,</code>操作符将大写字符转换为小写；它们都只转换第一个匹配到的字符，而<code>^^</code>和<code>,,</code>则转换每一个匹配到的字符。如果pattern为空则默认是<code>?</code>，表示匹配任意单个字符。如果parameter是位置参数或者数组则操作方式和上面几种情况类似</p>
 <h4 id="命令替换"><a href="#命令替换" class="headerlink" title="命令替换"></a>命令替换</h4><p>命令替换可以让命令的输出来替换命令名。使用下面的形式来使用命令替换。<em>command在一个子shell中执行</em></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">command</span>)</span><br><span class="line">`<span class="built_in">command</span>`</span><br></pre></td></tr></table></figure>
 <p>Bash将执行command的输出来替换命令名，替换后结尾的换行符被删除。内嵌的换行符保留，但是在接下来做 <em>word splitting</em>时会被删除( <em>给命令替换结构加引号可以避免word splitting</em>)。命令替换<code>$(cat file)</code>可以使用<code>$(&lt; file)</code>的形式来提高效率</p>
 <p>当使用旧式的反引号做命令替换时，反斜线后面跟<code>$</code> <code>` </code> <code>\</code>时仍保留转义的意义，后跟其他字符时表示字面意义。第一个未被引用(前置一个反斜线)的反引号结束命令替换。如果使用<code>$()</code>的形式，括号中的所有字符都作为命令行对待，没有字符有特殊意义</p>
 <p>命令替换可以嵌套使用。如果使用反引号的形式进行嵌套，内层的反引号需要使用反斜线引用</p>
 <p><em>如果命令替换结果加了双引号</em>，则word splitting和filename expansion不会进行</p>
-<h5 id="算术扩展"><a href="#算术扩展" class="headerlink" title="算术扩展"></a>算术扩展</h5><p>算术扩展将算术表达式进行计算，然后使用计算结果替换整个表达式。算术扩展的格式是：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(( expression ))</span><br></pre></td></tr></table></figure></p>
+<h4 id="算术扩展"><a href="#算术扩展" class="headerlink" title="算术扩展"></a>算术扩展</h4><p>算术扩展将算术表达式进行计算，然后使用计算结果替换整个表达式。算术扩展的格式是：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(( expression ))</span><br></pre></td></tr></table></figure></p>
 <p>expression就像在双引号中一样，但是小括号中的双引号不会被特殊对待。exression中的所有token都要经过 <em>parameter expansion command substitution和quote removal</em>。替换的结果被作为算术表达式进行算术运算。算术扩展也可以嵌套</p>
 <p>算术运算按照后面描述的规则进行。如果算术表达式不合法，bash会向标准错误输出打印错误消息，不进行任何扩展</p>
 <h4 id="进程替换"><a href="#进程替换" class="headerlink" title="进程替换"></a>进程替换</h4><p>只有支持命名管道或者是/dev/fd/方法的命名文件的系统上才支持。进程替换使用下面的形式：</p>
@@ -414,11 +414,11 @@ filename expansion">
 <p>如果可用，进程替换和parameter expansion command substitution和arithmetic expansion一起进行</p>
 <h4 id="word分割"><a href="#word分割" class="headerlink" title="word分割"></a>word分割</h4><p>shell扫描parameter expansion command substitution和arithmetic expansion的结果进行word splitting，<em>如果结果包含在双引号中则不进行word splitting</em></p>
 <p>Shell将<code>$IFS</code>的每一个字符作为分隔符，使用分隔符将其他扩展的结果分隔为单个的word。如果IFS未设置，或者它的值就是<code>&lt;space&gt;</code> <code>&lt;tab&gt;</code> <code>&lt;newline&gt;</code>这些默认值，则扩展结果中的开始的和结束的一串默认分隔符都被忽略，其他位置的一串默认分隔符用来分隔操作。如果IFS非默认值，则扩展结果中开始和结束的一连串的空格和tab也被忽略，就像空格字符也在$IFS中一样。IFS中的其他字符用来作为word splitting的分隔符。一系列的空格也被当做是一个分隔符。如果IFS为空值，则不进行word splitting</p>
-<p>显式的给IFS赋空值(“”或者’’)，则IFS为空值。未引用的隐式的空值，比如parameter expansion导致的空参数，则IFS为原来的值(默认值)。但是如果将隐式的空参数放置在双引号中则仍将IFS赋空值(原文如下，感觉不是作者的意思)<br>Explicit null arguments (“” or ‘’) are retained. Unquoted implicit null arguments, resulting from the expansion of parameters that have no values, are removed. If a parameter with no value is expanded within double quotes, a null argument results and is retained. </p>
+<p>显式的给IFS赋空值(<code>&quot;&quot;</code>或者<code>&#39;&#39;</code>)，则IFS为空值。未引用的隐式的空值，比如parameter expansion导致的空参数，则IFS为原来的值(默认值)。但是如果将隐式的空参数放置在双引号中则仍将IFS赋空值(原文如下，感觉不是作者的意思)<br>Explicit null arguments (“” or ‘’) are retained. Unquoted implicit null arguments, resulting from the expansion of parameters that have no values, are removed. If a parameter with no value is expanded within double quotes, a null argument results and is retained. </p>
 <blockquote>
 <p><em>注意：如果没有进行expansion则不会进行word splitting</em></p>
 </blockquote>
-<h4 id="文件名扩展"><a href="#文件名扩展" class="headerlink" title="文件名扩展"></a>文件名扩展</h4><p>word splitting之后，除非使用了-f参数，bash扫描每一个word中的<code>*</code> <code>?`` 和</code>[`字符。如果前面任意一个字符出现，则这个word被认为是一个pattern，然后用匹配这个pattern的所有文件名来进行替换，这些文件按字母顺序排序。如果没有匹配到，并且禁用了nullglob选项，则word按字面意义。如果没有匹配，启用了nullglob选项，则word被移除。如果启用了failglob选项，并且没有匹配到任何文件，则返回错误消息，并且命令不被执行。如果启用nocaseglob选项，则匹配时不区分大小写</p>
+<h4 id="文件名扩展"><a href="#文件名扩展" class="headerlink" title="文件名扩展"></a>文件名扩展</h4><p>word splitting之后，除非使用了-f参数，bash扫描每一个word中的<code>*</code> <code>?</code> <code>[</code>字符。如果前面任意一个字符出现，则这个word被认为是一个pattern，然后用匹配这个pattern的所有文件名来进行替换，这些文件按字母顺序排序。如果没有匹配到，并且禁用了nullglob选项，则word按字面意义。如果没有匹配，启用了nullglob选项，则word被移除。如果启用了failglob选项，并且没有匹配到任何文件，则返回错误消息，并且命令不被执行。如果启用nocaseglob选项，则匹配时不区分大小写</p>
 <p>当pattern被用来匹配文件名时，以一个<code>.</code>字符开始的文件名或者<code>.</code>然后紧跟一个斜线的文件名需要被显式的匹配，除非bash设置了dotglob选项。当匹配一个文件名时，斜线字符必须被显式的匹配，<code>.</code>字符则总是按字母意义</p>
 <p>bash的nocaseglob、nullglob、failglob和dotglob选项的详细信息参考shopt章节</p>
 <p>GLOBIGNORE shell变量可以用来限制匹配到的文件名。如果GLOBIGNORE变量被设置，所有匹配到的文件名中同时也匹配GLOBIGNORE变量的文件名被从结果列表中移除。如果设置了GLOBIGNORE并且非空则文件名<code>.</code> <code>..</code>总是被忽略。然而，设置GLOBIGNORE变量为非空值，也有和启用dotglob选项相同的作用，所以以”.”开始的文件会被匹配。可以将<code>.*</code>作为GLOBIGNORE的一个值来避免这种行为。如果将GLOBIGNORE变量取消则dotglob也会被禁用</p>
@@ -593,7 +593,7 @@ filename expansion">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#大括号扩展"><span class="nav-number">1.</span> <span class="nav-text">大括号扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#波浪线扩展"><span class="nav-number">2.</span> <span class="nav-text">波浪线扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shell参数扩展"><span class="nav-number">3.</span> <span class="nav-text">Shell参数扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命令替换"><span class="nav-number">4.</span> <span class="nav-text">命令替换</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#算术扩展"><span class="nav-number">4.1.</span> <span class="nav-text">算术扩展</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程替换"><span class="nav-number">5.</span> <span class="nav-text">进程替换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#word分割"><span class="nav-number">6.</span> <span class="nav-text">word分割</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件名扩展"><span class="nav-number">7.</span> <span class="nav-text">文件名扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#模式匹配"><span class="nav-number">7.1.</span> <span class="nav-text">模式匹配</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引用移除"><span class="nav-number">8.</span> <span class="nav-text">引用移除</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#大括号扩展"><span class="nav-number">1.</span> <span class="nav-text">大括号扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#波浪线扩展"><span class="nav-number">2.</span> <span class="nav-text">波浪线扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数扩展"><span class="nav-number">3.</span> <span class="nav-text">参数扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命令替换"><span class="nav-number">4.</span> <span class="nav-text">命令替换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算术扩展"><span class="nav-number">5.</span> <span class="nav-text">算术扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程替换"><span class="nav-number">6.</span> <span class="nav-text">进程替换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#word分割"><span class="nav-number">7.</span> <span class="nav-text">word分割</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件名扩展"><span class="nav-number">8.</span> <span class="nav-text">文件名扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#模式匹配"><span class="nav-number">8.1.</span> <span class="nav-text">模式匹配</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引用移除"><span class="nav-number">9.</span> <span class="nav-text">引用移除</span></a></li></ol></div>
             
           </div>
         </section>

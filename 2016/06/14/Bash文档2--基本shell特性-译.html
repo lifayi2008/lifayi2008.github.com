@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://blog.yoopig.com/2016/06/14/Bash文档2--基本shell特性-译.html">
 <meta property="og:site_name" content="lifayi2008">
 <meta property="og:description" content="Bash是Bourne-again shell的首字母缩写。Bourne shell是传统的Unix shell，由Stephen Bourne开发。所有的sh内置命令都在bash中实现，evaluation和quoting的规则则来自POSIX规范中Unix shell的标准">
-<meta property="og:updated_time" content="2016-10-11T10:00:17.000Z">
+<meta property="og:updated_time" content="2016-10-14T05:51:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Bash文档2--基本shell特性(译)">
 <meta name="twitter:description" content="Bash是Bourne-again shell的首字母缩写。Bourne shell是传统的Unix shell，由Stephen Bourne开发。所有的sh内置命令都在bash中实现，evaluation和quoting的规则则来自POSIX规范中Unix shell的标准">
@@ -359,7 +359,7 @@
 <p>保留字<code>time</code>可以对管道执行的时间进行统计，并且在管道命令返回时打印出统计信息。目前的统计信息包括流逝的时间（墙上时钟）和用户以及系统执行命令消耗的时间。<code>-p</code>参数可以按POSIX的方式输出。在POSIX模式下，如果下一个token以<code>-</code>开始，则time不被认为是一个保留字。<code>TIMEFORMAT</code>变量可以设置为一个格式字符串用来表示如何显示时间，Bash Variable一节描述了可用的格式字符。内置的<code>time</code>命令可以计算内置命令、shell函数和管道运行消耗的时间，非内置的<code>time</code>命令可能没有那么容易计算这些值</p>
 <p>当Shell在POSIX模式下，使用单独的<code>time</code>命令可以计算shell和shell的子进程消耗的用户和系统时间。同样可以使用<code>TIMEFORMAT</code>变量来设置显示的格式</p>
 <p>如果管道使用非异步方式运行则shell会等待所有的管道命令执行完毕(再返回)</p>
-<p>管道中的每个命令都在各自的子shell中执行。通常管道的退出状态是管道中最后一个命令的退出状态。如果使用<code>pipefail</code>选项，管道的返回值是最后一个返回值为非0的命令的返回值，如果所有命令都返回0则管道也返回0。如果再管道前放置一个<code>!</code>，则返回值是上面描述的返回值的逻辑非值。shell会等待管道中的所有命令都终止时才返回一个值</p>
+<p><strong>管道中的每个命令都在各自的子shell中执行</strong>。通常管道的退出状态是管道中最后一个命令的退出状态。如果使用<code>pipefail</code>选项，管道的返回值是最后一个返回值为非0的命令的返回值，如果所有命令都返回0则管道也返回0。如果再管道前放置一个<code>!</code>，则返回值是上面描述的返回值的逻辑非值。shell会等待管道中的所有命令都终止时才返回一个值</p>
 <h5 id="命令列表"><a href="#命令列表" class="headerlink" title="命令列表"></a>命令列表</h5><p>命令列表是由<code>;</code> <code>&amp;</code> <code>&amp;&amp;</code> <code>||</code>分割；可选的由<code>;</code> <code>&amp;</code>或者 <code>newline</code>终止的一个或者多个命令组成的命令流水线</p>
 <p>这些命令列表操作符中后两个的优先级相同高于前两个优先级</p>
 <p>一个或者多个换行和冒号一样可以作为命令的分割（因为command\n command\n的执行方式等同于command;command的执行方式）</p>
@@ -452,14 +452,14 @@ function name [()] compound-command [ redirections ]
 <p>FUNCNEST变量如果设置为大于零则表示函数调用的最大层数，函数调用超出这个值则会立刻终止，函数递归调用同样受这个变量的限制，默认为0表示没有限制</p>
 <p>在函数中执行return内置命令，则函数会返回到调用的地方继续下面命令的执行。和RETURN trap关联的命令会在函数返回时执行。当函数执行完毕后位置参数和<code>#</code>恢复到原来的值。如果return命令后面跟一个数字，则这个数字是函数的返回值，否则的话函数的返回值是return之前的一个命令的返回值</p>
 <p>函数的本地变量可以使用local内置命令声明；然后这些变量只能在函数和函数中调用的命令中使用；未使用local关键字声明的变量表示全局变量</p>
-<p>可以使用内置命令declare和typeset的<code>-f</code>参数列出当前环境中的所有的函数名和定义。而内置命令declare和typeset的-F参数可以只列出函数名，如果shell选项extdebug启用，也能列出文件名和行号。使用内置命令export的-f参数可以将一个函数定义导出到环境中，注意环境中的变量和函数重名会导致一些问题</p>
+<p>可以使用内置命令declare和typeset的<code>-f</code>参数列出当前环境中的所有的函数名和定义。而内置命令declare和typeset的<code>-F</code>参数可以只列出函数名，如果shell选项extdebug启用，也能列出文件名和行号。使用内置命令export的<code>-f</code>参数可以将一个函数定义导出到环境中，注意环境中的变量和函数重名会导致一些问题</p>
 <h4 id="shell变量-参数"><a href="#shell变量-参数" class="headerlink" title="shell变量/参数"></a>shell变量/参数</h4><p>参数是一个用来存储值的实体。参数名可以是前文中（术语一节）的name或者一个数字或者是下文中的一些特殊字符。变量是指用名字来指代一个参数。变量可以有零个或者多个属性。属性的分配使用内置命令declare</p>
 <p>初次给一个参数赋值就定义了这个参数。null字符也是一个合法的值。定义一个参数之后可以使用内置命令<code>unset</code>来取消</p>
 <p>变量可以使用这一的语句来赋值 <code>name=[value]</code></p>
 <p>如果未给出value值，则变量被赋予空值。所有的value都要经历 <em>tidle expansion、parameter/variable expansion、command substitution、arithmetic expansion、qoute removal。</em>如果一个变量被设置了整型的属性，则表达式中的变量会作为数字进行数学运算，即使没有使用<code>$(())</code>的结构。变量赋值时value不会进行 <em>word splitting和pathname expansion，</em> 有一个特例是<code>$@</code>，下面有相关描述。赋值语句也可以出现在<code>alias</code> <code>declare</code> <code>typeset</code> <code>export</code> <code>readonly</code>和<code>local</code>内置命令后面作为参数。When in POSIX mode (see Bash POSIX Mode), these builtins may appear in a command after one or more instances of the command builtin and retain these assignment statement properties.</p>
 <p>在使用赋值语句给一个变量和索引数组赋值的时候，<code>+=</code>操作符可以用来追加一个值到变量原来的值上。当变量名有整型的属性时，会进行数学运算。当使用compound command(圆括号)结构将一个或者多个值追加到一个数组变量时，数组索引会依次增大并且将对应的值依次赋给对应的索引，当使用<code>=</code>号操作符时，表示替换整个数组变量；当使用关联数组时依然可用。当变量没有这些属性时(默认是字符串)，则会将value连接到原来的值的后面</p>
 <p>A variable can be assigned the nameref attribute using the -n option to the \fBdeclare\fP or \fBlocal\fP builtin commands (see Bash Builtins) to create a nameref, or a reference to another variable. This allows variables to be manipulated indirectly. Whenever the nameref variable is referenced or assigned to, the operation is actually performed on the variable specified by the nameref variable’s value. A nameref is commonly used within shell functions to refer to a variable whose name is passed as an argument to the function. For instance, if a variable name is passed to a shell function as its first argument, running <code>declare -n ref=$1</code> inside the function creates a nameref variable ref whose value is the variable name passed as the first argument. References and assignments to ref are treated as references and assignments to the variable whose name was passed as $1.<br>If the control variable in a for loop has the nameref attribute, the list of words can be a list of shell variables, and a name reference will be established for each word in the list, in turn, when the loop is executed. Array variables cannot be given the -n attribute. However, nameref variables can reference array variables and subscripted array variables. Namerefs can be unset using the -n option to the unset builtin (see Bourne Shell Builtins). Otherwise, if unset is executed with the name of a nameref variable as an argument, the variable referenced by the nameref variable will be unset.</p>
-<h5 id="位置参数"><a href="#位置参数" class="headerlink" title="位置参数"></a>位置参数</h5><p>位置参数是用数字引用的参数（$0表示脚本名而不表示位置参数）；位置参数在shell调用时使用shell的参数来赋值，而且可以使用set内置命令重新赋值。位置参数使用${N}的形式引用，当N是单个的数字时可以不加大括号。位置参数不能使用普通的赋值语句赋值。set和shift内置命令可以用来重新定义和取消定义。当调用函数时位置参数临时被函数的参数代替</p>
+<h5 id="位置参数"><a href="#位置参数" class="headerlink" title="位置参数"></a>位置参数</h5><p>位置参数是用数字引用的参数（$0表示脚本名而不表示位置参数）；位置参数在shell调用时使用shell的参数来赋值，而且可以使用set内置命令重新赋值。位置参数使用<code>${N}</code>的形式引用，当N是单个的数字时可以不加大括号。位置参数不能使用普通的赋值语句赋值。<code>set</code>和<code>shift</code>内置命令可以用来重新定义和取消定义。当调用函数时位置参数临时被函数的参数代替</p>
 <h5 id="特殊参数"><a href="#特殊参数" class="headerlink" title="特殊参数"></a>特殊参数</h5><p>下面几个参数在shell中有特别的意义。这些参数只能引用不能给他们赋值：</p>
 <p><strong>$*</strong>：参数展开为所有的位置参数。当参数展开不在双引号中进行时，每一个位置参数展开为单个的word。根据上下文这些words会进一步使用 <em>word splitting</em>和 <em>pathname expansion</em>来进行处理。当位置参数在双引号中展开时，所有的位置参数扩展为一个word(在双引号中)，并且每个位置参数使用shell内置分隔符IFS的第一个字符来分割，如果IFS未设置则默认是空格，如果IFS设置为null则所有的位置参数连接在一起</p>
 <p><strong>$@</strong>：参数展开为所有的位置参数。当参数展开没有在双引号中时，和<code>$*</code>完全一样。当位置参数在双引号中展开时，每个位置参数展开为单个的word，<code>$@</code>等同于<code>&quot;$1&quot;</code> <code>&quot;$2&quot;</code> <code>....</code>。如果双引号引起来的<code>$@</code>或者<code>$*</code>包含在一个word中，则扩展的结果是：第一个参数连接着word的开始部分，然后是空格，然后第二个参数，最后一个参数连接着word的结束的部分。如果没有位置参数，<code>$@</code>和<code>$@</code>都展开为空（被移除）</p>
