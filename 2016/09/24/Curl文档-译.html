@@ -92,7 +92,7 @@ curl [options] [URL...]">
 <meta property="og:site_name" content="lifayi2008">
 <meta property="og:description" content="语法
 curl [options] [URL...]">
-<meta property="og:updated_time" content="2016-10-09T03:20:02.000Z">
+<meta property="og:updated_time" content="2016-11-11T08:05:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Curl文档(译)">
 <meta name="twitter:description" content="语法
@@ -454,7 +454,135 @@ URL-encoded already
 <p><strong><code>--key-type &lt;type&gt;</code></strong><br><code>(SSL)</code>指定私钥类型。支持<code>DER</code> <code>PEM</code> <code>ENG</code>，默认是<code>PEM</code></p>
 <p><strong><code>--krb &lt;level&gt;</code></strong><br><code>(FTP)</code>启用<code>Kerberos</code>认证。<code>level</code>必须提供，可以是<code>clear</code> <code>safe</code> <code>confidential</code> <code>private</code>，其他值都被认为是<code>private</code></p>
 <p>这个选项需要在编译时启用<code>kerberos4</code>或者<code>GSSAPI(GSS-Negotiate)</code>支持，这个可能在某些系统中并不支持，可以使用<code>-V, --version</code>选项来查看是否支持</p>
-<p><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong><br><strong>``</strong>  </p>
+<p><strong><code>-l, --list-only</code></strong>  </p>
+<p><strong><code>-L, --location</code></strong><br><code>(HTTP/HTTPS)</code>如果服务器报告请求的页面已经被移动到另外一个位置（使用HTTP头<code>Location:</code>和3xx响应码），使用这个选项可以让curl继续请求新的地址；如果和<code>-i, --include</code>或者<code>-I,  --head</code>选项一起使用，则会显示所有被请求页面的头信息。如果启用认证则curl只会将认证信息发送到初始的请求地址，可以使用<code>--location-trusted</code>选项改变这种行为。可以紧接着使用<code>--max-redirs</code>选项限制重定向的最大次数</p>
+<p>如果curl最初发送的不是普通的<code>GET</code>请求（比如<code>POST</code>和<code>PUT</code>）则如果响应码是<code>301</code> <code>302</code> <code>303</code>，curl会使用<code>GET</code>方法发送接下来的请求；如果响应码是其他的3xx则接下来的请求仍旧使用原来的请求方法</p>
+<p><strong><code>--libcurl &lt;file&gt;</code></strong>  </p>
+<p><strong><code>--limit-rate &lt;speed&gt;</code></strong><br>指定curl可以使用的传输速度。这在你想限制curl使用的带宽时有用；<code>speed</code>默认是字节/秒，你可以增加一个后缀比如：<code>k K</code> <code>m M</code> <code>g G</code>来表示一个单位；给定的速度是整个传输过程中的平均速度，有可能在瞬时会超过这个速度</p>
+<p>如果同时使用<code>-Y, --speed-limit</code>选项，that option will take precedence and might cripple the rate-limiting slightly, to help<br>              keeping the speed-limit logic working.</p>
+<p><strong><code>--local-port &lt;num&gt;[-num]</code></strong><br>设置发起连接所优先使用的端口号或者端口号范围</p>
+<p><strong><code>--location-trusted</code></strong><br><code>(HTTP/HTTPS)</code>就像<code>-L, --location</code>选项一样，但是允许将认证信息发送给重定向后的服务器；注意这可能有安全的问题，在基本认证方法下用户名和密码都是明文传输</p>
+<p><strong><code>-m, --max-time &lt;seconds&gt;</code></strong><br>允许整个操作运行的最大秒数。这有助于防止批量的请求占用大量的带宽和CPU时间。从7.32.0版本开始可以支持小数值</p>
+<p><strong><code>--mail-auth &lt;address&gt;</code></strong><br><code>(SMTP)</code>指定单个的地址。这个地址被用在请求转发邮件到其他服务器时的验证地址</p>
+<p><strong><code>--mail-from &lt;address&gt;</code></strong><br><code>(SMTP)</code>指定邮件信封中的发件人地址</p>
+<p><strong><code>--mail-rcpt &lt;address&gt;</code></strong><br><code>(SMTP)</code>指定单个地址，用户名或者邮件列表名。要发送邮件时，<code>recipient</code>应该是一个合法的地址。如果发送邮件时使用<code>VRFY</code>命令，则<code>recipient</code>使用用户名或者用户名+域名相同。如果使用邮件列表扩展（<code>EXPN</code>命令），则<code>recipient</code>应该指定一个邮件列表名</p>
+<p><strong><code>--max-filesize &lt;bytes&gt;</code></strong><br>指定允许下载的文件的最大字节数，如果请求的文件大小大于这个值，则curl不进行文件传输并返回63</p>
+<blockquote>
+<p>注意：文件大小不总是在文件传输之前可以获得，所以在这种情况下这个选项不起作用；这个选项主要用于<code>FTP</code> <code>HTTP</code></p>
+</blockquote>
+<p><strong><code>--max-redirs &lt;num&gt;</code></strong><br>用于限制<code>-L, --location</code>选项允许重定向时，最大的重定向次数。默认是50，设置为-1表示无限制</p>
+<p><strong><code>--metalink</code></strong>  </p>
+<p><strong><code>-n, --netrc</code></strong><br>让curl在用户家目录寻找并且读取<code>.netrc</code>文件中的登陆用户名和密码。典型的使用是在Unix系统的FTP服务。如果在HTTP中使用则curl会启用验证。文件的格式参考netrc(4)和ftp(1)。环境变量<code>HOME</code>的值被当作是家目录</p>
+<p>文件的格式：</p>
+<pre><code>machine host.domain.com login myself password secret
+# machine、login、password是固定的
+</code></pre><p><strong><code>--netrc-file</code></strong><br>指定<code>.netrc</code>文件的位置</p>
+<p><strong><code>--netrc-optional</code></strong><br><code>-n, --netrc</code>为强制使用<code>.netrc</code>文件，而这个选项表示可选的使用</p>
+<p><strong><code>-N, --no-buffer</code></strong><br>禁用输出的缓存</p>
+<p><strong><code>--negotiate</code></strong><br><code>(HTTP)</code>启用<code>GSS-Negotiate</code>认证。<code>GSS-Negotiate</code>认证方法是微软设计并且在其web框架中使用。主要是为了支持<code>Kerberos5</code>认证，但是也可以用于其他的认证方法</p>
+<p>If you want to enable Negotiate for your proxy authentication, then use –proxy-negotiate.</p>
+<p>这个选项需要libcurl库编译时启用GSSAPI支持，并且可能在很多系统中不被支持，可以使用<code>-V</code>选项来检查是否支持这个选项</p>
+<p>要使用这个选项，必须提供一个假的user来恰当的激活认证过程，通常使用<code>-u :</code></p>
+<p><strong><code>--no-keepalive</code></strong><br>禁用HTTP长连接，curl默认是启用的</p>
+<p><strong><code>--no-sessionid</code></strong><br><code>(SSL)</code>禁用SSL session—ID缓存。By default all transfers are done using the cache. Note that while nothing<br>              should ever get hurt by attempting to reuse SSL session-IDs, there seem to be broken SSL implementations in the wild that may require<br>              you to disable this in order for you to succeed. (Added in 7.16.0)</p>
+<p><strong><code>--noproxy &lt;no-proxy-list&gt;</code></strong><br>指定的逗号分隔的主机列表不使用代理。<code>*</code>表示任意主机。注意，列表中指定的域名匹配这个域名本身，及这个域名所有的子域名和主机名</p>
+<p><strong><code>--ntlm</code></strong><br><code>(HTTP)</code>启用NTLM认证。NTLM认证是由微软设计并且在IIS web服务器中使用。</p>
+<p><strong><code>-o, --output &lt;file&gt;</code></strong><br>将输出写入到文件而不是标准输出。如果你使用<code>{}</code> <code>[]</code>一次性获取多个文档数据，则可以在<code>file</code>中加上一个<code>#</code>并且后跟一个数字，这个数字指代<code>url</code>中的第<code>n</code>个<code>[]或者{}</code>，并且会被替换为实际的<code>{} []</code>中的字符串：</p>
+<pre><code>curl http://{one,two}.site.com -o &quot;file_#1.txt&quot;
+# 1会被替换为 one 和 two
+
+curl http://{site,host}.host[1-5].com -o &quot;#1_#2&quot;
+# 1会被替换为 site host 而2会被替换为1 2 3 4 5
+</code></pre><p><code>file</code>同样可以使用<code>-</code>表示标准输出</p>
+<p><strong><code>-O, --remote-name</code></strong><br>同样将输出写入到文件，但是不需要指定文件名，而直接使用获取的资源名作为文件名。资源名通常是URL的一部分。文件会被写入到当前文件夹。如果URL中有URLEncode编码则curl不会进行解码</p>
+<p><strong><code>--oauth2-bearer</code></strong><br><code>(IMAP,POP3,SMTP)</code>为OAUTH2.0验证服务指定Bearer Token</p>
+<p><strong><code>-p, --proxytunnel</code></strong><br>在使用HTTP proxy时<code>(-x, --proxy)</code>，这个选项让非HTTP协议通过这个HTTP代理通道发送其他协议请求。这个通道是利用HTTP代理的<code>CONNECT</code>请求，并且需要代理服务器允许重定向连接请求到远程的服务端口</p>
+<p><strong><code>-P, --ftp-port &lt;address&gt;</code></strong><br><code>(FTP)</code>使用FTP的主动模式。<code>address</code>可以是下面的三种值：<code>interface</code> <code>IP address</code> <code>hostname</code></p>
+<p>禁用<code>PORT</code>命令可以使用<code>--ftp-pasv</code>。禁用<code>EPRT</code>命令可以使用<code>--disable-eprt</code></p>
+<p>从<code>7.19.5</code>版本开始可以在<code>IP address</code>后面加上<code>:[start]-[end]</code>来指定一个curl可以使用的端口范围，也可以指定一个单独的端口号，但是要注意这个端口没有被其他应用占用</p>
+<p><strong><code>--pass &lt;phrase&gt;</code></strong><br><code>(SSL/SSH)</code>指定私钥的Passphrase（密码）</p>
+<p><strong><code>--post301 --post302 --post303</code></strong><br><code>(HTTP)</code>按照RFC 2616/10.3.2的规定在301/302/303重定向后不将POST请求转换为GET请求。因为很多浏览器会做这样的转换，所以curl默认也做转换，使用这个选项可以阻止这种转换</p>
+<p>这个选项只在使用<code>-L, --location</code>选项时才有意义</p>
+<p><strong><code>--proto &lt;protocols&gt;</code></strong><br><code>protocols</code>是逗号分隔的协议列表（也可以是<code>all</code>）来指定curl依次尝试请求所使用的协议类型，可以使用下面的一个或者多个前缀：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+   除了协议列表允许的协议外，还包括这个协议（这是默认的前缀）</span><br><span class="line">-   从允许的协议列表中禁用某个协议</span><br><span class="line">=   只允许这个指定的协议（忽略已经允许的协议列表）</span><br></pre></td></tr></table></figure></p>
+<p><strong><code>--proto-redir &lt;protocols&gt;</code></strong><br>让curl在重定向之后使用指定的协议列表。<code>protocols</code>同上面的参数</p>
+<p><strong><code>--proxy-anyauth</code></strong><br>让curl在连接代理时自动选择一个合适的认证方式，这可能会导致curl发送多次请求</p>
+<p><strong><code>--proxy-basic --proxy-digest --proxy-negotiate --proxy-ntlm</code></strong><br>让curl在连接代理时使用<code>basic/digest/negotiage/NTLM</code>认证方式。使用<code>--basic --digest --negotiate --ntlm</code>选项可以让curl连接远程服务器时使用相应的认证方法</p>
+<p><strong><code>--proxy1.0 &lt;proxyhost[:port]&gt;</code></strong><br>使用指定的<code>HTTP 1.0</code>代理协议。如果未指定<code>port</code>则默认是1080</p>
+<p>这个选项和<code>-x, --proxy</code>选项的区别是后者默认是用<code>HTTP 1.1</code>协议的<code>CONNECT</code>请求连接代理服务器</p>
+<p><strong><code>--pubkey &lt;key&gt;</code></strong><br><code>(SSH)</code>指定公钥文件的位置</p>
+<p><strong><code>-q</code></strong><br>如果作为第一个选项。则<code>curlrc</code>不会被使用。<code>-K, --config</code>提供了查找默认配置文件的路径</p>
+<p><strong><code>-Q, --quote &lt;command&gt;</code></strong><br><code>(FTP/SFTP)</code>发送一个命令到远程的<code>FTP</code> <code>SFTP</code>服务器。Quote命令会在数据传输之前发送（并且在连接到FTP服务器发送<code>PWD</code>命令之后）。要让命令在成功传输数据之后发送则需要在<code>command</code>之前加一个<code>-</code>字符。要让命令在curl改变当前工作目录之后发送可以在<code>command</code>之前加上<code>+</code>（只支持FTP）。你可以指定任意数量的<code>command</code>，如果这些command的执行有任何错误发生则停止执行其他的command。这些<code>command</code>必须是语义正确的（RFC959）或者是<code>SFTP</code>服务器支持的。这个选项可以使用多次，如果在前一个选项的<code>command</code>之前加上一个<code>*</code>则即使这个命令执行错误，下一个选项的<code>command</code>依旧会执行（默认会停止执行）</p>
+<p><code>SFTP</code>是一个二进制协议。不像<code>FTP</code>协议，curl会在发送命令到服务器之前解释这个命令。文件名可以使用shell风格的引用这样允许中间包含空格或者特殊字符。下面是<code>SFTP</code>支持的所有quote命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">chgrp group file</span><br><span class="line">chmod mode file</span><br><span class="line">chown user file</span><br><span class="line">ln <span class="built_in">source</span>_file target_file</span><br><span class="line">mkdir directory_name</span><br><span class="line"><span class="built_in">pwd</span></span><br><span class="line">rename <span class="built_in">source</span> target</span><br><span class="line">rm file</span><br><span class="line">rmdir directory</span><br><span class="line">symlink <span class="built_in">source</span>_file target_file</span><br></pre></td></tr></table></figure></p>
+<p><strong><code>-r, --range &lt;range&gt;</code></strong><br><code>(HTTP/FTP/SFTP/FILE)</code>从<code>HTTP1.1</code> <code>FTP</code> <code>SFTP</code> <code>FILE</code>服务器获取一个字节范围的数据。<code>range</code>可以使用下面的表示方法<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">0-499     前500字节</span><br><span class="line">500-999   指定第二个500字节</span><br><span class="line">-500      指定最后500字节</span><br><span class="line">9500-     从9500偏移量开始的字节</span><br><span class="line">0-0,-1    制定第一个和最后一个字节 (*)(H)</span><br><span class="line">500-700,600-799  指定从500偏移量开始的300个字节 (H)</span><br><span class="line">100-199,500-599  制定两个范围的字节 (*)(H)</span><br><span class="line"></span><br><span class="line">(*)表示服务器会返回多个响应</span><br></pre></td></tr></table></figure></p>
+<p><code>range</code>中只能使用数字，如果发送非数字的范围。则根据服务器端的设置，返回不确定的结果；另外很多服务器可能未启用这个功能，所以当你想获取一部分数据时服务器给你发送了整个文档；<code>FTP/SFTP</code>只支持<code>start-stop</code>的表示方法</p>
+<p><strong><code>-R, --remote-time</code></strong><br>如果使用这个选项，则curl会尝试获取远程文件的时间，并且使用那个时间作为下载到本地文件的时间</p>
+<p><strong><code>--random-file &lt;file&gt;</code></strong><br><code>(SSL)</code>指定一个包含随机数的文件。这个随机数会作为ssl引擎的随机数种子</p>
+<p><strong><code>--raw</code></strong><br><code>(HTTP)</code>禁用curl的内容编码和传输编码</p>
+<p><strong><code>--remote-name-all</code></strong>  </p>
+<p><strong><code>--resolve &lt;host:port:address&gt;</code></strong><br>Provide a custom address for a specific host and port pair. Using this, you can make the curl requests(s) use a specified address and<br>              prevent  the  otherwise  normally  resolved  address to be used. Consider it a sort of /etc/hosts alternative provided on the command<br>              line. The port number should be the number used for the specific protocol the host will be  used  for.  It  means  you  need  several<br>              entries if you want to provide address for the same host but different ports.</p>
+<p><strong><code>--retry &lt;num&gt;</code></strong><br>指定错误（超时，FTP4xx相应码，HTTP5xx响应码）传输重试的次数。设置为0表示不重试，这也是默认值。</p>
+<p>第一次重试时会等待一秒的时间，以后每次重试都会等待前一次双倍的时间，直到最大值为10分钟，以后每次重试都使用这个间隔时间。下一个选项可以指定固定的等待时间</p>
+<p><strong><code>--retry-delay &lt;seconds&gt;</code></strong><br>这个选项只有在<code>--retry &lt;num&gt;</code>选项使用时才有意义，表示指定一个固定的等待时间</p>
+<p><strong><code>--retry-max-time &lt;seconds&gt;</code></strong><br>指定<code>--retry &lt;num&gt;</code>选项会增加到的最大等待时间，因为是前一个数值的双倍所以实际时间有可能超过这个数值</p>
+<p><strong><code>-s, --silent</code></strong><br>静默模式。不显示进度信息或者错误信息，只显示用户请求的数据。可以使用重定向将请求数据输出到文本</p>
+<p><strong><code>--sasl-ir</code></strong><br>Enable initial response in SASL authentication.  (Added in 7.31.0)</p>
+<p><strong><code>-S, --show-error</code></strong><br>如果请求失败显示错误信息</p>
+<p><strong><code>--ssl</code></strong><br><code>(FTP,  POP3,  IMAP,  SMTP)</code>尝试使用<code>SSL/TLS</code>连接服务器。如果服务器不支持<code>SSL/TLS</code>则使用非安全的连接。<code>--ftp-ssl-control</code> <code>--ssl-reqd</code>可以设置不同级别的加密请求</p>
+<p><strong><code>--ssl-reqd</code></strong><br><code>(FTP,  POP3,  IMAP,  SMTP)</code>尝试使用<code>SSL/TLS</code>连接服务器。如果服务器不支持<code>SSL/TLS</code>则终止连接</p>
+<p><strong><code>--ssl-allow-beast</code></strong><br>(SSL)  This  option  tells  curl  to not work around a security flaw in the SSL3 and TLS1.0 protocols known as BEAST.  If this option<br>              isn’t used, the SSL layer may use work-arounds known to cause interoperability problems with some older SSL implementations. WARNING:<br>              this option loosens the SSL security, and by using this flag you ask for exactly that.  (Added in 7.25.0)</p>
+<p><strong><code>--socks4 &lt;host[:port]&gt; --socks4a &lt;host[:port]&gt;</code></strong><br>使用指定的<code>socks4[a]</code>代理。如果端口未指定默认是1080。这个选项会覆盖掉<code>-x --proxy</code>选项的设置，这两个选项是互斥的</p>
+<p>从7.21.7版本开始这个选项是多余的，因为你可以使用<code>-x --proxy</code>，并将选项参数指定为<code>socks4[a]://xxxxxxxx</code>的形式</p>
+<p><strong><code>--socks5-hostname &lt;host[:port]&gt;</code></strong><br>使用指定的<code>socks5</code>代理，并且让代理服务器解析主机名；其他的和上面的<code>socks4[a]</code>相同；使用<code>-x --proxy</code>选项时，选项参数应该是<code>socks5h://xxxxxxxx</code>的形式</p>
+<p><strong><code>--socks5 &lt;host[:port]&gt;</code></strong><br>使用指定的<code>socks5</code>代理，但是使用本地的服务器解析主机名；其他的和上面的<code>socks4[a]</code>相同；使用<code>-x --proxy</code>选项时，选项参数应该是<code>socks5://xxxxxxxx</code>的形式</p>
+<p>这个选项和<code>--socks4</code>都不支持<code>ipv6</code> <code>FTPS</code> <code>LDAP</code>协议</p>
+<p><strong><code>--socks5-gssapi-service &lt;servicename&gt;</code></strong><br><strong><code>--socks5-gssapi-nec</code></strong>  </p>
+<p><strong><code>--stderr &lt;file&gt;</code></strong><br>将所有标准错误输出的信息，输出到指定的文件<code>&lt;file&gt;</code>；如果文件名是<code>-</code>则表示标准输出</p>
+<p><strong><code>-t, --telnet-option &lt;OPT=val&gt;</code></strong><br>使用<code>telnet</code>协议连接服务器时传递一些参数。支持这些参数：</p>
+<ul>
+<li><code>TTYPE=&lt;term&gt;</code> 设置终端类型</li>
+<li><code>XDISPLOC=&lt;X display&gt;</code> 设置<code>X play</code>位置</li>
+<li><code>NEW_ENV=&lt;var,val&gt;</code> 设置环境变量</li>
+</ul>
+<p><strong><code>-T, --upload-file &lt;file&gt;</code></strong><br>将本地文件传输到指定的URL地址，文件名加引号。如果在URL中没有指定文件部分，则Curl将本地的文件追加在URL后。注意：如果不指定文件名那么URL中最后必须使用<code>/</code>结束，否则curl可能认为最后一部分是你要指定的远程文件名。如果用在<code>HTTP(S)</code>协议中，将会使用<code>PUT</code>请求方式</p>
+<p>使用<code>&quot;-&quot;</code>（加引号）作为文件名表示从标准输入获取数据。使用<code>&quot;.&quot;</code>（加引号）作为文件名表示以非阻塞的方式从标准输入中获取数据</p>
+<p>可以同时制定多个<code>-T URL</code>组合来同时将不同的文件传送到不同的目标。<code>-T</code>也支持通配符模式，可以上传多个文件到同一个指定的地址：</p>
+<pre><code>curl -T &quot;{file1, file2}&quot; http://www.uploadthisfiel.com
+curl -T &quot;img[1-1000].png&quot; ftp://ftp.picturemania.com/upload/
+</code></pre><p><strong><code>--tcp-nodelay</code></strong><br>启用<code>TCP_NODELAY</code>选项</p>
+<p><strong><code>--tftp-blksize &lt;value&gt;</code></strong><br><code>(TFTP)</code>设置<code>TFTP BLKSIZE</code>选项。这是curl从TFPT服务器传输数据时使用的数据块大小，默认是512字节</p>
+<p><strong><code>--tlsauthtype &lt;authtype&gt;</code></strong><br>设置<code>TLS</code>认证类型。目前仅支持<code>SRP</code>。如果同时使用<code>--tlsuser --tlspassword</code>选项则这个选项默认被设置为<code>SRP</code></p>
+<p><strong><code>--tlspassword &lt;password&gt;</code></strong><br>设置<code>--tlsauthtype</code>所指定的认证类型所需要的密码，这个选项要求<code>--tlsuser</code>选项也被指定</p>
+<p><strong><code>--tlsuser &lt;user&gt;</code></strong><br>设置<code>--tlsauthtype</code>所指定的认证类型所需要的用户，这个选项要求<code>--tlspassword</code>选项也被指定</p>
+<p><strong><code>--tlsv1.0 --tlsv1.1 --tlsv1.2</code></strong><br><code>(SSL)</code>当和一个远程的<code>TLS</code>服务器连接时强制使用的<code>TLS</code>版本</p>
+<p><strong><code>--tr-encoding</code></strong><br><code>(HTTP)</code>使用curl支持的压缩算法，来发送HTTP请求，获取相应的数据并解压缩文件</p>
+<p><strong><code>--trace &lt;file&gt;</code></strong><br>跟踪（显示）所有请求和响应的数据，包括描述性信息，将<code>&lt;file&gt;</code>指定为<code>&quot;-&quot;</code>表示将输出信息打印到标准输出；这个选项会覆盖之前的<code>-v --verbose --trace-ascii</code>选项设置</p>
+<p><strong><code>--trace-ascii &lt;file&gt;</code></strong><br>和<code>--trace</code>选项类似，但是只会显示<code>ASCII</code>字符，其他的数据不会显示，这样可以减少一些输出让人更容易获取到感兴趣的信息；这个选项会覆盖之前的<code>-v --verbose --trace-ascii</code>选项设置</p>
+<p><strong><code>--trace-time</code></strong><br>在每一条跟踪信息前面显示一个时间戳</p>
+<p><strong><code>-u, --user &lt;user:password;options&gt;</code></strong><br>指定一个用户名、密码和可选的登录选项用于服务器的验证。指定这个选项会忽略<code>-n,  --netrc</code>选项</p>
+<p>如果只是指定一个用户名，则curl会提示你输入密码</p>
+<p>如果你使用了启用<code>SSPI</code>的curl，并且进行<code>NTLM</code>验证，你可以使用<code>-u :</code>的形式强制curl从环境中选择一个用户名和密码或者指定一个登陆选项，比如：<code>-u ;auth=NTLM</code></p>
+<p>可以在选项中使用协议相关的验证选项。目前只有<code>IMAP</code> <code>POP3</code> <code>SMTP</code>支持使用登陆选项作为一部分登陆信息。更多的登陆选项可以查询<code>RFC 2384</code> <code>RFC 5092</code></p>
+<p><strong><code>-U, --proxy-user &lt;user:password&gt;</code></strong><br>指定代理服务器验证时需要的用户名和密码</p>
+<p>如果你使用了启用<code>SSPI</code>的curl，并且进行<code>NTLM</code>验证，你可以使用<code>-U :</code>的形式强制curl从环境中选择一个用户名和密码</p>
+<p><strong><code>--url &lt;URL&gt;</code></strong><br>指定一个URL。如果要在一个文件中读取参数时通常使用这个选项指定URL；这个选项可以被使用多次；To control where this URL is written, use the -o,  –output  or  the  -O,  –remote-name<br>              options.</p>
+<p><strong><code>-v, --verbose</code></strong><br>显示更详细的信息通常用于排错；以<code>&gt;</code>开始的行，表示curl发送的头数据；以<code>&lt;</code>开始的行表示收到的头数据（默认情况下这些数据不显示）；以<code>*</code>开始的行表示curl添加的信息</p>
+<p>如果你只想显示<code>HTTP</code>头信息可以使用<code>-i, --include</code>选项</p>
+<p>如果这个选项显示的信息仍然不够详细，可以使用<code>--trace</code> <code>--trace-ascii</code>选项</p>
+<p>这个选项会覆盖之前的<code>--trace</code> <code>--trace-ascii</code>选项</p>
+<p><strong><code>-w, --write-out &lt;format&gt;</code></strong><br>指定成功完成一个操作后显示到终端的内容；<code>format</code>是一个包括普通字符和变量的字符串的混合，指定为<code>@filename</code>表示从文件读入格式，指定为<code>@-</code>表示从标准输入读入格式</p>
+<p>输出格式中的变量会被curl使用实际的值代替，变量使用<code>${variable_name}</code>的形式（如果要表示<code>&quot;%&quot;</code>字符需要使用<code>%%</code>），也可以使用<code>\n</code> <code>\r</code> <code>\t</code>分别表示换行、回车、制表符</p>
+<p>可用的变量如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">content_<span class="built_in">type</span>    请求文档的内容类型（Content-Type）</span><br><span class="line"></span><br><span class="line">filename_effective  curl写输出的最终文件名；这仅在指定--remote-name --output选项时有意义；在和--remote-header-name选项合用时也很有用</span><br><span class="line"></span><br><span class="line">ftp_entry_path      The initial path curl ended up <span class="keyword">in</span> when logging on to the remote FTP server</span><br><span class="line"></span><br><span class="line">http_code       上一次收到的http/ftp传输的状态码；等同于response_code</span><br><span class="line"></span><br><span class="line">http_connect    上一次curl发送的CNNECT请求收到的响应码</span><br><span class="line"></span><br><span class="line"><span class="built_in">local</span>_ip        最近一次连接使用的本地IP地址</span><br><span class="line"><span class="built_in">local</span>_port      最近一次连接使用的本地端口地址</span><br><span class="line">remote_ip       最近一次连接的远程IP地址</span><br><span class="line">remote_port     最近一次连接的远程端口</span><br><span class="line"></span><br><span class="line">num_connects    最近一次传输使用的连接数</span><br><span class="line"></span><br><span class="line">num_redirects   一个请求被重定向的次数</span><br><span class="line">redirect_url    当一个请求被允许进行重定向时（使用-L选项），实际重定向到的URL</span><br><span class="line"></span><br><span class="line">size_download   总共下载的字节数</span><br><span class="line">size_header     下载的头部信息的大小</span><br><span class="line">size_request    http请求的头部字节数</span><br><span class="line">size_upload     上传的总字节数</span><br><span class="line"></span><br><span class="line">speed_download      完成下载后计算出的下载速度 字节/秒</span><br><span class="line">speed_upload        完成上传后计算出的下载速度 字节/秒</span><br><span class="line"></span><br><span class="line">ssl_verify_result   The  result  of  the  SSL  peer  certificate verification that was requested. 0 means the verification was successful.</span><br><span class="line"></span><br><span class="line">time_appconnect     从发出curl命令到SSL/SSH/etc connect/handshake完成耗费的时间（秒）</span><br><span class="line">time_connect        从发出curl命令到完成连接耗费的时间（秒）</span><br><span class="line">time_namelookup     从发出curl命令到域名解析完成耗费的时间（秒）</span><br><span class="line">time_pretransfer    从发出curl命令到准备开始传输文件所消耗的时间（time_appconnect时间+文件传输协商时间）</span><br><span class="line">time_redirect       从发出curl命令到准备重定向，名称解析，文件传输协商，到最后实际准备开始传输消耗的事件</span><br><span class="line">time_starttransfer      从发出curl命令到第一个字节准备开始传输消耗的时间</span><br><span class="line">time_total          整个请求耗费的事件，微秒为单位</span><br><span class="line">url_effective       实际响应请求的URL地址，这在允许curl进行重定向时有用</span><br></pre></td></tr></table></figure>
+<p><strong><code>-x, --proxy &lt;[protocol://][user:password@]proxyhost[:port]&gt;</code></strong><br>使用特定的代理；尖括号中的代理实体可以使用<code>protocol://</code>前缀指定一个协议：<code>socks4://</code> <code>socks4a://</code> <code>socks5://</code> <code>socks5h://</code>，如果未使用协议前缀则默认是<code>http://</code>表示使用HTTP代理</p>
+<p>如果端口未指定的话，默认使用1080</p>
+<p>这个选项可以覆盖环境变量中配置的相关代理的设置；如果环境变量中有代理相关配置可以使用<code>&quot;&quot;</code>来表示不使用代理</p>
+<p>使用HTTP代理进行其他协议的数据传输都会被转换为HTTP协议，所以其他协议的某些操作可能会不用</p>
+<p><strong><code>-X, --request &lt;command&gt;</code></strong><br><code>(HTTP)</code>指定一个请求方法（默认为GET）；通用的请求方法包括<code>PUT</code> <code>DELETE</code>等，基于HTTP的<code>WebDAV</code>协议还提供了<code>PROPFIND</code> <code>COPY</code> <code>MOVE</code>和其他的一些方法</p>
+<p>通常不需要使用这个选项，因为请求方法会根据特定的选项而设置；这个选项仅仅更改了请求头信息中的字符串，而不会实际更改curl的行为；比如如果你想发送一个<code>HEAD</code>请求使用<code>-X HEAD</code>是无效的，需要使用<code>-I, --head</code>选项</p>
+<p>(FTP) Specifies a custom FTP command to use instead of LIST when doing file lists with FTP.<br>(POP3) Specifies a custom POP3 command to use instead of LIST or RETR. (Added in 7.26.0)<br>(IMAP) Specifies a custom IMAP command to use insead of LIST. (Added in 7.30.0)<br>(SMTP) Specifies a custom SMTP command to use instead of HELP or VRFY. (Added in 7.34.0)</p>
+<p><strong><code>--xattr</code></strong><br>将输出信息保存在文件中时，在扩展文件属性中记录一些数据的元信息</p>
+<p><strong><code>-y, --speed-time &lt;time&gt;</code></strong><br><strong><code>-Y, --speed-limit &lt;speed&gt;</code></strong><br>如果在指定的时间（默认30秒）内，下载速度（默认是1k）小于指定的值则终止传输</p>
+<p><strong><code>-z, --time-cond &lt;date expression&gt;|&lt;file&gt;</code></strong>  </p>
 
       
     </div>
@@ -582,7 +710,7 @@ URL-encoded already
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
