@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://blog.yoopig.com/2016/12/07/%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B03.html</loc>
-    <lastmod>2016-12-15T07:08:01.000Z</lastmod>
+    <lastmod>2017-02-04T05:32:09.000Z</lastmod>
     <data>
         <display>
         <title>《JavaScript高级程序设计》读书笔记3</title>
@@ -25,7 +25,7 @@
     
   <url>
     <loc>http://blog.yoopig.com/2016/12/01/%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B02.html</loc>
-    <lastmod>2016-12-07T05:43:28.000Z</lastmod>
+    <lastmod>2017-02-04T05:31:07.000Z</lastmod>
     <data>
         <display>
         <title>《JavaScript高级程序设计》读书笔记2</title>
@@ -45,7 +45,7 @@
     
   <url>
     <loc>http://blog.yoopig.com/2016/10/18/%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B01.html</loc>
-    <lastmod>2016-12-01T07:05:42.000Z</lastmod>
+    <lastmod>2017-02-04T05:29:04.000Z</lastmod>
     <data>
         <display>
         <title>《JavaScript高级程序设计》读书笔记1</title>
@@ -400,6 +400,26 @@
 
     
   <url>
+    <loc>http://blog.yoopig.com/2016/06/21/CentOS6-5%E5%AE%89%E8%A3%85redmine.html</loc>
+    <lastmod>2016-08-17T09:21:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>CentOS6.5安装redmine</title>
+        <pubTime>2016-06-21T09:38:38.000Z</pubTime>
+        
+        <tag>redmine</tag>
+         
+         
+           
+             
+              <breadCrumb title="基础服务" url="http://blog.yoopig.com/categories/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.yoopig.com/2016/06/12/hello-world.html</loc>
     <lastmod>2016-08-17T09:21:23.000Z</lastmod>
     <data>
@@ -409,26 +429,6 @@
         
          
            
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.yoopig.com/2016/08/15/MySQL%E4%BA%8B%E5%8A%A1%E5%8F%8A%E5%AE%9E%E7%8E%B0.html</loc>
-    <lastmod>2016-08-17T09:21:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>Mysql事务及实现</title>
-        <pubTime>2016-08-15T10:07:59.000Z</pubTime>
-        
-        <tag>MySQL</tag>
-         
-         
-           
-             
-              <breadCrumb title="数据库" url="http://blog.yoopig.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-          
         </display>
     </data>
     </url>
@@ -455,19 +455,19 @@
 
     
   <url>
-    <loc>http://blog.yoopig.com/2016/06/21/CentOS6-5%E5%AE%89%E8%A3%85redmine.html</loc>
+    <loc>http://blog.yoopig.com/2016/08/15/MySQL%E4%BA%8B%E5%8A%A1%E5%8F%8A%E5%AE%9E%E7%8E%B0.html</loc>
     <lastmod>2016-08-17T09:21:23.000Z</lastmod>
     <data>
         <display>
-        <title>CentOS6.5安装redmine</title>
-        <pubTime>2016-06-21T09:38:38.000Z</pubTime>
+        <title>Mysql事务及实现</title>
+        <pubTime>2016-08-15T10:07:59.000Z</pubTime>
         
-        <tag>redmine</tag>
+        <tag>MySQL</tag>
          
          
            
              
-              <breadCrumb title="基础服务" url="http://blog.yoopig.com/categories/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/"/>
+              <breadCrumb title="数据库" url="http://blog.yoopig.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
           
         </display>
     </data>

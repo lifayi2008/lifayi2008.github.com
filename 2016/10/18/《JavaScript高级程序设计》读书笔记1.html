@@ -96,7 +96,7 @@
 *   核心（ECMAScript）
 *   文档对象模型（DOM）
 *   浏览器对象模型（BOM）">
-<meta property="og:updated_time" content="2016-12-01T07:05:42.000Z">
+<meta property="og:updated_time" content="2017-02-04T05:29:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《JavaScript高级程序设计》读书笔记1">
 <meta name="twitter:description" content="JavaScript简介一个完整的JavaScript实现包含下面三个组成部分：
@@ -540,18 +540,19 @@
 <p>在严格模式下，<code>arguments</code>和对应的命名参数不会同步</p>
 <p><code>ECMAScript</code>中没有函数重载，如果定义了两个名称相同，参数不同的函数，则实际只有第二个是有效的</p>
 </blockquote>
-<h3 id="变量、作用域和内存问题"><a href="#变量、作用域和内存问题" class="headerlink" title="变量、作用域和内存问题"></a>变量、作用域和内存问题</h3><h4 id="基本类型和引用类型"><a href="#基本类型和引用类型" class="headerlink" title="基本类型和引用类型"></a>基本类型和引用类型</h4><p><code>ECMAScript</code>中变量的值可以是基本类型（基本数据类型）和引用类型（对象）；基本类型是指简单的数据段，而引用类型是指那些可能由多个值构成的对象</p>
+<h3 id="变量、作用域和内存问题"><a href="#变量、作用域和内存问题" class="headerlink" title="变量、作用域和内存问题"></a>变量、作用域和内存问题</h3><p><code>Javascript</code>中的变量只是在特定时间内保存数据的一个名字；变量的值及其保存的数据的类型在生命周期内都是可以改变的</p>
+<h4 id="基本类型和引用类型"><a href="#基本类型和引用类型" class="headerlink" title="基本类型和引用类型"></a>基本类型和引用类型</h4><p><code>ECMAScript</code>中变量的值可以是基本类型（基本数据类型）和引用类型（对象）；基本类型是指简单的数据段，而引用类型是指那些可能由多个值构成的对象</p>
 <p>创建一个基本类型或者引用类型的变量的方式是相同的，但是当相应的类型赋值到这个变量之后，我们可以对这个变量名的操作就不同了。对于引用类型我们可以动态的给它添加属性和方法，也可以改变和删除其属性和方法；但是我们不能给基本类型添加属性和方法</p>
 <p><code>ECMAScript</code>中基本类型和引用类型的复制区别和<code>JAVA</code>一样，即：基本类型复制值，引用类型复制地址（引用）；不同的是<code>ECMAScript</code>中的<code>String</code>是基本类型，<code>JAVA</code>中的字符串是一个对象；但是他们表现是一样的</p>
 <blockquote>
-<p>注意：变量的访问有按值访问和按引用访问的区别；但是复制时都是按值访问（参数传递同复制）</p>
+<p>注意：变量的访问有按值访问和按引用访问的区别；但是复制时都是按值访问（参数传递和复制相同）</p>
 </blockquote>
 <p><code>typeof</code>操作符用来确定一个变量的类型（通过返回一个表示类型的字符串）：<code>&quot;string&quot;</code> <code>&quot;number&quot;</code> <code>&quot;boolean&quot;</code> <code>&quot;object&quot;</code> <code>&quot;undefined&quot;</code> <code>&quot;function&quot;</code></p>
 <p><code>instanceof</code>操作符用来确定一个对象是什么类型的对象：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result = variable <span class="keyword">instanceof</span> <span class="keyword">constructor</span></span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>因为所有引用类型的值都是<code>Object</code>的实例，所以在检测一个引用类型和<code>Object</code>构造函数时，始终返回<code>true</code>；如果检测一个基本类型的变量，则始终返回<code>false</code></p>
 </blockquote>
-<h4 id="执行环境及作用域"><a href="#执行环境及作用域" class="headerlink" title="执行环境及作用域"></a>执行环境及作用域</h4><p>执行环境定义了变量或者函数有权访问的其他数据，决定了他们各自的行为。每个执行环境都有一个与之相关联的变量对象，环境中定义的所有变量和函数都保存在这个对象中。代码无法访问这个对象，但解析器在处理数据时会在后台访问它</p>
+<h4 id="执行环境及作用域"><a href="#执行环境及作用域" class="headerlink" title="执行环境及作用域"></a>执行环境及作用域</h4><p>执行环境定义了变量或者函数有权访问的其他数据，决定了他们各自的行为。每个执行环境都有一个与之相关联的 <strong>变量对象</strong>，环境中定义的所有变量和函数都保存在这个对象中。代码无法访问这个对象，但解析器在处理数据时会在后台访问它</p>
 <p>某个执行环境中所有代码执行完毕后，该环境即被销毁，保存在其中的所有变量和函数定义也被销毁</p>
 <p>在WEB浏览器中全局执行环境是<code>window</code>对象，因此所有全局变量和函数都是作为<code>window</code>对象的方法和属性创建的；这个全局执行环境直到所有代码执行完毕或者浏览器关闭时才会被销毁</p>
 <p>当代码在一个环境中执行时会创建变量对象的一个作用域链。作用域链的用途是保证对执行环境有权访问的所有变量和函数的有序访问。作用域链的前端，始终都是当前执行代码所在的环境的变量对象。如果这个环境是一个函数，则将其<em>活动对象</em>作为变量对象。活动对象在一开始时只包含一个变量：<code>arguments</code>对象（这个对象在全局中是不存在的）。作用域链中的下一个变量对象来自包含（包含当前环境）环境，这样一直延续到全局环境。全局环境的变量对象始终是作用域链中的最后一个对象</p>
@@ -559,32 +560,38 @@
 <blockquote>
 <p>函数的参数也被当做是局部变量</p>
 </blockquote>
-<p><code>JavaScript</code>中有两种方法可以延长作用域链（在作用域链的前端临时增加一个变量对象）：1）<code>with</code>语句会将指定的对象添加到作用域链<br>2）<code>try-catch</code>语句会创建一个新的变量对象，其中包含的是被抛出的错误对象的声明</p>
+<p><code>JavaScript</code>中有两种方法可以延长作用域链（在作用域链的前端临时增加一个变量对象）：</p>
+<p>1）<code>with</code>语句会将指定的对象添加到作用域链<br>2）<code>try-catch</code>语句会创建一个新的变量对象，其中包含的是被抛出的错误对象的声明</p>
 <p><code>JavaScript</code>中 <strong>没有块级作用域</strong> ：在代码块中（<code>if</code> <code>while</code> <code>for</code>等，不包含函数）定义的变量会被添加到当前执行环境，在代码块结束后这变量也存在；但是在其他语言，比如<code>C</code> <code>C++</code> <code>JAVA</code>中，任何代码块都是一个作用域</p>
 <blockquote>
 <p><code>for</code>循环的<code>()</code>中创建的变量也被添加到当前执行环境中</p>
 <p>要在函数中访问全局中和局部重名的标识符，可以使用<code>对象名.标识符</code>的方式</p>
+<p>因为没有块级作用域，所以在<code>with() {}</code>语句中创建的变量可以在其外部访问到</p>
 </blockquote>
+<p>通常在<code>javascript</code>开发过程中，全局的对象和不会结束的局部环境中的对象应该在不使用时将其值手动置为<code>null</code>，以便于垃圾回收器将其清理</p>
 <h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><h4 id="Object类型-1"><a href="#Object类型-1" class="headerlink" title="Object类型"></a>Object类型</h4><p>尽管<code>ECMAScript</code>是一门面向对象的语言，但是它不具备传统的面向对象的类和接口的概念。<code>ECMAScript</code>中的引用类型被称为<em>对象定义</em>，它描述的是一类对象所具有的属性和方法</p>
 <blockquote>
 <p>当使用<code>new Object()</code>创建一个实例时，我们并不说<code>Object</code>是一个类，而是一个<em>引用类型</em>，同时也说<code>Object()</code>是这个实例的构造函数</p>
 </blockquote>
-<p>除了使用构造函数创建一个引用类型的实例之外还可以使用 <strong>对象字面量</strong> 的创建和表示方法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    name : <span class="string">"test"</span>,</span><br><span class="line">    age : <span class="number">29</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = &#123;&#125;     <span class="comment">//这个等价于 var person = new Object()</span></span><br></pre></td></tr></table></figure></p>
+<p>除了使用构造函数创建一个引用类型的实例之外还可以使用 <strong>对象字面量</strong> 的创建和表示方法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    name : <span class="string">"test"</span>,</span><br><span class="line">    age : <span class="number">29</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = &#123;&#125;     <span class="comment">//这种方式效果上等价于 var person = new Object()</span></span><br></pre></td></tr></table></figure></p>
 <p><code>ECMAScript</code>推荐使用对象字面量的方法创建引用类型实例；这种表示对象的方法在向函数传递大量可选参数时也是常用的方法</p>
 <blockquote>
-<p>推荐函数的必选参数使用命名参数的方式，而可选参数则封装到一个对象中传递</p>
+<p>在开发中建议函数的必选参数使用命名参数的方式，而可选参数则封装到一个对象中传递</p>
 </blockquote>
 <p><code>ECMAScript</code>中访问对象的属性一般使用<code>.</code>；但是也可以使用<code>[&quot;&quot;]</code>的方法来访问；后者在指定属性名时可以使用变量，并且可以包含空格等其他字符；除非必须要使用后面一种类型来访问属性，通常总是应该使用<code>.</code></p>
 <h4 id="Array类型"><a href="#Array类型" class="headerlink" title="Array类型"></a>Array类型</h4><p><code>Array</code>在<code>ECMAScript</code>中是一种引用类型；数组中可以同时保存任意类型的值，并且数组的长度可以自动扩展，创建数组可以使用两种方法：</p>
 <ul>
 <li><p><strong><code>构造函数的方法</code></strong>：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colors = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line"><span class="keyword">var</span> colors = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">20</span>);</span><br><span class="line"><span class="keyword">var</span> colors = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">"red"</span>, <span class="string">"blue"</span>);</span><br><span class="line"><span class="comment">//如果给构造函数传递的是一个数值则会创建一个大小为数值的数组</span></span><br><span class="line"><span class="comment">//如果给构造函数传递的是其他类型或者逗号分隔的多个数值则会创建一个包含这些值的数组</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colors = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line"><span class="keyword">var</span> colors = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">20</span>);</span><br><span class="line"><span class="keyword">var</span> colors = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">"red"</span>, <span class="string">"blue"</span>);</span><br><span class="line"><span class="keyword">var</span> colors = <span class="built_in">Array</span>(<span class="string">"hello"</span>);    <span class="comment">//可以省略new关键字</span></span><br><span class="line"><span class="comment">//如果给构造函数传递的是一个数值则会创建一个大小为数值的数组</span></span><br><span class="line"><span class="comment">//如果给构造函数传递的是其他类型或者逗号分隔的多个数值则会创建一个包含这些值的数组</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong><code>数组字面量的方法</code></strong>：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colors = [<span class="string">"red"</span>, <span class="string">"blue"</span>];</span><br><span class="line"><span class="keyword">var</span> colors = [];</span><br><span class="line"><span class="keyword">var</span> colors = [<span class="number">1</span>,<span class="number">2</span>,] <span class="comment">//不要使用这样有歧义的创建方法</span></span><br><span class="line"><span class="keyword">var</span> colors = [,,,]  <span class="comment">//不要使用这样有歧义的创建方法</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用字面量方式创建的数组或者对象都不会在内部调用他们的构造函数（Firefox3之前的浏览器会）</p>
+</blockquote>
 </li>
 </ul>
-<p><code>ECMAScript</code>的数组是比较松散类型的数组，可以直接给数组的任意元素赋值，如果赋值的元素不是紧挨着当前数组索引最大的元素，则中间的元素都被赋<code>undefined</code>的值，数组的长度属性<code>length</code>也会变化反应当前数组的元素个数；另外<code>length</code>属性是可写的，可以直接改变这个熟悉来增加或者减少元素的个数</p>
+<p><code>ECMAScript</code>的数组是比较松散类型的数组，可以直接给数组的任意元素赋值，如果赋值的元素不是紧挨着当前数组索引最大的元素，则中间的元素都被赋<code>undefined</code>的值，数组的长度属性<code>length</code>也会变化反应当前数组的元素个数；另外<code>length</code>属性是可写的，可以直接改变这个属性来增加或者减少元素的个数</p>
 <blockquote>
 <p><code>ECMAScript</code>中只有索引类型的数组，并且数组的长度（length属性）总是最大一个索引值加1</p>
 </blockquote>
@@ -610,7 +617,7 @@
 <blockquote>
 <p>注意：<code>concat()</code> <code>slice()</code>都不改变原数组，使用返回值表示新数组；而<code>splice()</code>则改变原数组，返回值表示删除的元素组成的数组</p>
 </blockquote>
-<p><strong><code>indexOf() lastIndexOf()</code></strong> 方法可以开始或者结尾查找数组元素并返回找到的元素的位置（位置都是从第0个元素开始的位置），比较时候会使用全等来比较；如果没有找到元素则返回<code>-1</code></p>
+<p><strong><code>indexOf() lastIndexOf()</code></strong> 方法可以开始或者结尾查找数组元素并返回找到的元素的位置（位置都是从第0个元素开始的位置），比较时候会使用 <strong>全等</strong> 来比较；如果没有找到元素则返回<code>-1</code></p>
 <p><strong><code>迭代和归并方法</code></strong></p>
 <p><strong><code>every() filter() forEach() map() some()</code></strong><br>这五个方法是<code>ECMAScript 5</code>为数组定义的迭代方法。每个方法都接受两个参数：第一个参数表示在每一个元素上运行的函数，第二个参数表示运行该函数的作用域对象（影响this的值）；这函数会接收到解释器传来的三个参数：当前操作的数组元素的值、数组元素的索引和数组名，函数的返回值根据使用方法的不同可能会影响方法的返回值：</p>
 <ul>
@@ -1201,8 +1208,8 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
